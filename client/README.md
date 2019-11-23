@@ -1,6 +1,7 @@
 # Kopflos
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.23.
+"Kopflos" is the literal translation in german for "headless". Maybe I'll get a better idea later…
+This is a GUI for generating static json files. Like a static counterpart of a headless CMS. Think of a static JSON generator.
 
 ## Development server
 
