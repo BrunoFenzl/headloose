@@ -1,0 +1,7 @@
+<form class="" [formGroup]="form">
+  <ng-container
+    *ngFor="let componentSchema of controlsFormSchema"
+    [dynamicComponent]="componentSchema"
+  >
+  </ng-container>
+</form>

@@ -1,15 +1,17 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { DynamicRendererModule } from './dynamic-renderer/dynamic-renderer.module';
-import { ReactiveFormsModule } from '@angular/forms';
-import { DYNAMIC_COMPONENT_FACTORIES } from './dynamic-renderer/injection-token';
-import { headlineDynamicFactory } from './typography/headline/dynamic/headline.dynamic-factory';
-import { HeadlineComponent } from './typography/headline/headline.component';
-import { TypographyModule } from './typography/typography.module';
+import { UIModule } from './ui/ui.module';
+import { PagesModule } from './pages/pages.module';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreModule } from '@ngrx/store';
+import { PagesReducer } from './store/reducers/pages.reducer';
+import { PagesEffects } from './store/effects/pages.effects';
 
 @NgModule({
   declarations: [
@@ -19,19 +21,14 @@ import { TypographyModule } from './typography/typography.module';
     BrowserModule,
     AppRoutingModule,
     NoopAnimationsModule,
-    DynamicRendererModule,
-    ReactiveFormsModule,
-    TypographyModule,
-  ],
-  entryComponents: [
-    HeadlineComponent,
-  ],
-  providers: [
-    {
-      multi: true,
-      provide: DYNAMIC_COMPONENT_FACTORIES,
-      useValue: headlineDynamicFactory,
-    }
+    UIModule,
+    PagesModule,
+    HttpClientModule,
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
+    EffectsModule.forRoot([PagesEffects]),
+    StoreModule.forRoot({
+      pages: PagesReducer,
+    })
   ],
   bootstrap: [AppComponent]
 })

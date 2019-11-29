@@ -1,0 +1,7 @@
+<div *ngIf="(state$ | async)">
+  <ul *ngFor="let page of state$ | async">
+    <li (click)="editPage(page.id)">
+      {{ page.title }}
+    </li>
+  </ul>
+</div>

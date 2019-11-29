@@ -1,0 +1,34 @@
+{
+  "pages": [
+    {
+      "id": 0,
+      "title": "Page 0",
+      "path": "/page1.json",
+      "content": {}
+    },
+    {
+      "id": 1,
+      "title": "Page 1",
+      "path": "/page1.json",
+      "content": {}
+    },
+    {
+      "id": 2,
+      "title": "Page 2",
+      "path": "/page2.json",
+      "content": {}
+    },
+    {
+      "id": 3,
+      "title": "Page 3",
+      "path": "/page3.json",
+      "content": {}
+    },
+    {
+      "id": 4,
+      "title": "Page 4",
+      "path": "/page4.json",
+      "content": {}
+    }
+  ]
+}

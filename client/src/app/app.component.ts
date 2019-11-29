@@ -1,6 +1,10 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-import { DynamicFormComponentSchema } from './dynamic-renderer/dynamic-components.interfaces';
-import { FormGroup } from '@angular/forms';
+// import { StateManagerService } from './state-manager.service';
+import { AppState } from './store/models/app-state.model';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { LoadPagesAction } from './store/actions/pages.actions';
+import { Page } from './store/models/pages.model';
 
 @Component({
   selector: 'app-root',
@@ -8,29 +12,14 @@ import { FormGroup } from '@angular/forms';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  public form: FormGroup;
-
-  public controlsFormSchema: DynamicFormComponentSchema[];
+  pages$: Observable<Array<Page>>;
 
   constructor(
-    private cd: ChangeDetectorRef,
-  ) {
-    this.form = new FormGroup({});
-    this.controlsFormSchema = [
-      {
-        '@id': 'test',
-        '@type': 'Headline',
-        title: 'Hello ',
-        size: 'h1',
-      },
-      {
-        '@id': 'test',
-        '@type': 'Headline',
-        title: 'World!',
-        size: 'h3',
-      },
-    ];
-  }
+    private store: Store<AppState>
+  ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.pages$ = this.store.select(store => store.pages.list);
+    this.store.dispatch(new LoadPagesAction());
+  }
 }
