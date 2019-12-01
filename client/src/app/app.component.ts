@@ -1,10 +1,10 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 // import { StateManagerService } from './state-manager.service';
-import { AppState } from './store/models/app-state.model';
+import { AppState } from './content/store/models/app-state.model';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { LoadPagesAction } from './store/actions/pages.actions';
-import { Page } from './store/models/pages.model';
+import { LoadPagesAction } from './content/store/actions/pages.actions';
+import { Page } from './content/store/models/pages.model';
 
 @Component({
   selector: 'app-root',

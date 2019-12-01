@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { PagesComponent } from './pages/pages/pages.component';
-import { EditorComponent } from './pages/editor/editor.component';
-import { SettingsComponent } from './pages/settings/settings.component';
-import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
-import { MediaLibraryComponent } from './pages/media-library/media-library.component';
+import { OverviewComponent } from './content/overview/overview.component';
+import { EditorComponent } from './content/editor/editor.component';
+import { SettingsComponent } from './settings/settings.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { MediaLibraryComponent } from './media-library/media-library.component';
 
 
 const routes: Routes = [
-  { path: 'pages', component: PagesComponent },
+  { path: 'pages', component: OverviewComponent },
   { path: 'pages/:id', component: EditorComponent },
   { path: 'settings', component: SettingsComponent },
   { path: 'media-library', component: MediaLibraryComponent },

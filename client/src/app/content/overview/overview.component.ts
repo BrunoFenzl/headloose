@@ -2,17 +2,17 @@ import { Component, OnInit } from '@angular/core';
 // import { StateManagerService } from 'src/app/state-manager.service';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { AppState } from 'src/app/store/models/app-state.model';
+import { AppState } from 'src/app/content/store/models/app-state.model';
 import { Observable } from 'rxjs';
-import { Pages } from 'src/app/store/reducers/pages.reducer';
-import { Page } from 'src/app/store/models/pages.model';
+import { Pages } from 'src/app/content/store/reducers/pages.reducer';
+import { Page } from 'src/app/content/store/models/pages.model';
 
 @Component({
   selector: 'app-pages',
-  templateUrl: './pages.component.html',
-  styleUrls: ['./pages.component.scss']
+  templateUrl: './overview.component.html',
+  styleUrls: ['./overview.component.scss']
 })
-export class PagesComponent implements OnInit {
+export class OverviewComponent implements OnInit {
   private state$: Observable<Array<Page>>;
 
   constructor(
