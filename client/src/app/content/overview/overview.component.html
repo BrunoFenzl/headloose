@@ -1,7 +1,12 @@
-<div *ngIf="(state$ | async)">
+<div *ngIf="state$ | async">
   <ul *ngFor="let page of state$ | async">
-    <li (click)="editPage(page.id)">
-      {{ page.title }}
+    <li>
+      <div>reorder</div>
+      <div (click)="editPage(page.id)">
+        {{ page.title }}
+      </div>
+      <div (click)="deletePage(page.id)">Delete</div>
     </li>
   </ul>
+  <button (click)="addPage()">Add page</button>
 </div>

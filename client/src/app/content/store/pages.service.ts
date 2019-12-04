@@ -1,22 +1,20 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Page } from './models/pages.model';
+import { PageModel } from './models/pages.model';
 import { Observable } from 'rxjs';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class PagesService {
   private PAGES_URL = 'http://localhost:3000/pages';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
-  getPages(): Observable<Page[]> {
-    return this.http.get<Page[]>(this.PAGES_URL);
+  getPages(): Observable<PageModel[]> {
+    return this.http.get<PageModel[]>(this.PAGES_URL);
   }
 
-  addPage(page: Page): Observable<Page> {
-    return this.http.post<Page>(this.PAGES_URL, page);
+  addPage(page: PageModel): Observable<PageModel> {
+    return this.http.post<PageModel>(this.PAGES_URL, page);
   }
 
   deletePage(id: string): Observable<string> {

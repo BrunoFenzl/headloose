@@ -7,28 +7,30 @@
       "content": {}
     },
     {
-      "id": 1,
-      "title": "Page 1",
-      "path": "/page1.json",
-      "content": {}
-    },
-    {
       "id": 2,
       "title": "Page 2",
       "path": "/page2.json",
       "content": {}
     },
     {
-      "id": 3,
-      "title": "Page 3",
-      "path": "/page3.json",
-      "content": {}
+      "@id": "ef74a491-c2a0-490a-8089-fa7309d577ec",
+      "title": "New Page",
+      "path": "",
+      "content": [],
+      "id": 6
     },
     {
-      "id": 4,
-      "title": "Page 4",
-      "path": "/page4.json",
-      "content": {}
+      "@id": "760e70f8-c239-4f81-93b8-c6cf247e5381",
+      "title": "New Page",
+      "path": "",
+      "content": [],
+      "id": 7
+    },
+    {
+      "title": "New Page",
+      "path": "",
+      "content": [],
+      "id": 8
     }
   ]
 }

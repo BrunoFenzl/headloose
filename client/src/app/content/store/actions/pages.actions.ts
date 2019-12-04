@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { Page } from '../models/pages.model';
+import { PageModel } from '../models/pages.model';
 
 export enum PageActionTypes {
   LOAD_PAGES = '[PAGE] Load Page',
@@ -20,43 +20,43 @@ export class LoadPagesAction implements Action {
 
 export class LoadPagesSuccessAction implements Action {
   readonly type = PageActionTypes.LOAD_PAGES_SUCCESS;
-  constructor(public payload: Array<Page>) {}
+  constructor(public payload: Array<PageModel>) { }
 }
 
 export class LoadPagesFailureAction implements Action {
   readonly type = PageActionTypes.LOAD_PAGES_FAILURE;
-  constructor(public payload: Error) {}
+  constructor(public payload: Error) { }
 }
 
 // Next Actions are for single pages
 export class AddPageAction implements Action {
   readonly type = PageActionTypes.ADD_PAGE;
-  constructor(public payload: Page) {}
+  constructor(public payload: PageModel) { }
 }
 
 export class AddPageSuccessAction implements Action {
   readonly type = PageActionTypes.ADD_PAGE_SUCCESS;
-  constructor(public payload: Page) {}
+  constructor(public payload: PageModel) { }
 }
 
 export class AddPageFailureAction implements Action {
   readonly type = PageActionTypes.ADD_PAGE_FAILURE;
-  constructor(public payload: Error) {}
+  constructor(public payload: Error) { }
 }
 
 export class DeletePageAction implements Action {
   readonly type = PageActionTypes.DELETE_PAGE;
-  constructor(public payload: string) {}
+  constructor(public payload: string) { }
 }
 
 export class DeletePageSuccessAction implements Action {
   readonly type = PageActionTypes.DELETE_PAGE_SUCCESS;
-  constructor(public payload: string) {}
+  constructor(public payload: string) { }
 }
 
 export class DeletePageFailureAction implements Action {
   readonly type = PageActionTypes.DELETE_PAGE_FAILURE;
-  constructor(public payload: Error) {}
+  constructor(public payload: Error) { }
 }
 
 export type PageAction =
@@ -69,4 +69,4 @@ export type PageAction =
   DeletePageAction |
   DeletePageSuccessAction |
   DeletePageFailureAction
-;
+  ;

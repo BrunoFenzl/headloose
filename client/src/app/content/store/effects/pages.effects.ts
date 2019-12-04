@@ -18,10 +18,7 @@ export class PagesEffects {
         // Makes the request and pipes the resulting Observable
         () => this.pagesService.getPages()
           .pipe(
-            map((data) => {
-              console.log('effect', data);
-              return new LoadPagesSuccessAction(data);
-            }),
+            map((data) => new LoadPagesSuccessAction(data)),
             catchError(error => of(new LoadPagesFailureAction(error))),
           )
       )
@@ -31,7 +28,7 @@ export class PagesEffects {
     .pipe(
       ofType<AddPageAction>(PageActionTypes.ADD_PAGE),
       mergeMap(
-        (data) => this.pagesService.addPage(data.payload)
+        (data) => this.pagesService.addPage(data.payload) // data.payload is a new Page instance
           .pipe(
             map(() => new AddPageSuccessAction(data.payload)),
             catchError(error => of(new AddPageFailureAction(error))),
@@ -43,7 +40,7 @@ export class PagesEffects {
     .pipe(
       ofType<DeletePageAction>(PageActionTypes.DELETE_PAGE),
       mergeMap(
-        (data) => this.pagesService.deletePage(data.payload)
+        (data) => this.pagesService.deletePage(data.payload) // data.payload is the id of the page to delete
           .pipe(
             map(() => new DeletePageSuccessAction(data.payload)),
             catchError(error => of(new DeletePageFailureAction(error)))

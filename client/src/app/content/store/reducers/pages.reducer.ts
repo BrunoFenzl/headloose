@@ -1,22 +1,17 @@
-import { Page } from '../models/pages.model';
 import { PageAction, PageActionTypes } from '../actions/pages.actions';
+import { PagesModel } from '../models';
+import { PagesEffects } from '../effects/pages.effects';
 
-export interface Pages {
-  list: Page[];
-  loading: boolean;
-  error: Error;
-}
-
-const initialState: Pages = {
-  list: [],
+const initialState: PagesModel = {
+  data: [],
   loading: false,
   error: undefined,
 };
 
-export function PagesReducer(
-  state: Pages = initialState,
+export function reducer(
+  state: PagesModel = initialState,
   action: PageAction,
-) {
+): PagesModel {
   switch (action.type) {
     case PageActionTypes.LOAD_PAGES:
       return {
@@ -24,12 +19,12 @@ export function PagesReducer(
         loading: true,
       };
     case PageActionTypes.LOAD_PAGES_SUCCESS:
-      console.log('reducer', action.payload);
-      return {
+      const p = {
         ...state,
-        list: action.payload,
+        data: action.payload,
         loading: false,
       };
+      return p;
     case PageActionTypes.LOAD_PAGES_FAILURE:
       return {
         ...state,
@@ -44,7 +39,7 @@ export function PagesReducer(
     case PageActionTypes.ADD_PAGE_SUCCESS:
       return {
         ...state,
-        list: action.payload,
+        data: [...state.data, action.payload],
         loading: false
       };
     case PageActionTypes.ADD_PAGE_FAILURE:
@@ -61,7 +56,7 @@ export function PagesReducer(
     case PageActionTypes.DELETE_PAGE_SUCCESS:
       return {
         ...state,
-        list: state.list.filter(item => item.id !== action.payload), // remove page with the id given in the payload
+        data: state.data.filter(item => item.id !== action.payload), // remove page with the id given in the payload
         loading: false
       };
     case PageActionTypes.DELETE_PAGE_FAILURE:

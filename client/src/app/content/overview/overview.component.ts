@@ -2,10 +2,11 @@ import { Component, OnInit } from '@angular/core';
 // import { StateManagerService } from 'src/app/state-manager.service';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { AppState } from 'src/app/content/store/models/app-state.model';
+import { ContentState } from 'src/app/content/store/models/content.model';
 import { Observable } from 'rxjs';
-import { Pages } from 'src/app/content/store/reducers/pages.reducer';
-import { Page } from 'src/app/content/store/models/pages.model';
+import { PageModel } from '../store/models/pages.model';
+import { LoadPagesAction, AddPageAction, DeletePageAction } from '../store';
+
 
 @Component({
   selector: 'app-pages',
@@ -13,16 +14,28 @@ import { Page } from 'src/app/content/store/models/pages.model';
   styleUrls: ['./overview.component.scss']
 })
 export class OverviewComponent implements OnInit {
-  private state$: Observable<Array<Page>>;
+  private state$: Observable<Array<PageModel>>;
 
   constructor(
-    private store: Store<AppState>,
+    private store: Store<ContentState>,
     private router: Router,
-  ) {}
+  ) { }
 
   ngOnInit() {
-    this.state$ = this.store.select(store => store.pages.list);
-    console.log('state', this.state$);
+    this.state$ = this.store.select(store => store.pages.data);
+    this.store.dispatch(new LoadPagesAction());
+  }
+
+  addPage(): void {
+    this.store.dispatch(new AddPageAction({
+      title: 'New Page',
+      path: '',
+      content: [],
+    } as PageModel));
+  }
+
+  deletePage(pageId: string): void {
+    this.store.dispatch(new DeletePageAction(pageId));
   }
 
   editPage(id: number): void {
