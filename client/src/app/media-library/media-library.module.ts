@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MediaLibraryComponent } from './media-library.component';
+import { MediaLibraryRoutingModule } from './media-library-routing.module';
 
 
 
@@ -8,7 +9,8 @@ import { MediaLibraryComponent } from './media-library.component';
   declarations: [MediaLibraryComponent],
   exports: [MediaLibraryComponent],
   imports: [
-    CommonModule
+    CommonModule,
+    MediaLibraryRoutingModule,
   ]
 })
 export class MediaLibraryModule { }

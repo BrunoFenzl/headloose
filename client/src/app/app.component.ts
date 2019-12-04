@@ -1,10 +1,10 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 // import { StateManagerService } from './state-manager.service';
-import { AppState } from './content/store/models/app-state.model';
+import { ContentState } from './content/store/models/content.model';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { LoadPagesAction } from './content/store/actions/pages.actions';
-import { Page } from './content/store/models/pages.model';
+import { PageModel } from './content/store/models/pages.model';
 
 @Component({
   selector: 'app-root',
@@ -12,14 +12,14 @@ import { Page } from './content/store/models/pages.model';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  pages$: Observable<Array<Page>>;
+  pages$: Observable<Array<PageModel>>;
 
   constructor(
-    private store: Store<AppState>
-  ) {}
+    private store: Store<ContentState>
+  ) { }
 
   ngOnInit() {
-    this.pages$ = this.store.select(store => store.pages.list);
-    this.store.dispatch(new LoadPagesAction());
+    // this.pages$ = this.store.select(store => store.pages.data);
+    // this.store.dispatch(new LoadPagesAction());
   }
 }

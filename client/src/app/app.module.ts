@@ -4,18 +4,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ContentModule } from './content/content.module';
 import { environment } from '../environments/environment';
-import { PagesReducer } from './content/store/reducers/pages.reducer';
-import { PagesEffects } from './content/store/effects/pages.effects';
-import { MediaLibraryModule } from './media-library/media-library.module';
-import { SettingsModule } from './settings/settings.module';
 import { PageNotFoundModule } from './page-not-found/page-not-found.module';
+import { reducers, metaReducers } from './reducers';
+import { EffectsModule } from '@ngrx/effects';
 
 @NgModule({
   declarations: [
@@ -24,19 +20,20 @@ import { PageNotFoundModule } from './page-not-found/page-not-found.module';
   imports: [
     // Angular
     BrowserModule,
-    AppRoutingModule,
     NoopAnimationsModule,
     HttpClientModule,
     // App
-    ContentModule,
-    MediaLibraryModule,
-    SettingsModule,
+    AppRoutingModule,
     PageNotFoundModule,
-    // Vendor
+    // Vendor (ngrx)
+    EffectsModule.forRoot([]),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
-    EffectsModule.forRoot([PagesEffects]),
-    StoreModule.forRoot({
-      pages: PagesReducer,
+    StoreModule.forRoot(reducers, {
+      metaReducers,
+      runtimeChecks: {
+        strictStateImmutability: true,
+        strictActionImmutability: true
+      }
     }),
   ],
   bootstrap: [AppComponent]
