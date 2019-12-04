@@ -6,7 +6,7 @@ export interface PageModel {
 }
 
 export interface PagesModel {
-  data: PageModel[];
+  entities: { [id: number]: PageModel };
   loading: boolean;
   error: Error;
 }

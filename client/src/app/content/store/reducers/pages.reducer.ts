@@ -1,9 +1,9 @@
 import { PageAction, PageActionTypes } from '../actions/pages.actions';
-import { PagesModel } from '../models';
+import { PagesModel, PageModel } from '../models';
 import { PagesEffects } from '../effects/pages.effects';
 
 const initialState: PagesModel = {
-  data: [],
+  entities: {},
   loading: false,
   error: undefined,
 };
@@ -19,9 +19,19 @@ export function reducer(
         loading: true,
       };
     case PageActionTypes.LOAD_PAGES_SUCCESS:
+      const e = action.payload.reduce(
+        (entities: { [id: number]: PageModel }, page: PageModel) => {
+          return {
+            ...entities,
+            [page.id]: page
+          };
+        },
+        { ...state.entities }
+      );
+
       const p = {
         ...state,
-        data: action.payload,
+        entities: { ...e },
         loading: false,
       };
       return p;
@@ -39,7 +49,7 @@ export function reducer(
     case PageActionTypes.ADD_PAGE_SUCCESS:
       return {
         ...state,
-        data: [...state.data, action.payload],
+        entities: { ...state.entities, [action.payload.id]: action.payload },
         loading: false
       };
     case PageActionTypes.ADD_PAGE_FAILURE:
@@ -54,9 +64,17 @@ export function reducer(
         loading: true,
       };
     case PageActionTypes.DELETE_PAGE_SUCCESS:
+      /*
+        Very clever trick!
+        Destructure the item identified by the payload AND use the Rest Spread operator to destructure
+        the rest of the object BUT the one we destructure first. This way we can use entities cleaned off
+        the item to delete.
+      */
+      const { [parseInt(action.payload, 10)]: removed, ...entities } = state.entities;
+
       return {
         ...state,
-        data: state.data.filter(item => item.id !== action.payload), // remove page with the id given in the payload
+        entities, // remove page with the id given in the payload
         loading: false
       };
     case PageActionTypes.DELETE_PAGE_FAILURE:

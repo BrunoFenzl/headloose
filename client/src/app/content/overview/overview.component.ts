@@ -22,7 +22,10 @@ export class OverviewComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.state$ = this.store.select(store => store.pages.data);
+    this.state$ = this.store.select(store => {
+      const e = store.pages.entities;
+      return Object.keys(e).map(id => e[id]);
+    });
     this.store.dispatch(new LoadPagesAction());
   }
 
