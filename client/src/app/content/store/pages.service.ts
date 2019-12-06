@@ -13,6 +13,10 @@ export class PagesService {
     return this.http.get<PageModel[]>(this.PAGES_URL);
   }
 
+  getPage(id: string): Observable<PageModel> {
+    return this.http.get<PageModel>(`${this.PAGES_URL}/${id}`);
+  }
+
   addPage(page: PageModel): Observable<PageModel> {
     return this.http.post<PageModel>(this.PAGES_URL, page);
   }

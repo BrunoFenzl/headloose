@@ -1,6 +1,5 @@
 import { PageAction, PageActionTypes } from '../actions/pages.actions';
 import { PagesModel, PageModel } from '../models';
-import { PagesEffects } from '../effects/pages.effects';
 
 const initialState: PagesModel = {
   entities: {},

@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { DynamicFormComponentSchema } from '../../../dynamic-renderer/dynamic-components.interfaces';
 import { FormGroup } from '@angular/forms';
+import { Store } from '@ngrx/store';
+import { ContentState, PageModel, getSelectedPage } from '../store';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-editor',
@@ -8,10 +11,14 @@ import { FormGroup } from '@angular/forms';
   styleUrls: ['./editor.component.scss']
 })
 export class EditorComponent implements OnInit {
+  public page$: Observable<PageModel>;
   public form: FormGroup;
   public controlsFormSchema: DynamicFormComponentSchema[];
 
-  constructor() {
+  constructor(
+    private store: Store<ContentState>
+  ) {
+
     this.form = new FormGroup({});
     this.controlsFormSchema = [
       // {
@@ -37,6 +44,7 @@ export class EditorComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.page$ = this.store.select(getSelectedPage);
   }
 
 }

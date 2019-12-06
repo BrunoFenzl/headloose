@@ -4,4 +4,8 @@
     [dynamicComponent]="componentSchema"
   >
   </ng-container>
+
+  <pre>
+    {{ page$ | async | json }}
+  </pre>
 </form>

@@ -6,12 +6,15 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { StoreModule } from '@ngrx/store';
 
+import { StoreRouterConnectingModule, RouterStateSerializer } from '@ngrx/router-store';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { environment } from '../environments/environment';
 import { PageNotFoundModule } from './page-not-found/page-not-found.module';
-import { reducers, metaReducers } from './reducers';
+import { metaReducers } from './reducers';
 import { EffectsModule } from '@ngrx/effects';
+
+import { reducers, CustomSerializer } from './store';
 
 @NgModule({
   declarations: [
@@ -26,15 +29,16 @@ import { EffectsModule } from '@ngrx/effects';
     AppRoutingModule,
     PageNotFoundModule,
     // Vendor (ngrx)
+    StoreModule.forRoot(reducers),
     EffectsModule.forRoot([]),
+    StoreRouterConnectingModule.forRoot(),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
-    StoreModule.forRoot(reducers, {
-      metaReducers,
-      runtimeChecks: {
-        strictStateImmutability: true,
-        strictActionImmutability: true
-      }
-    }),
+  ],
+  providers: [
+    {
+      provide: RouterStateSerializer,
+      useClass: CustomSerializer
+    }
   ],
   bootstrap: [AppComponent]
 })

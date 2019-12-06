@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-// import { StateManagerService } from 'src/app/state-manager.service';
-import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { ContentState } from 'src/app/content/store/models/content.model';
 import { Observable } from 'rxjs';
@@ -18,7 +16,6 @@ export class OverviewComponent implements OnInit {
 
   constructor(
     private store: Store<ContentState>,
-    private router: Router,
   ) { }
 
   ngOnInit() {
@@ -40,9 +37,4 @@ export class OverviewComponent implements OnInit {
   deletePage(pageId: string): void {
     this.store.dispatch(new DeletePageAction(pageId));
   }
-
-  editPage(id: number): void {
-    this.router.navigate(['pages', id]);
-  }
-
 }

@@ -2,7 +2,7 @@
   <ul *ngFor="let page of state$ | async">
     <li>
       <div>reorder</div>
-      <div (click)="editPage(page.id)">
+      <div routerLink="{{ page.id }}">
         {{ page.title }}
       </div>
       <div (click)="deletePage(page.id)">Delete</div>
