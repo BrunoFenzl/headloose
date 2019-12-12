@@ -11,14 +11,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { environment } from '../environments/environment';
 import { PageNotFoundModule } from './page-not-found/page-not-found.module';
-import { metaReducers } from './reducers';
 import { EffectsModule } from '@ngrx/effects';
 
 import { reducers, CustomSerializer } from './store';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     // Angular

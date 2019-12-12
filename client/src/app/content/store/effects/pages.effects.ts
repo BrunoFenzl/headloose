@@ -1,7 +1,18 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { PagesService } from '../pages.service';
-import { LoadPagesAction, PageActionTypes, LoadPagesSuccessAction, LoadPagesFailureAction, AddPageFailureAction, AddPageAction, AddPageSuccessAction, DeletePageAction, DeletePageSuccessAction, DeletePageFailureAction, LoadPageAction, LoadPageSuccessAction, LoadPageFailureAction } from '../actions/pages.actions';
+import {
+  LoadPagesAction,
+  PageActionTypes,
+  LoadPagesSuccessAction,
+  LoadPagesFailureAction,
+  AddPageFailureAction,
+  AddPageAction,
+  AddPageSuccessAction,
+  DeletePageAction,
+  DeletePageSuccessAction,
+  DeletePageFailureAction
+} from '../actions/pages.actions';
 import { mergeMap, map, catchError } from 'rxjs/operators';
 import { of, Observable } from 'rxjs';
 import { Action } from '@ngrx/store';
