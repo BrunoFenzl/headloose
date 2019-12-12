@@ -1,0 +1,9 @@
+@import "src/scss";
+
+:host {
+  @include make-row();
+  width: 100%;
+
+  min-height: 2rem;
+  border: 1px solid blue;
+}

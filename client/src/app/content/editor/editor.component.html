@@ -1,11 +1,18 @@
-<form class="" [formGroup]="form">
-  <ng-container
-    *ngFor="let componentSchema of controlsFormSchema"
-    [dynamicComponent]="componentSchema"
-  >
-  </ng-container>
+<div class="row">
+  <div class="col-12 col-9">
+    <form class="" [formGroup]="form">
+      <ng-container
+        *ngFor="let componentSchema of controlsFormSchema"
+        [dynamicComponent]="componentSchema"
+      >
+      </ng-container>
 
-  <pre>
-    {{ page$ | async | json }}
-  </pre>
-</form>
+      <pre>
+        {{ page$ | async | json }}
+      </pre>
+    </form>
+  </div>
+  <div class="col-12 col-3">
+    <component-editor></component-editor>
+  </div>
+</div>

@@ -1,0 +1,10 @@
+<form class="" [formGroupd]="form">
+  <div *ngIf="activeField">
+    Currently editing {{ activeField["@type"] }}
+    <strong>{{ activeField["@id"] }}</strong>
+  </div>
+  <ng-container
+    *ngFor="let compSchema of formSchema"
+    [dynamicComponent]="compSchema"
+  ></ng-container>
+</form>

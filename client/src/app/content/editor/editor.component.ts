@@ -21,25 +21,35 @@ export class EditorComponent implements OnInit {
 
     this.form = new FormGroup({});
     this.controlsFormSchema = [
-      // {
-      //   '@id': 'test',
-      //   '@type': 'Headline',
-      //   title: 'Hello ',
-      //   size: 'h1',
-      // },
-      // {
-      //   '@id': 'test',
-      //   '@type': 'Headline',
-      //   title: 'World!',
-      //   size: 'h3',
-      // },
-      // {
-      //   '@id': 'btn1',
-      //   '@type': 'Button',
-      //   content: 'click me!!',
-      //   size: 'btn-lg',
-      //   disabled: false,
-      // },
+      {
+        '@id': 'test',
+        '@type': 'Row',
+        children: [
+          {
+            '@id': 'test',
+            '@type': 'Column',
+            classes: ['dyn-col', 'col-12', 'col-md-6', 'col-lg-4'],
+            children: [
+              {
+                '@id': 'sdfsdfsd',
+                '@type': 'TextInput',
+              }
+            ],
+          },
+          {
+            '@id': 'test',
+            '@type': 'Column',
+            classes: ['dyn-col', 'col-12', 'col-md-6', 'col-lg-4'],
+            children: [],
+          },
+          {
+            '@id': 'test',
+            '@type': 'Column',
+            classes: ['dyn-col', 'col-12', 'col-md-6', 'col-lg-4'],
+            children: [],
+          },
+        ],
+      },
     ];
   }
 
