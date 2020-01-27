@@ -1,24 +1,29 @@
-import { PagesModel } from '../models';
+import { PagesModel, ContentState } from '../models';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { getRouterState } from '../../../store';
 import { PageModel } from '../models/pages.model';
 
 // Set which part of the global state tree belongs to this feature module
-export const getContentState = createFeatureSelector<PagesModel>('pages');
+export const getContentState = createFeatureSelector<ContentState>('content');
 
 // Query first level and return only the 'pages' section from the global state tree
-export const getPagesState = createSelector(
+export const getContentPages = createSelector(
   getContentState,
-  (state: PagesModel) => state.entities);
+  (state: ContentState) => state.pages
+);
+
+export const getPagesArray = createSelector(
+  getContentPages,
+  (state: { [id: number]: PageModel }) => Object.keys(state).map(key => state[key]));
 
 /**
  * Returns an Object of type PageModel with the page id from RouterState
  */
 export const getSelectedPage = createSelector(
-  getPagesState,
+  getContentPages,
   getRouterState,
-  (entities, router): PageModel => {
-    return router.state && entities[router.state.params.id];
+  (pages, router): PageModel => {
+    return router.state && pages[router.state.params.id];
   }
 );
 
@@ -27,5 +32,5 @@ export const getSelectedPage = createSelector(
  */
 export const getSelectedPageContent = createSelector(
   getSelectedPage,
-  (state: PageModel) => state.content
+  (state: PageModel) => state.contentUrl
 );

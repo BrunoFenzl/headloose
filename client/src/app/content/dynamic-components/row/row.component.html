@@ -1,6 +1,6 @@
 <app-component-options
-  (editComponent)="selectComponent()"
-  (deleteComponent)="deleteComponent()"
+  (editComponent)="selectComponent($event)"
+  (deleteComponent)="deleteComponent($event)"
 ></app-component-options>
 <ng-container
   *ngFor="let child of children$ | async"

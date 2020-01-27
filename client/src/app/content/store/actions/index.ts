@@ -1,2 +1,2 @@
-export * from './pages.actions';
-export * from './components.actions';
+export * from './content.actions';
+export * from './page.actions';

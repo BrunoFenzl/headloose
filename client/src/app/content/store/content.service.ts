@@ -2,10 +2,12 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { PageModel } from './models/pages.model';
 import { Observable } from 'rxjs';
+import { DynamicPageSchema } from 'src/dynamic-renderer/dynamic-components.interfaces';
 
 @Injectable()
 export class PagesService {
   private PAGES_URL = 'http://localhost:3000/pages';
+  private PAGE = 'http://localhost:8080/pages';
 
   constructor(private http: HttpClient) { }
 
@@ -13,8 +15,8 @@ export class PagesService {
     return this.http.get<PageModel[]>(this.PAGES_URL);
   }
 
-  getPage(id: string): Observable<PageModel> {
-    return this.http.get<PageModel>(`${this.PAGES_URL}/${id}`);
+  getPage(id: string): Observable<DynamicPageSchema> {
+    return this.http.get<DynamicPageSchema>(`${this.PAGE}/${id}.json`);
   }
 
   addPage(page: PageModel): Observable<PageModel> {

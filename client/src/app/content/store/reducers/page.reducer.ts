@@ -1,22 +1,31 @@
 import { DynamicPageSchema } from 'src/dynamic-renderer/dynamic-components.interfaces';
-import { ComponentAction, ComponentActionTypes, PageAction } from '../actions';
+import { PageActionTypes, PageAction } from '../actions';
 
-export function ComponentReducer(
-  state: DynamicPageSchema,
-  action: PageAction | ComponentAction
+const initialState: DynamicPageSchema = {
+  '@id': '',
+  '@type': 'Page',
+  children: [],
+  components: {},
+  activeComponent: null,
+};
+
+export function pageReducer(
+  state: DynamicPageSchema = initialState,
+  action: PageAction
 ): DynamicPageSchema {
   switch (action.type) {
-    case ComponentActionTypes.SELECT_COMPONENT:
+    case PageActionTypes.SELECT_COMPONENT:
+      console.log('select component', action.payload);
       return {
         ...state,
         activeComponent: action.payload['@id'],
       };
-    case ComponentActionTypes.ADD_COMPONENT:
+    case PageActionTypes.ADD_COMPONENT:
       return {
         ...state,
         components: { ...state.components, [action.payload['@id']]: action.payload }
       };
-    case ComponentActionTypes.DELETE_COMPONENT:
+    case PageActionTypes.DELETE_COMPONENT:
       // First we have to find the object being deleted, here named 'theOne'.
       // 'components' is an object with all components EXCEPT the one we will remove.
 

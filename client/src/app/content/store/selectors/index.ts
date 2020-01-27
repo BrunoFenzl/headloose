@@ -1,2 +1,2 @@
-export * from './pages.selectors';
-export * from './components.selectors';
+export * from './content.selectors';
+export * from './page.selectors';

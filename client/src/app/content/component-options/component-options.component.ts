@@ -8,21 +8,21 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 export class ComponentOptionsComponent implements OnInit {
 
   @Output()
-  public editComponent = new EventEmitter<string>();
+  editComponent: EventEmitter<string> = new EventEmitter<string>();
 
   @Output()
-  public deleteComponent = new EventEmitter<string>();
+  deleteComponent: EventEmitter<string> = new EventEmitter<string>();
 
   constructor() { }
 
   ngOnInit() { }
 
   editClick(): void {
-    this.editComponent.emit();
+    this.editComponent.emit('select');
   }
 
   deleteClick(): void {
-    this.deleteComponent.emit();
+    this.deleteComponent.emit('delete');
   }
 
 }
