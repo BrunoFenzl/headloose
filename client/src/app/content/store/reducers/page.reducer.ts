@@ -18,7 +18,7 @@ export function pageReducer(
       console.log('select component', action.payload);
       return {
         ...state,
-        activeComponent: action.payload['@id'],
+        activeComponent: action.payload,
       };
     case PageActionTypes.ADD_COMPONENT:
       return {
@@ -31,7 +31,8 @@ export function pageReducer(
 
       // The idea is to remove 'theOne' from the components object and stitch the
       // object together linking it's children to it's parent.
-      const { [action.payload['@id']]: theOne, ...components } = state.components;
+      const { [action.payload]: theOne, ...components } = state.components;
+      console.log('delete payload', action.payload, theOne);
       // Now, we have to get references to it's parent...
       const onesParent = components[theOne.parent];
       // ...and children

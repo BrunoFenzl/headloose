@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { ContentState, getSelectedPageContent } from '../store';
+import { ContentState, getSelectedPageContent, getActiveComponent } from '../store';
 import { Observable } from 'rxjs';
 import { DynamicComponentSchema } from 'src/dynamic-renderer/dynamic-components.interfaces';
 
@@ -12,7 +12,7 @@ import { DynamicComponentSchema } from 'src/dynamic-renderer/dynamic-components.
 })
 export class OptionsRendererComponent implements OnInit {
 
-  public content$: Observable<DynamicComponentSchema[]>;
+  public content$: Observable<DynamicComponentSchema>;
   public form: FormGroup;
 
   constructor(
@@ -22,7 +22,7 @@ export class OptionsRendererComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.content$ = this.store.select(getSelectedPageContent);
+    this.content$ = this.store.select(getActiveComponent);
   }
 
 }

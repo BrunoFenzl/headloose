@@ -1,6 +1,8 @@
 <div [ngClass]="{ 'comp--active': 'active' }">
-  column
-  <app-component-options></app-component-options>
+  <app-component-options
+    (editComponent)="selectComponent($event)"
+    (deleteComponent)="deleteComponent($event)"
+  ></app-component-options>
   <ng-container
     *ngFor="let child of children"
     [dynamicComponent]="child"

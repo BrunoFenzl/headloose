@@ -19,16 +19,13 @@ export class RowComponent implements OnInit {
   constructor(
     public store: Store<ContentState>,
     public readonly formGroupDirective: FormGroupDirective
-  ) {
-
-  }
+  ) { }
 
   ngOnInit() {
     this.children$ = this.store.select(getComponentChildren, { id: this.id });
   }
 
   selectComponent(): void {
-    console.log('select row');
     this.store.dispatch(new SelectComponentAction(this.id));
   }
 
