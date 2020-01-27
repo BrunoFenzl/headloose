@@ -3,13 +3,14 @@ import { v4 as uuid } from 'uuid';
 
 export interface TextInputSchema extends DynamicComponentSchema {
   '@type': 'TextInput' | string;
-  'maxlength': number | null;
-  'minlength': number | null;
-  'size': number | null;
-  'placeholder': string;
-  'readonly': boolean;
-  'disabled': boolean;
-  'required': boolean;
+  parent: string | null;
+  maxlength?: number | null;
+  minlength?: number | null;
+  size?: number | null;
+  placeholder?: string;
+  readonly?: boolean;
+  disabled?: boolean;
+  required?: boolean;
   classes?: Array<string>;
 }
 
@@ -19,6 +20,7 @@ export interface TextInputSchema extends DynamicComponentSchema {
 export class TextInputDefaults implements TextInputSchema {
   '@id' = uuid();
   '@type' = 'TextInput';
+  parent = null;
   maxlength = null;
   minlength = null;
   size = null;

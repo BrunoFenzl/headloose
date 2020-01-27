@@ -2,7 +2,7 @@
   <div class="col-12 col-9">
     <form class="" [formGroup]="form">
       <ng-container
-        *ngFor="let componentSchema of controlsFormSchema"
+        *ngFor="let componentSchema of page$ | async"
         [dynamicComponent]="componentSchema"
       >
       </ng-container>
@@ -12,7 +12,5 @@
       </pre>
     </form>
   </div>
-  <div class="col-12 col-3">
-    <component-editor></component-editor>
-  </div>
+  <div class="col-12 col-3"></div>
 </div>

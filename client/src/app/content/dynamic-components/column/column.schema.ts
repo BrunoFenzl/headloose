@@ -3,15 +3,17 @@ import { v4 as uuid } from 'uuid';
 
 export interface ColumnSchema extends DynamicComponentSchema {
   '@type': 'Column' | string;
+  parent: string | null;
+  children: Array<string>; // id's of components below this one
   classes?: Array<string>;
-  children: Array<DynamicComponentSchema>;
 }
 
 export class ColumnDefaults implements ColumnSchema {
   '@id' = uuid();
   '@type' = 'Column';
-  classes = [];
+  parent = null;
   children = [];
+  classes = [];
 
   constructor(options) {
     Object.assign(this, options);

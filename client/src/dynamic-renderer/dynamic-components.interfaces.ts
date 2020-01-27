@@ -15,11 +15,10 @@ export interface DynamicFormValues {
   [id: string]: DynamicFormValue;
 }
 
-export interface DynamicFormComponentSchema extends DynamicComponentSchema {
-  initialModel?: DynamicFormValue;
-  disabled?: boolean;
-  readonly?: boolean;
-  validation?: Array<DynamicFormValidationSchema>;
+export interface DynamicPageSchema extends DynamicComponentSchema {
+  children: Array<string>;
+  components: { [id: string]: DynamicComponentSchema };
+  activeComponent?: string | null;
 }
 
 export interface DynamicFormValidationSchema {
