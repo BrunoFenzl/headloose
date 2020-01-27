@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-component-options',
@@ -7,9 +7,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ComponentOptionsComponent implements OnInit {
 
+  @Output()
+  public editComponent = new EventEmitter<string>();
+
+  @Output()
+  public deleteComponent = new EventEmitter<string>();
+
   constructor() { }
 
-  ngOnInit() {
+  ngOnInit() { }
+
+  editClick(): void {
+    this.editComponent.emit();
+  }
+
+  deleteClick(): void {
+    this.deleteComponent.emit();
   }
 
 }

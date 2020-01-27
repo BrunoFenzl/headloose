@@ -1,5 +1,8 @@
-<app-component-options></app-component-options>
+<app-component-options
+  (editComponent)="selectComponent()"
+  (deleteComponent)="deleteComponent()"
+></app-component-options>
 <ng-container
-  *ngFor="let child of children"
+  *ngFor="let child of children$ | async"
   [dynamicComponent]="child"
 ></ng-container>

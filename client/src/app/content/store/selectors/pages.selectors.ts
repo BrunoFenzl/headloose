@@ -2,7 +2,6 @@ import { PagesModel } from '../models';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { getRouterState } from '../../../store';
 import { PageModel } from '../models/pages.model';
-import { DynamicPageSchema } from 'src/dynamic-renderer/dynamic-components.interfaces';
 
 // Set which part of the global state tree belongs to this feature module
 export const getContentState = createFeatureSelector<PagesModel>('pages');
@@ -12,6 +11,9 @@ export const getPagesState = createSelector(
   getContentState,
   (state: PagesModel) => state.entities);
 
+/**
+ * Returns an Object of type PageModel with the page id from RouterState
+ */
 export const getSelectedPage = createSelector(
   getPagesState,
   getRouterState,
@@ -20,12 +22,10 @@ export const getSelectedPage = createSelector(
   }
 );
 
+/**
+ * Returns an Object of type DynamicPageSchema
+ */
 export const getSelectedPageContent = createSelector(
   getSelectedPage,
   (state: PageModel) => state.content
-);
-
-export const getSelectedPageContentParsed = createSelector(
-  getSelectedPageContent,
-  (state: DynamicPageSchema) => state.children.map(id => state.components[id])
 );
