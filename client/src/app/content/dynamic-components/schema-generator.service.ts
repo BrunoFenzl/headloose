@@ -43,14 +43,21 @@ export class SchemaGeneratorService {
         const valueType = typeof schema[key];
         const field: DynamicComponentSchema = new (this.inputTypesMap[valueType])({ '@id': key });
 
-        if (valueType === 'object') {
-          if (key === 'options') {
-            // convert options array into a string with the format 'label:value'
-            field.model = this.stringifyOptions(schema.options);
-          } else if (key === 'classes') {
-            // convert classes array into a string with the form 'classname1 classname2 classname3'
-            field.model = this.stringifyClassnames(schema.classes);
-          }
+        switch (valueType) {
+          case 'object':
+            if (key === 'options') {
+              // convert options array into a string with the format 'label:value'
+              field.model = this.stringifyOptions(schema.options);
+            } else if (key === 'classes') {
+              // convert classes array into a string with the form 'classname1 classname2 classname3'
+              field.model = this.stringifyClassnames(schema.classes);
+            }
+            break;
+          case 'string':
+          case 'number':
+          case 'boolean':
+            field.model = schema[key];
+            break;
         }
         fieldsSchema.push(field);
       });
@@ -72,13 +79,33 @@ export class SchemaGeneratorService {
   }
 
   generateSchemaFromFields(formValues: any[]): DynamicComponentSchema {
-    const updatedSchema = { ...this.activeSchema };
+    const schema = { ...this.activeSchema };
+
     Object.keys(formValues)
       .forEach((key) => {
-        if (updatedSchema.hasOwnProperty(key)) {
-          updateSchema[key] = formValues
+        if (schema.hasOwnProperty(key)) {
+          const valueType = typeof schema[key];
+          switch (valueType) {
+            case 'object':
+              if (key === 'classes') {
+                schema[key] = this.parseCssClassnames(formValues[key]);
+              } else if (key === 'options') {
+                schema[key] = this.parseOptions(formValues[key]);
+              }
+              break;
+            case 'string':
+              schema[key] = formValues[key].trim();
+              break;
+            case 'number':
+              schema[key] = parseInt(formValues[key], 10);
+              break;
+            case 'boolean':
+              schema[key] = (formValues[key] === 'true') ? true : false;
+              break;
+          }
         }
-      })
+      });
+    return schema;
   }
 
   parseOptions(options: string): any[] {

@@ -15,10 +15,14 @@ export function pageReducer(
 ): DynamicPageSchema {
   switch (action.type) {
     case PageActionTypes.SELECT_COMPONENT:
-      console.log('select component', action.payload);
       return {
         ...state,
         activeComponent: action.payload,
+      };
+    case PageActionTypes.UPDATE_COMPONENT:
+      return {
+        ...state,
+        components: { ...state.components, [state.activeComponent]: action.payload }
       };
     case PageActionTypes.ADD_COMPONENT:
       return {
