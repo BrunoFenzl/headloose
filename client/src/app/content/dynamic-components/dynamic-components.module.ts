@@ -11,8 +11,8 @@ import { ColumnComponent } from './column/column.component';
 import { ColumnComponentDynamicFactory } from './column/column.dynamic-factory';
 import { TextInputComponent } from './text-input/text-input.component';
 import { TextInputComponentDynamicFactory } from './text-input/text-input.dynamic-factory';
-import { RadioGroupComponent } from './radio-group/radio-group.component';
-import { CheckboxGroupComponent } from './checkbox-group/checkbox-group.component';
+// import { RadioGroupComponent } from './radio-group/radio-group.component';
+// import { CheckboxGroupComponent } from './checkbox-group/checkbox-group.component';
 import { SelectComponent } from './select/select.component';
 import { TextareaComponent } from './textarea/textarea.component';
 import { NumberInputComponent } from './number-input/number-input.component';
@@ -33,8 +33,8 @@ import { SwitchComponentDynamicFactory } from './switch/switch.dynamic-factory';
     RowComponent,
     ColumnComponent,
     TextInputComponent,
-    RadioGroupComponent,
-    CheckboxGroupComponent,
+    // RadioGroupComponent,
+    // CheckboxGroupComponent,
     SelectComponent,
     TextareaComponent,
     NumberInputComponent,
