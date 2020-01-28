@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ContentState, SelectComponentAction, DeleteComponentAction, getComponentChildren } from '../../store';
+import { ContentState, getComponentChildren } from '../../store';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { DynamicComponentSchema } from 'src/dynamic-renderer/dynamic-components.interfaces';
@@ -21,14 +21,5 @@ export class ColumnComponent implements OnInit {
 
   ngOnInit() {
     this.children$ = this.store.select(getComponentChildren, { id: this.id });
-  }
-
-  selectComponent(): void {
-    this.store.dispatch(new SelectComponentAction(this.id));
-  }
-
-  deleteComponent(): void {
-    this.store.dispatch(new DeleteComponentAction(this.id));
-    getComponentChildren.release();
   }
 }

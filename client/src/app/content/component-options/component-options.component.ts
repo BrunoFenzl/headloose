@@ -1,4 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { ContentState, SelectComponentAction, DeleteComponentAction } from '../store';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-component-options',
@@ -7,22 +9,20 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 })
 export class ComponentOptionsComponent implements OnInit {
 
-  @Output()
-  editComponent: EventEmitter<string> = new EventEmitter<string>();
+  @Input()
+  targetId: string;
 
-  @Output()
-  deleteComponent: EventEmitter<string> = new EventEmitter<string>();
-
-  constructor() { }
+  constructor(
+    public store: Store<ContentState>,
+  ) { }
 
   ngOnInit() { }
 
   editClick(): void {
-    this.editComponent.emit('select');
+    this.store.dispatch(new SelectComponentAction(this.targetId));
   }
 
   deleteClick(): void {
-    this.deleteComponent.emit('delete');
+    this.store.dispatch(new DeleteComponentAction(this.targetId));
   }
-
 }

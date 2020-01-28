@@ -1,10 +1,7 @@
+<app-component-options [targetId]="id"></app-component-options>
 <div [ngClass]="{ 'comp--active': 'active' }">
-  <app-component-options
-    (editComponent)="selectComponent($event)"
-    (deleteComponent)="deleteComponent($event)"
-  ></app-component-options>
-  <ng-container
-    *ngFor="let child of children$ | async"
-    [dynamicComponent]="child"
-  ></ng-container>
+  <div *ngFor="let child of children$ | async">
+    <app-component-options [targetId]="child['@id']"></app-component-options>
+    <ng-container [dynamicComponent]="child"></ng-container>
+  </div>
 </div>

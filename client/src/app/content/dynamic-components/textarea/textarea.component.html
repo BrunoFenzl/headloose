@@ -1,13 +1,13 @@
-<app-component-options
-  (editComponent)="selectComponent($event)"
-  (deleteComponent)="deleteComponent($event)"
-></app-component-options>
-<textarea
-  [name]=""
-  [id]="id"
-  [disabled]="disabled || ''"
-  [required]="required || ''"
-  [readonly]="readonly || ''"
-  [value]="model"
-  (change)="valueChange($event)"
-></textarea>
+<div class="form-group">
+  <label for="exampleFormControlTextarea1">Example textarea</label>
+  <textarea
+    [name]=""
+    [id]="id"
+    [disabled]="disabled || ''"
+    [required]="required || ''"
+    [readonly]="readonly || ''"
+    [value]="model"
+    class="form-control"
+    (change)="valueChange($event)"
+  ></textarea>
+</div>

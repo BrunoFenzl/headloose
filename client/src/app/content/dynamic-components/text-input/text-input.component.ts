@@ -58,12 +58,4 @@ export class TextInputComponent extends FormComponentBase<string> implements OnI
   valueChange(evt) {
     this.setInternalModel(evt.target.value, false, true, true);
   }
-
-  selectComponent(): void {
-    this.store.dispatch(new SelectComponentAction(this.id));
-  }
-
-  deleteComponent(): void {
-    this.store.dispatch(new DeleteComponentAction(this.id));
-  }
 }
