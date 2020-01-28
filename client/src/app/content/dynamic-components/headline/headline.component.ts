@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-headline',
@@ -6,6 +6,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./headline.component.scss']
 })
 export class HeadlineComponent implements OnInit {
+
+  @Input()
+  public content: string;
+
+  @Input()
+  public size: string;
+
+  public id: string;
 
   constructor() { }
 

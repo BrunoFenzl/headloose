@@ -22,6 +22,10 @@ import { SelectComponentDynamicFactory } from './select/select.dynamic-factory';
 import { SchemaGeneratorService } from './schema-generator.service';
 import { TextareaComponentDynamicFactory } from './textarea/textarea.dynamic-factory';
 import { ParagraphComponentDynamicFactory } from './paragraph/paragraph.dynamic-factory';
+import { HeadlineComponentDynamicFactory } from './headline/headline.dynamic-factory';
+import { NumberInputComponentDynamicFactory } from './number-input/number-input.dynamic-factory';
+import { SwitchComponent } from './switch/switch.component';
+import { SwitchComponentDynamicFactory } from './switch/switch.dynamic-factory';
 
 
 @NgModule({
@@ -37,6 +41,7 @@ import { ParagraphComponentDynamicFactory } from './paragraph/paragraph.dynamic-
     HeadlineComponent,
     ParagraphComponent,
     ComponentOptionsComponent,
+    SwitchComponent,
   ],
   imports: [
     CommonModule,
@@ -51,7 +56,10 @@ import { ParagraphComponentDynamicFactory } from './paragraph/paragraph.dynamic-
     TextInputComponent,
     SelectComponent,
     ParagraphComponent,
+    HeadlineComponent,
+    NumberInputComponent,
     TextareaComponent,
+    SwitchComponent,
   ],
   providers: [
     SchemaGeneratorService,
@@ -84,6 +92,21 @@ import { ParagraphComponentDynamicFactory } from './paragraph/paragraph.dynamic-
       multi: true,
       provide: DYNAMIC_COMPONENT_FACTORIES,
       useValue: ParagraphComponentDynamicFactory,
+    },
+    {
+      multi: true,
+      provide: DYNAMIC_COMPONENT_FACTORIES,
+      useValue: HeadlineComponentDynamicFactory,
+    },
+    {
+      multi: true,
+      provide: DYNAMIC_COMPONENT_FACTORIES,
+      useValue: NumberInputComponentDynamicFactory,
+    },
+    {
+      multi: true,
+      provide: DYNAMIC_COMPONENT_FACTORIES,
+      useValue: SwitchComponentDynamicFactory,
     }
   ],
 })

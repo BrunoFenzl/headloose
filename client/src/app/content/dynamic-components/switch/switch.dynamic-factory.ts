@@ -1,25 +1,20 @@
 import { DynamicComponentFactory } from 'src/dynamic-renderer/dynamic-components.interfaces';
-import { TextInputComponent } from './text-input.component';
-import { TextInputSchema } from './text-input.schema';
+import { SwitchComponent } from './switch.component';
+import { SwitchSchema } from './switch.schema';
 import { Injector, ComponentRef, ComponentFactoryResolver, Renderer, Renderer2 } from '@angular/core';
 
-export const TextInputComponentDynamicFactory: DynamicComponentFactory<TextInputComponent> = {
-  create: (schema: TextInputSchema, injector: Injector): ComponentRef<TextInputComponent> => {
+export const SwitchComponentDynamicFactory: DynamicComponentFactory<SwitchComponent> = {
+  create: (schema: SwitchSchema, injector: Injector): ComponentRef<SwitchComponent> => {
     const renderer: Renderer2 = injector.get(Renderer2);
 
-    const componentRef: ComponentRef<TextInputComponent> = injector
+    const componentRef: ComponentRef<SwitchComponent> = injector
       .get(ComponentFactoryResolver)
-      .resolveComponentFactory(TextInputComponent)
+      .resolveComponentFactory(SwitchComponent)
       .create(injector);
 
     // These properties from the schema should be populated as attributes in this component's instance
-    const attributes: Array<keyof TextInputSchema> = [
-      'name',
+    const attributes: Array<keyof SwitchSchema> = [
       'model',
-      'max',
-      'min',
-      'step',
-      'placeholder',
       'readonly',
       'disabled',
       'required',
@@ -44,5 +39,5 @@ export const TextInputComponentDynamicFactory: DynamicComponentFactory<TextInput
 
     return componentRef;
   },
-  for: 'TextInput',
+  for: 'Switch',
 };

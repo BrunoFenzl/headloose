@@ -1,24 +1,24 @@
 import { DynamicComponentFactory } from 'src/dynamic-renderer/dynamic-components.interfaces';
-import { TextInputComponent } from './text-input.component';
-import { TextInputSchema } from './text-input.schema';
+import { NumberInputComponent } from './number-input.component';
+import { NumberInputSchema } from './number-input.schema';
 import { Injector, ComponentRef, ComponentFactoryResolver, Renderer, Renderer2 } from '@angular/core';
 
-export const TextInputComponentDynamicFactory: DynamicComponentFactory<TextInputComponent> = {
-  create: (schema: TextInputSchema, injector: Injector): ComponentRef<TextInputComponent> => {
+export const NumberInputComponentDynamicFactory: DynamicComponentFactory<NumberInputComponent> = {
+  create: (schema: NumberInputSchema, injector: Injector): ComponentRef<NumberInputComponent> => {
     const renderer: Renderer2 = injector.get(Renderer2);
 
-    const componentRef: ComponentRef<TextInputComponent> = injector
+    const componentRef: ComponentRef<NumberInputComponent> = injector
       .get(ComponentFactoryResolver)
-      .resolveComponentFactory(TextInputComponent)
+      .resolveComponentFactory(NumberInputComponent)
       .create(injector);
 
     // These properties from the schema should be populated as attributes in this component's instance
-    const attributes: Array<keyof TextInputSchema> = [
+    const attributes: Array<keyof NumberInputSchema> = [
       'name',
       'model',
-      'max',
-      'min',
-      'step',
+      'maxlength',
+      'minlength',
+      'size',
       'placeholder',
       'readonly',
       'disabled',
@@ -44,5 +44,5 @@ export const TextInputComponentDynamicFactory: DynamicComponentFactory<TextInput
 
     return componentRef;
   },
-  for: 'TextInput',
+  for: 'NumberInput',
 };

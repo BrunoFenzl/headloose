@@ -1,13 +1,10 @@
 import { DynamicComponentSchema } from '../../../../dynamic-renderer/dynamic-components.interfaces';
 import { v4 as uuid } from 'uuid';
 
-export interface TextInputSchema extends DynamicComponentSchema {
-  '@type': 'TextInput' | string;
+export interface SwitchSchema extends DynamicComponentSchema {
+  '@type': 'Switch' | string;
   parent: string | null;
-  max?: number | null;
-  min?: number | null;
-  step?: number | null;
-  placeholder?: string;
+  model: boolean;
   readonly?: boolean;
   disabled?: boolean;
   required?: boolean;
@@ -17,18 +14,15 @@ export interface TextInputSchema extends DynamicComponentSchema {
 /**
  * Default implementation with sensitive defaults
  */
-export class TextInputDefaults implements TextInputSchema {
+export class SwitchDefaults implements SwitchSchema {
   '@id' = uuid();
-  '@type' = 'TextInput';
+  '@type' = 'Switch';
   parent = null;
-  max = 100;
-  min = 0;
-  step = 10;
+  model = false;
   readonly = false;
-  placeholder = '';
   disabled = false;
   required = false;
-  classes = ['form-group'];
+  classes = ['foo'];
 
   constructor(options) {
     Object.assign(this, options);

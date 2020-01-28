@@ -3,6 +3,8 @@ import { TextInputDefaults } from 'src/app/content/dynamic-components/text-input
 import { Injectable } from '@angular/core';
 import { TextareaComponent } from './textarea/textarea.component';
 import { TextareaDefaults } from './textarea/textarea.schema';
+import { NumberInputDefaults } from './number-input/number-input.schema';
+import { SwitchDefaults } from './switch/switch.schema';
 
 @Injectable({
   providedIn: 'root',
@@ -20,8 +22,8 @@ export class SchemaGeneratorService {
 
     this.inputTypesMap = {
       string: TextInputDefaults,
-      number: TextInputDefaults,
-      boolean: TextInputDefaults,
+      number: NumberInputDefaults,
+      boolean: SwitchDefaults,
       object: TextareaDefaults,
     };
   }
@@ -40,7 +42,7 @@ export class SchemaGeneratorService {
       .filter(key => ignoreTypes.indexOf(typeof schema[key]) === -1) // these too
       .forEach((key) => {
         const valueType = typeof schema[key];
-        const field: DynamicComponentSchema = new (this.inputTypesMap[valueType])({ '@id': key });
+        const field: DynamicComponentSchema = new (this.inputTypesMap[valueType])({ '@id': key, name: key });
 
         switch (valueType) {
           case 'object':

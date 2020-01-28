@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, ChangeDetectorRef, forwardRef } from '@angular/core';
 import { FormComponentBase } from '../form-component.base';
-import { ContentState, SelectComponentAction, DeleteComponentAction } from '../../store';
+import { ContentState } from '../../store';
 import { Store } from '@ngrx/store';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
@@ -31,13 +31,13 @@ export class TextInputComponent extends FormComponentBase<string> implements OnI
   readonly: boolean;
 
   @Input()
-  maxlength: number;
+  max: number;
 
   @Input()
-  minlength: number;
+  min: number;
 
   @Input()
-  size: number;
+  step: number;
 
   @Input()
   placeholder: string;

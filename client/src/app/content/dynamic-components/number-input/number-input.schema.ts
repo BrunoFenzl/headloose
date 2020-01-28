@@ -1,12 +1,12 @@
 import { DynamicComponentSchema } from '../../../../dynamic-renderer/dynamic-components.interfaces';
 import { v4 as uuid } from 'uuid';
 
-export interface TextInputSchema extends DynamicComponentSchema {
-  '@type': 'TextInput' | string;
+export interface NumberInputSchema extends DynamicComponentSchema {
+  '@type': 'NumberInput' | string;
   parent: string | null;
-  max?: number | null;
-  min?: number | null;
-  step?: number | null;
+  maxlength?: number | null;
+  minlength?: number | null;
+  size?: number | null;
   placeholder?: string;
   readonly?: boolean;
   disabled?: boolean;
@@ -17,13 +17,13 @@ export interface TextInputSchema extends DynamicComponentSchema {
 /**
  * Default implementation with sensitive defaults
  */
-export class TextInputDefaults implements TextInputSchema {
+export class NumberInputDefaults implements NumberInputSchema {
   '@id' = uuid();
-  '@type' = 'TextInput';
+  '@type' = 'NumberInput';
   parent = null;
-  max = 100;
-  min = 0;
-  step = 10;
+  maxlength = null;
+  minlength = null;
+  size = null;
   readonly = false;
   placeholder = '';
   disabled = false;
