@@ -4,12 +4,12 @@ import { v4 as uuid } from 'uuid';
 export interface TextareaSchema extends DynamicComponentSchema {
   '@type': 'Textarea' | string;
   parent: string | null;
-  maxlength?: number | null;
-  minlength?: number | null;
-  size?: number | null;
+  maxlength?: number;
+  minlength?: number;
+  size?: number;
   placeholder?: string;
-  readonly?: boolean;
   disabled?: boolean;
+  readonly?: boolean;
   required?: boolean;
   classes?: Array<string>;
 }
@@ -24,9 +24,7 @@ export class TextareaDefaults implements TextareaSchema {
   maxlength = null;
   minlength = null;
   size = null;
-  readonly = false;
-  placeholder = '';
-  disabled = false;
+  placeholder = 'platzhalter';
   required = false;
   classes = ['textarea'];
 

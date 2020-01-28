@@ -1,17 +1,25 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectorRef, forwardRef } from '@angular/core';
+import { FormComponentBase } from '../form-component.base';
+import { ContentState, SelectComponentAction, DeleteComponentAction } from '../../store';
+import { Store } from '@ngrx/store';
+import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
   selector: 'app-text-input',
   templateUrl: './text-input.component.html',
-  styleUrls: ['./text-input.component.scss']
+  styleUrls: ['./text-input.component.scss'],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => TextInputComponent),
+      multi: true,
+    }
+  ]
 })
-export class TextInputComponent implements OnInit {
+export class TextInputComponent extends FormComponentBase<string> implements OnInit {
 
   @Input()
   name: string;
-
-  @Input()
-  model: string;
 
   @Input()
   required: boolean;
@@ -36,14 +44,26 @@ export class TextInputComponent implements OnInit {
 
   public id: string;
 
-  constructor() { }
+  constructor(
+    public store: Store<ContentState>,
+    changeDetector: ChangeDetectorRef
+  ) {
+    super(changeDetector);
+  }
 
   ngOnInit() {
-    console.log('input', this);
+    this.internalModel = this.model;
   }
 
-  onValueChange(evt) {
-    console.log('input value change:', evt);
+  valueChange(evt) {
+    this.setInternalModel(evt.target.value, false, true, true);
   }
 
+  selectComponent(): void {
+    this.store.dispatch(new SelectComponentAction(this.id));
+  }
+
+  deleteComponent(): void {
+    this.store.dispatch(new DeleteComponentAction(this.id));
+  }
 }

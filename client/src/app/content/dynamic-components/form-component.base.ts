@@ -65,7 +65,7 @@ export class FormComponentBase<T> extends ComponentBase implements ControlValueA
     this.propagateTouched = onTouchedCallback;
   }
 
-  setDisabledState(isDisabed: boolean): void {
+  setDisabledState(isDisabled: boolean): void {
     this.disabled = isDisabled;
     this.triggerChangeDetection();
   }
@@ -79,6 +79,10 @@ export class FormComponentBase<T> extends ComponentBase implements ControlValueA
 
     if (doRender) {
       this.doRender(normalizedValue, false);
+    }
+
+    if (emitEvent) {
+      this.modelChange.emit(normalizedValue);
     }
 
     if (emitChange) {

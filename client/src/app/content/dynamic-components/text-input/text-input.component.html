@@ -1,10 +1,14 @@
+<app-component-options
+  (editComponent)="selectComponent($event)"
+  (deleteComponent)="deleteComponent($event)"
+></app-component-options>
 <input
   type="text"
   [name]=""
   [id]="id"
   [disabled]="disabled || ''"
-  [attr.required]="required || ''"
-  [attr.readonly]="readonly || ''"
+  [required]="required || ''"
+  [readonly]="readonly || ''"
   [value]="model"
-  (change)="onValueChange($event)"
+  (change)="valueChange($event)"
 />

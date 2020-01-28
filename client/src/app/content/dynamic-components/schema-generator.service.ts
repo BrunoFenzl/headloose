@@ -10,9 +10,9 @@ import { TextareaDefaults } from './textarea/textarea.schema';
 export class SchemaGeneratorService {
 
   private inputTypesMap: any;
-
   private cssClassesRegex: RegExp;
   private keyValueRegex: RegExp;
+  private activeSchema: DynamicComponentSchema;
 
   constructor() {
     this.cssClassesRegex = /((\w+)(-))*(\w+)/g;
@@ -27,6 +27,7 @@ export class SchemaGeneratorService {
   }
 
   generateFieldsfromSchema(schema: DynamicComponentSchema): DynamicComponentSchema[] {
+    this.activeSchema = schema;
     console.log('generateFieldsfromSchema', schema);
     // Object for holding our new schema
     const fieldsSchema: DynamicComponentSchema[] = [];
@@ -68,6 +69,16 @@ export class SchemaGeneratorService {
     return css.reduce((acc, curr) => {
       return acc = (acc === '') ? curr : `${acc} ${curr}`;
     }, '');
+  }
+
+  generateSchemaFromFields(formValues: any[]): DynamicComponentSchema {
+    const updatedSchema = { ...this.activeSchema };
+    Object.keys(formValues)
+      .forEach((key) => {
+        if (updatedSchema.hasOwnProperty(key)) {
+          updateSchema[key] = formValues
+        }
+      })
   }
 
   parseOptions(options: string): any[] {

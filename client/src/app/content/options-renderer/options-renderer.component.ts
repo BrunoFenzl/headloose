@@ -5,7 +5,6 @@ import { ContentState, getActiveComponent } from '../store';
 import { Observable } from 'rxjs';
 import { DynamicComponentSchema } from 'src/dynamic-renderer/dynamic-components.interfaces';
 import { SchemaGeneratorService } from 'src/app/content/dynamic-components/schema-generator.service';
-import { FormControl, FormGroup, FormArray } from '@angular/forms';
 
 @Component({
   selector: 'app-options-renderer',
@@ -23,6 +22,9 @@ export class OptionsRendererComponent implements OnInit {
     private schemaGenerator: SchemaGeneratorService,
   ) {
     this.form = new FormGroup({});
+    this.form.valueChanges.subscribe((v) => {
+      console.log('v', v);
+    });
   }
 
   ngOnInit() {

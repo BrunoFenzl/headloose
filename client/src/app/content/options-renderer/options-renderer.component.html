@@ -1,5 +1,4 @@
 <form class="" [formGroup]="form">
-  <pre>{{ content$ | async | json }}</pre>
   <div *ngIf="content$ | async">
     Currently editing {{ content$["@type"] | async }}
     <strong>{{ content$["@id"] }}</strong>

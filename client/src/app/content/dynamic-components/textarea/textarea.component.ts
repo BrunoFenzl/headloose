@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, forwardRef } from '@angular/core';
+import { Component, OnInit, Input, forwardRef, ChangeDetectorRef } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { FormComponentBase } from '../form-component.base';
 
@@ -14,13 +14,10 @@ import { FormComponentBase } from '../form-component.base';
     }
   ]
 })
-export class TextareaComponent extends FormComponentBase implements OnInit {
+export class TextareaComponent extends FormComponentBase<string> implements OnInit {
 
   @Input()
   name: string;
-
-  @Input()
-  model: string;
 
   @Input()
   required: boolean;
@@ -45,18 +42,17 @@ export class TextareaComponent extends FormComponentBase implements OnInit {
 
   public id: string;
 
-  constructor() {
-    super();
+  constructor(changeDetector: ChangeDetectorRef) {
+    super(changeDetector);
   }
 
   ngOnInit() {
     this.internalModel = this.model;
   }
 
-  onValueChange(evt) {
-    console.log('textarea value change:', evt);
-    this.onModelChange(evt.value);
-    this.onTouch();
+  valueChange(evt) {
+    console.log('textarea value change:', evt.target.value);
+    this.setInternalModel(evt.target.value, false, true, true);
   }
 
 }
