@@ -8,9 +8,6 @@ import {
 import {
   dynamicComponentRegistryServiceFactory
 } from './dynamic-component/dynamic-component-registry/dynamic-component-registry.service-factory';
-import { SchemaGeneratorService } from './schema-generator.service';
-
-
 
 @NgModule({
   declarations: [DynamicComponentDirective],
@@ -19,7 +16,6 @@ import { SchemaGeneratorService } from './schema-generator.service';
     CommonModule
   ],
   providers: [
-    SchemaGeneratorService,
     {
       deps: [
         [new Optional(), new SkipSelf(), DynamicComponentRegistryService],

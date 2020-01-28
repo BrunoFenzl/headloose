@@ -1,19 +1,19 @@
 import { DynamicComponentFactory } from 'src/dynamic-renderer/dynamic-components.interfaces';
-import { TextInputComponent } from './text-input.component';
-import { TextInputSchema } from './text-input.schema';
+import { TextareaComponent } from './textarea.component';
+import { TextareaSchema } from './textarea.schema';
 import { Injector, ComponentRef, ComponentFactoryResolver, Renderer, Renderer2 } from '@angular/core';
 
-export const TextInputComponentDynamicFactory: DynamicComponentFactory<TextInputComponent> = {
-  create: (schema: TextInputSchema, injector: Injector): ComponentRef<TextInputComponent> => {
+export const TextareaComponentDynamicFactory: DynamicComponentFactory<TextareaComponent> = {
+  create: (schema: TextareaSchema, injector: Injector): ComponentRef<TextareaComponent> => {
     const renderer: Renderer2 = injector.get(Renderer2);
 
-    const componentRef: ComponentRef<TextInputComponent> = injector
+    const componentRef: ComponentRef<TextareaComponent> = injector
       .get(ComponentFactoryResolver)
-      .resolveComponentFactory(TextInputComponent)
+      .resolveComponentFactory(TextareaComponent)
       .create(injector);
 
     // These properties from the schema should be populated as attributes in this component's instance
-    const attributes: Array<keyof TextInputSchema> = [
+    const attributes: Array<keyof TextareaSchema> = [
       'name',
       'model',
       'maxlength',
@@ -44,5 +44,5 @@ export const TextInputComponentDynamicFactory: DynamicComponentFactory<TextInput
 
     return componentRef;
   },
-  for: 'TextInput',
+  for: 'Textarea',
 };

@@ -1,11 +1,12 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { SelectOption } from './select.schema';
 
 @Component({
-  selector: 'app-text-input',
-  templateUrl: './text-input.component.html',
-  styleUrls: ['./text-input.component.scss']
+  selector: 'app-select',
+  templateUrl: './select.component.html',
+  styleUrls: ['./select.component.scss']
 })
-export class TextInputComponent implements OnInit {
+export class SelectComponent implements OnInit {
 
   @Input()
   name: string;
@@ -20,21 +21,11 @@ export class TextInputComponent implements OnInit {
   disabled: boolean;
 
   @Input()
-  readonly: boolean;
-
-  @Input()
-  maxlength: number;
-
-  @Input()
-  minlength: number;
-
-  @Input()
   size: number;
 
-  @Input()
-  placeholder: string;
-
   public id: string;
+
+  public options: SelectOption[];
 
   constructor() { }
 
@@ -45,5 +36,4 @@ export class TextInputComponent implements OnInit {
   onValueChange(evt) {
     console.log('input value change:', evt);
   }
-
 }

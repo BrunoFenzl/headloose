@@ -1,0 +1,12 @@
+<select
+  [name]="name"
+  [id]="id"
+  [disabled]="disabled || ''"
+  [attr.required]="required || ''"
+  [value]="model"
+  (change)="onValueChange($event)"
+>
+  <option *ngFor="let option of options" value="{{ option.value }}">
+    {{ option.label }}
+  </option>
+</select>

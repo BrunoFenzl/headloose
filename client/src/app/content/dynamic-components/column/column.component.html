@@ -4,7 +4,7 @@
     (deleteComponent)="deleteComponent($event)"
   ></app-component-options>
   <ng-container
-    *ngFor="let child of children"
+    *ngFor="let child of children$ | async"
     [dynamicComponent]="child"
   ></ng-container>
 </div>

@@ -38,7 +38,7 @@ export function pageReducer(
       // ...and children
       const onesChildren = theOne.children;
       // set the parent of the component being deleted to the parent property of it's children
-      onesChildren.forEach(c => c.parent = onesParent['@id']);
+      onesChildren.forEach(c => components[c].parent = onesParent['@id']);
       // now remove change theOne's id for it's children id's inside the onesParent
       onesParent.children
         .splice(
