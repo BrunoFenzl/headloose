@@ -1,4 +1,5 @@
 <app-component-options [targetId]="id"></app-component-options>
-<div *ngFor="let child of children$ | async">
-  <ng-container [dynamicComponent]="child"></ng-container>
-</div>
+<ng-container
+  *ngFor="let child of children$ | async"
+  [dynamicComponent]="child"
+></ng-container>

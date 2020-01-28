@@ -21,6 +21,7 @@ import { ParagraphComponent } from './paragraph/paragraph.component';
 import { SelectComponentDynamicFactory } from './select/select.dynamic-factory';
 import { SchemaGeneratorService } from './schema-generator.service';
 import { TextareaComponentDynamicFactory } from './textarea/textarea.dynamic-factory';
+import { ParagraphComponentDynamicFactory } from './paragraph/paragraph.dynamic-factory';
 
 
 @NgModule({
@@ -49,6 +50,7 @@ import { TextareaComponentDynamicFactory } from './textarea/textarea.dynamic-fac
     ColumnComponent,
     TextInputComponent,
     SelectComponent,
+    ParagraphComponent,
     TextareaComponent,
   ],
   providers: [
@@ -77,6 +79,11 @@ import { TextareaComponentDynamicFactory } from './textarea/textarea.dynamic-fac
       multi: true,
       provide: DYNAMIC_COMPONENT_FACTORIES,
       useValue: TextareaComponentDynamicFactory,
+    },
+    {
+      multi: true,
+      provide: DYNAMIC_COMPONENT_FACTORIES,
+      useValue: ParagraphComponentDynamicFactory,
     }
   ],
 })

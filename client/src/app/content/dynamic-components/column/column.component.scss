@@ -1,6 +1,7 @@
 @import "src/scss";
 
 :host {
+  position: relative;
   min-height: 2rem;
   border: 1px solid red;
 }

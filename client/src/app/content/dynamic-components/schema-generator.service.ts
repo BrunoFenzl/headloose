@@ -28,7 +28,6 @@ export class SchemaGeneratorService {
 
   generateFieldsfromSchema(schema: DynamicComponentSchema): DynamicComponentSchema[] {
     this.activeSchema = schema;
-    console.log('generateFieldsfromSchema', schema);
     // Object for holding our new schema
     const fieldsSchema: DynamicComponentSchema[] = [];
     // These keys should not be rendered as input fields

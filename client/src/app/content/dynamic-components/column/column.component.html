@@ -1,5 +1,5 @@
 <app-component-options [targetId]="id"></app-component-options>
-<div [ngClass]="{ 'comp--active': 'active' }">
+<div>
   <div *ngFor="let child of children$ | async">
     <app-component-options [targetId]="child['@id']"></app-component-options>
     <ng-container [dynamicComponent]="child"></ng-container>
