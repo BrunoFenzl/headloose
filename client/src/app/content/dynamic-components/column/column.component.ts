@@ -3,6 +3,7 @@ import { ContentState, getComponentChildren, ChooseComponentAction } from '../..
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { DynamicComponentSchema } from 'src/dynamic-renderer/dynamic-components.interfaces';
+import { ModalService } from '../../../modal/modal.service';
 
 @Component({
   selector: 'app-column',
@@ -17,6 +18,7 @@ export class ColumnComponent implements OnInit {
 
   constructor(
     public store: Store<ContentState>,
+    private modalService: ModalService,
   ) { }
 
   ngOnInit() {
@@ -24,6 +26,7 @@ export class ColumnComponent implements OnInit {
   }
 
   public addComponent(): void {
-    this.store.dispatch(new ChooseComponentAction());
+    // this.store.dispatch(new ChooseComponentAction());
+    this.modalService.open({});
   }
 }

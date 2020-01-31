@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { PageModel } from './models/pages.model';
+import { PageModel } from '../models/pages.model';
 import { Observable } from 'rxjs';
 import { DynamicPageSchema } from 'src/dynamic-renderer/dynamic-components.interfaces';
 

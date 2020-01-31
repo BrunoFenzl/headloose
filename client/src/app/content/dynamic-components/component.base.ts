@@ -24,7 +24,7 @@ export class ComponentBase {
   }
 
   /**
-   * Unique id of this component
+   * Unique id of this component. Will be expected by the respective componentFactories
    */
   public id: string;
 

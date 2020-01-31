@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
-import { ContentService } from '../content.service';
+import { ContentService } from '../services/content.service';
 import {
   LoadPagesAction,
   ContentActionTypes,
@@ -37,7 +37,8 @@ export class ContentEffects {
       )
     );
 
-  @Effect() loadPage$ = this.actions$
+  @Effect()
+  loadPage$ = this.actions$
     .pipe(
       ofType<LoadPageAction>(ContentActionTypes.LOAD_PAGE),
       mergeMap(
@@ -49,7 +50,8 @@ export class ContentEffects {
       )
     );
 
-  @Effect() addPage$ = this.actions$
+  @Effect()
+  addPage$ = this.actions$
     .pipe(
       ofType<AddPageAction>(ContentActionTypes.ADD_PAGE),
       mergeMap(
@@ -61,7 +63,8 @@ export class ContentEffects {
       )
     );
 
-  @Effect() deletePage$ = this.actions$
+  @Effect()
+  deletePage$ = this.actions$
     .pipe(
       ofType<DeletePageAction>(ContentActionTypes.DELETE_PAGE),
       mergeMap(

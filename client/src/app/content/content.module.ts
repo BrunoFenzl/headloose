@@ -1,38 +1,53 @@
+// Vendos
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { OverviewComponent } from './overview/overview.component';
-import { EditorComponent } from './editor/editor.component';
+import { OverlayModule } from '@angular/cdk/overlay';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-import { ContentService } from './store/content.service';
+
+// State
+import { contentReducer, ContentEffects, PageEffects, ContentService } from './store';
+
 import { ContentRoutingModule } from './content-routing.module';
+
+// Components
+import { ModalService, ModalComponent } from '../modal';
+import { OverviewComponent } from './overview/overview.component';
+import { EditorComponent } from './editor/editor.component';
 import { DynamicComponentsModule } from './dynamic-components/dynamic-components.module';
-import { contentReducer } from './store';
 import { OptionsRendererComponent } from './options-renderer/options-renderer.component';
-import { PageEffects } from './store/effects/page.effects';
-import { ContentEffects } from './store/effects/content.effects';
+import { ComponentsListComponent } from './components-list/components-list.component';
+
 
 @NgModule({
   declarations: [
     OverviewComponent,
     EditorComponent,
     OptionsRendererComponent,
+    ModalComponent,
+    ComponentsListComponent,
   ],
   exports: [
     OverviewComponent,
     EditorComponent,
+    ModalComponent,
   ],
   imports: [
     ReactiveFormsModule,
     CommonModule,
     StoreModule.forFeature('content', contentReducer),
-    EffectsModule.forFeature([PageEffects, ContentEffects]),
+    EffectsModule.forFeature([ContentEffects]),
     ContentRoutingModule,
     DynamicComponentsModule,
+    OverlayModule,
   ],
-  entryComponents: [],
+  entryComponents: [
+    ModalComponent,
+    OptionsRendererComponent,
+  ],
   providers: [
+    ModalService,
     ContentService,
   ],
 })

@@ -1,6 +1,8 @@
 import { Component, Input, HostListener, ElementRef } from '@angular/core';
 import { ContentState, SelectComponentAction, DeleteComponentAction } from '../store';
 import { Store } from '@ngrx/store';
+import { ModalService } from 'src/app/modal/modal.service';
+import { OptionsRendererComponent } from '../options-renderer/options-renderer.component';
 
 @Component({
   selector: 'app-component-options',
@@ -22,17 +24,20 @@ export class ComponentOptionsComponent {
     this.element.nativeElement.classList.remove('is-visible');
   }
 
-
   constructor(
     public store: Store<ContentState>,
     private element: ElementRef,
+    private modalService: ModalService,
   ) { }
 
   editClick(): void {
     this.store.dispatch(new SelectComponentAction(this.targetId));
+    this.modalService.open({ component: OptionsRendererComponent });
   }
 
   deleteClick(): void {
-    this.store.dispatch(new DeleteComponentAction(this.targetId));
+    if (window.confirm('Are you sure? This can not be undone.')) {
+      this.store.dispatch(new DeleteComponentAction(this.targetId));
+    }
   }
 }
