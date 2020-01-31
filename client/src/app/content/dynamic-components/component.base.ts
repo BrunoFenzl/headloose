@@ -12,7 +12,7 @@ export class ComponentBase {
   public disabled: boolean;
 
   /**
-   * readonly flag
+   * Readonly flag
    */
   @Input()
   @HostBinding('class.is-readonly')
@@ -22,6 +22,11 @@ export class ComponentBase {
     this.disabled = false;
     this.readonly = false;
   }
+
+  /**
+   * Unique id of this component
+   */
+  public id: string;
 
   /**
    * Intercepts all click events and prevent them if the component is disabled
