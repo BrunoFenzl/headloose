@@ -11,7 +11,7 @@ export class HeadlineComponent implements OnInit {
   public content: string;
 
   @Input()
-  public size: string;
+  public model: string;
 
   public id: string;
 

@@ -14,9 +14,7 @@ export const HeadlineComponentDynamicFactory: DynamicComponentFactory<HeadlineCo
 
     // These properties from the schema should be populated as attributes in this component's instance
     const attributes: Array<keyof HeadlineSchema> = [
-      'children',
-      'options',
-      'size',
+      'model',
       'content',
     ];
 

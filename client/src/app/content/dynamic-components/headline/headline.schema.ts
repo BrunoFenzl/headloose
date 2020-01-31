@@ -4,10 +4,9 @@ import { v4 as uuid } from 'uuid';
 export interface HeadlineSchema extends DynamicComponentSchema {
   '@type': 'Headline' | string;
   parent: string | null;
-  size: string;
-  options: Array<Option>;
+  model: string;
+  modelOptions: Array<Option>;
   content: string;
-  children: Array<string>; // id's of components below this one
   classes?: Array<string>;
 }
 
@@ -20,8 +19,8 @@ export class HeadlineDefaults implements HeadlineSchema {
   '@id' = uuid();
   '@type' = 'Headline';
   content: 'I\'m a brand new Headline!';
-  size: 'h1';
-  options: [
+  model: 'h1';
+  modelOptions: [
     { label: 'H1', value: 'h1' },
     { label: 'H2', value: 'h2' },
     { label: 'H3', value: 'h3' },
@@ -30,7 +29,6 @@ export class HeadlineDefaults implements HeadlineSchema {
     { label: 'H6', value: 'h6' }
   ];
   parent = null;
-  children = [];
   classes = [];
 
   constructor(options) {
