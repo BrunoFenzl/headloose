@@ -1,0 +1,56 @@
+@import "src/scss";
+
+:host {
+  @include make-col-ready();
+  @include make-col(12);
+  background-color: $gray-900;
+  padding: 5rem 0 2rem 0;
+}
+
+.navigation {
+  height: inherit;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.navigation__item {
+  border-bottom: 1px solid $gray-800;
+
+  &:first-child {
+    border-top: 1px solid $gray-800;
+  }
+}
+
+.navigation__anchor {
+  display: block;
+  padding: 1rem;
+  color: $primary;
+  background-color: $gray-900;
+  transition: color 200ms, background-color 200ms;
+
+  &--active {
+    color: $gray-900;
+    background-color: $primary;
+  }
+
+  &:hover {
+    text-decoration: none;
+    color: $gray-900;
+
+    &:not(.navigation__anchor--active) {
+      background-color: lighten($primary, 10);
+    }
+  }
+}
+
+@include media-breakpoint-up(md) {
+  :host {
+    flex: 0 0 300px;
+  }
+
+  .navigation {
+    position: fixed;
+    width: 300px;
+  }
+}
