@@ -1,0 +1,26 @@
+@import "src/scss";
+
+:host {
+  @include make-container();
+
+  display: block;
+}
+
+.editor {
+  display: flex;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.page {
+  background-color: white;
+  padding: 1rem;
+  border-radius: 3px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+@include media-breakpoint-up(md) {
+  .page {
+    max-width: 80%;
+  }
+}
