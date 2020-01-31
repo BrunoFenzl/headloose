@@ -1,7 +1,7 @@
 import { DynamicComponentFactory } from 'src/dynamic-renderer/dynamic-components.interfaces';
 import { ColumnComponent } from './column.component';
 import { ColumnSchema } from './column.schema';
-import { Injector, ComponentRef, ComponentFactoryResolver, Renderer, Renderer2 } from '@angular/core';
+import { Injector, ComponentRef, ComponentFactoryResolver, Renderer2 } from '@angular/core';
 
 export const ColumnComponentDynamicFactory: DynamicComponentFactory<ColumnComponent> = {
   create: (schema: ColumnSchema, injector: Injector): ComponentRef<ColumnComponent> => {

@@ -1,6 +1,6 @@
 <app-component-options [targetId]="id"></app-component-options>
-<div>
-  <div *ngFor="let child of children$ | async">
+<div *ngFor="let child of children$ | async">
+  <div class="comp-wrapper">
     <app-component-options [targetId]="child['@id']"></app-component-options>
     <ng-container [dynamicComponent]="child"></ng-container>
   </div>
