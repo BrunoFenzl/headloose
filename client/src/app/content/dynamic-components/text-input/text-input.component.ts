@@ -19,7 +19,7 @@ import { NG_VALUE_ACCESSOR } from '@angular/forms';
 export class TextInputComponent extends FormComponentBase<string> implements OnInit {
 
   @Input()
-  name: string;
+  label: string;
 
   @Input()
   required: boolean;
@@ -42,10 +42,7 @@ export class TextInputComponent extends FormComponentBase<string> implements OnI
   @Input()
   placeholder: string;
 
-  public id: string;
-
   constructor(
-    public store: Store<ContentState>,
     changeDetector: ChangeDetectorRef
   ) {
     super(changeDetector);

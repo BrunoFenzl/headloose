@@ -14,7 +14,7 @@ export const TextInputComponentDynamicFactory: DynamicComponentFactory<TextInput
 
     // These properties from the schema should be populated as attributes in this component's instance
     const attributes: Array<keyof TextInputSchema> = [
-      'name',
+      'label',
       'model',
       'max',
       'min',

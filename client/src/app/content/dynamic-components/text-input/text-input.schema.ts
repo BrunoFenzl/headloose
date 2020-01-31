@@ -3,6 +3,7 @@ import { v4 as uuid } from 'uuid';
 
 export interface TextInputSchema extends DynamicComponentSchema {
   '@type': 'TextInput' | string;
+  label: string;
   parent: string | null;
   max?: number | null;
   min?: number | null;
@@ -20,6 +21,7 @@ export interface TextInputSchema extends DynamicComponentSchema {
 export class TextInputDefaults implements TextInputSchema {
   '@id' = uuid();
   '@type' = 'TextInput';
+  label = 'My input label';
   parent = null;
   max = 100;
   min = 0;

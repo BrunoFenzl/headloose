@@ -1,5 +1,5 @@
-<label for="{{ id }}">{{ name }}</label>
 <input
+  class="input input--text"
   type="text"
   [name]=""
   [id]="id"
@@ -7,7 +7,6 @@
   [required]="required || ''"
   [readonly]="readonly || ''"
   [value]="model"
-  aria-describedby="emailHelp"
-  class="form-control"
   (change)="valueChange($event)"
 />
+<label class="input__label" for="{{ id }}">{{ label }}</label>
