@@ -3,8 +3,15 @@
 :host {
   @include make-row();
   position: relative;
-  width: 100%;
 
   min-height: 2rem;
-  border: 1px solid blue;
+  border-radius: 2px;
+  border: 1px solid $gray-200;
+  padding: 1rem;
+
+  &:hover {
+    app-component-options {
+      display: block;
+    }
+  }
 }

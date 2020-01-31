@@ -14,10 +14,12 @@ import { PageNotFoundModule } from './page-not-found/page-not-found.module';
 import { EffectsModule } from '@ngrx/effects';
 
 import { reducers, CustomSerializer } from './store';
+import { NavigationComponent } from './navigation/navigation.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    NavigationComponent,
   ],
   imports: [
     // Angular

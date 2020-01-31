@@ -42,8 +42,6 @@ export class NumberInputComponent extends FormComponentBase<string> implements O
   @Input()
   placeholder: string;
 
-  public id: string;
-
   constructor(
     public store: Store<ContentState>,
     changeDetector: ChangeDetectorRef
