@@ -31,7 +31,7 @@ export class OptionsRendererComponent implements OnInit {
       )
       .subscribe((v) => {
         const b = this.schemaGenerator.generateSchemaFromFields(v);
-        console.log(b);
+        // console.log(b);
         this.store.dispatch(new UpdateComponentAction(b));
       });
   }
@@ -40,7 +40,7 @@ export class OptionsRendererComponent implements OnInit {
     this.content$ = this.store.select(getActiveComponent);
     this.content$.subscribe((r) => {
       if (r) {
-        console.log('r', r);
+        // console.log('r', r);
         this.formSchema = this.schemaGenerator.generateFieldsfromSchema(r);
       }
     });
