@@ -4,6 +4,7 @@ import { DynamicComponentSchema } from 'src/dynamic-renderer/dynamic-components.
 export enum PageActionTypes {
   SELECT_COMPONENT = '[COMPONENT] Select Component',
   UPDATE_COMPONENT = '[COMPONENT] Update Component',
+  CHOOSE_COMPONENT = '[COMPONENT] Choose Component',
   ADD_COMPONENT = '[COMPONENT] Add Component',
   DELETE_COMPONENT = '[COMPONENT] Delete Component',
 }
@@ -19,6 +20,11 @@ export class UpdateComponentAction implements Action {
   constructor(public payload: DynamicComponentSchema) { }
 }
 
+export class ChooseComponentAction implements Action {
+  readonly type = PageActionTypes.CHOOSE_COMPONENT;
+  constructor(public payload: string | null) { }
+}
+
 export class AddComponentAction implements Action {
   readonly type = PageActionTypes.ADD_COMPONENT;
   constructor(public payload: DynamicComponentSchema) { }
@@ -32,6 +38,7 @@ export class DeleteComponentAction implements Action {
 export type PageAction =
   SelectComponentAction |
   UpdateComponentAction |
+  ChooseComponentAction |
   AddComponentAction |
   DeleteComponentAction
   ;

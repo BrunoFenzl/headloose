@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { DynamicPageSchema } from 'src/dynamic-renderer/dynamic-components.interfaces';
 
 @Injectable()
-export class PagesService {
+export class ContentService {
   private PAGES_URL = 'http://localhost:3000/pages';
   private PAGE = 'http://localhost:8080/pages';
 

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
-import { PagesService } from '../content.service';
+import { ContentService } from '../content.service';
 import {
   LoadPagesAction,
   ContentActionTypes,
@@ -20,7 +20,7 @@ import { of, Observable } from 'rxjs';
 import { Action } from '@ngrx/store';
 
 @Injectable()
-export class PagesEffects {
+export class ContentEffects {
 
   @Effect()
   loadPages$: Observable<Action> = this.actions$
@@ -75,6 +75,6 @@ export class PagesEffects {
 
   constructor(
     private actions$: Actions,
-    private pagesService: PagesService,
+    private pagesService: ContentService,
   ) { }
 }

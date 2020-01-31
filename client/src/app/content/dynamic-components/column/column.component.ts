@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ContentState, getComponentChildren } from '../../store';
+import { ContentState, getComponentChildren, ChooseComponentAction } from '../../store';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { DynamicComponentSchema } from 'src/dynamic-renderer/dynamic-components.interfaces';
@@ -21,5 +21,9 @@ export class ColumnComponent implements OnInit {
 
   ngOnInit() {
     this.children$ = this.store.select(getComponentChildren, { id: this.id });
+  }
+
+  public addComponent(): void {
+    this.store.dispatch(new ChooseComponentAction());
   }
 }
