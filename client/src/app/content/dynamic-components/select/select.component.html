@@ -1,12 +1,12 @@
 <label for="{{ id }}">Example select</label>
 <select
+  class="form-control"
   [name]="name"
   [id]="id"
   [disabled]="disabled || ''"
-  [attr.required]="required || ''"
+  [required]="required || ''"
   [value]="model"
-  class="form-control"
-  (change)="onValueChange($event)"
+  (change)="valueChange($event)"
 >
   <option *ngFor="let option of options" value="{{ option.value }}">
     {{ option.label }}

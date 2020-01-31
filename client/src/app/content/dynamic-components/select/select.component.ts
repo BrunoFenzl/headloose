@@ -1,12 +1,21 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectorRef, forwardRef } from '@angular/core';
 import { SelectOption } from './select.schema';
+import { FormComponentBase } from '../form-component.base';
+import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
   selector: 'app-select',
   templateUrl: './select.component.html',
-  styleUrls: ['./select.component.scss']
+  styleUrls: ['./select.component.scss'],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => SelectComponent),
+      multi: true,
+    }
+  ]
 })
-export class SelectComponent implements OnInit {
+export class SelectComponent extends FormComponentBase<any> implements OnInit {
 
   @Input()
   name: string;
@@ -20,20 +29,19 @@ export class SelectComponent implements OnInit {
   @Input()
   disabled: boolean;
 
-  @Input()
-  size: number;
-
-  public id: string;
-
   public options: SelectOption[];
 
-  constructor() { }
-
-  ngOnInit() {
-    console.log('input', this);
+  constructor(
+    changeDetector: ChangeDetectorRef
+  ) {
+    super(changeDetector);
   }
 
-  onValueChange(evt) {
-    console.log('input value change:', evt);
+  ngOnInit() {
+    this.internalModel = this.model;
+  }
+
+  valueChange(evt) {
+    this.setInternalModel(evt.target.value, false, true, true);
   }
 }
