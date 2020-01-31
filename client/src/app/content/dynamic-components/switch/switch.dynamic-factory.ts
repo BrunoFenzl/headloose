@@ -14,6 +14,7 @@ export const SwitchComponentDynamicFactory: DynamicComponentFactory<SwitchCompon
 
     // These properties from the schema should be populated as attributes in this component's instance
     const attributes: Array<keyof SwitchSchema> = [
+      'name',
       'model',
       'readonly',
       'disabled',

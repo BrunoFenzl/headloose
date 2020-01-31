@@ -1,4 +1,4 @@
-import { Component, forwardRef, ChangeDetectorRef } from '@angular/core';
+import { Component, forwardRef, ChangeDetectorRef, Input } from '@angular/core';
 import { FormComponentBase } from '../form-component.base';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
@@ -16,11 +16,17 @@ import { NG_VALUE_ACCESSOR } from '@angular/forms';
 })
 export class SwitchComponent extends FormComponentBase<boolean> {
 
-  public id: string;
+  @Input()
+  name: string;
+
+  @Input()
+  required: boolean;
+
+  @Input()
+  disabled: boolean;
 
   constructor(changeDetector: ChangeDetectorRef) {
     super(changeDetector);
-
     this.internalModel = false;
   }
 
@@ -28,7 +34,7 @@ export class SwitchComponent extends FormComponentBase<boolean> {
     event.stopPropagation(); // Prevent the click event from firing twice
   }
 
-  public onCheckboxChange(): void {
+  public valueChange(evt): void {
     this.setInternalModel(!this.internalModel, false, true, true);
   }
 }

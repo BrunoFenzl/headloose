@@ -3,9 +3,9 @@
   [id]="id"
   [name]="name"
   [disabled]="disabled"
-  [checked]="model"
-  [value]="model"
+  [checked]="internalModel"
+  [value]="internalModel"
   (click)="onCheckboxClick($event)"
-  (change)="onCheckboxChange()"
+  (change)="valueChange($event)"
 />
 <label for="{{ id }}">{{ name }}</label>
