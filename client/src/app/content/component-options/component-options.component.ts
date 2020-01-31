@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, HostListener, ElementRef } from '@angular/core';
 import { ContentState, SelectComponentAction, DeleteComponentAction } from '../store';
 import { Store } from '@ngrx/store';
 
@@ -7,16 +7,26 @@ import { Store } from '@ngrx/store';
   templateUrl: './component-options.component.html',
   styleUrls: ['./component-options.component.scss']
 })
-export class ComponentOptionsComponent implements OnInit {
+export class ComponentOptionsComponent {
 
   @Input()
   targetId: string;
 
+  @HostListener('mouseenter')
+  onEnter(): void {
+    this.element.nativeElement.classList.add('is-visible');
+  }
+
+  @HostListener('mouseleave')
+  onLeave(): void {
+    this.element.nativeElement.classList.remove('is-visible');
+  }
+
+
   constructor(
     public store: Store<ContentState>,
+    private element: ElementRef,
   ) { }
-
-  ngOnInit() { }
 
   editClick(): void {
     this.store.dispatch(new SelectComponentAction(this.targetId));
