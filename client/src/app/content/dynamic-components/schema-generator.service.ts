@@ -5,13 +5,13 @@ import { TextareaComponent } from './textarea/textarea.component';
 import { TextareaDefaults } from './textarea/textarea.schema';
 import { NumberInputDefaults } from './number-input/number-input.schema';
 import { SwitchDefaults } from './switch/switch.schema';
+import { SelectDefaults } from './select/select.schema';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SchemaGeneratorService {
 
-  private inputTypesMap: any;
   private cssClassesRegex: RegExp;
   private keyValueRegex: RegExp;
   private activeSchema: DynamicComponentSchema;
@@ -19,13 +19,6 @@ export class SchemaGeneratorService {
   constructor() {
     this.cssClassesRegex = /((\w+)(-))*(\w+)/g;
     this.keyValueRegex = /(([0-9a-z\-\_äöüÄÖÜß!?])+ ?([0-9a-z\-\_äöüÄÖÜß!?])+ ?):( ?\w+ ?([0-9a-z\-\_äöüÄÖÜß!?])+)/g;
-
-    this.inputTypesMap = {
-      string: TextInputDefaults,
-      number: NumberInputDefaults,
-      boolean: SwitchDefaults,
-      object: TextareaDefaults,
-    };
   }
 
   generateFieldsfromSchema(schema: DynamicComponentSchema): DynamicComponentSchema[] {
@@ -33,7 +26,7 @@ export class SchemaGeneratorService {
     // Object for holding our new schema
     const fieldsSchema: DynamicComponentSchema[] = [];
     // These keys should not be rendered as input fields
-    const ignoreKeys = ['@id', '@type', 'children', 'parent'];
+    const ignoreKeys = ['@id', '@type', 'children', 'parent', 'modelOptions'];
     // Keys with values of these types should also not be rendered
     const ignoreTypes = ['undefined', 'symbol', 'function'];
 
@@ -42,10 +35,12 @@ export class SchemaGeneratorService {
       .filter(key => ignoreTypes.indexOf(typeof schema[key]) === -1) // these too
       .forEach((key) => {
         const valueType = typeof schema[key];
-        const field: DynamicComponentSchema = new (this.inputTypesMap[valueType])({ '@id': key, name: key });
+        // const field: DynamicComponentSchema = new (this.inputTypesMap[valueType])({ '@id': key, name: key });
+        let field: DynamicComponentSchema;
 
         switch (valueType) {
           case 'object':
+            field = new TextareaDefaults({ '@id': key, name: key });
             if (key === 'options') {
               // convert options array into a string with the format 'label:value'
               field.model = this.stringifyOptions(schema.options);
@@ -55,9 +50,17 @@ export class SchemaGeneratorService {
             }
             break;
           case 'string':
+            if (key === 'model' && schema.modelOptions !== undefined) {
+              field = new SelectDefaults({ '@id': key, label: key, name: key, model: schema.model, options: schema.modelOptions });
+            } else {
+              field = new TextInputDefaults({ '@id': key, label: key, name: key, model: schema[key] });
+            }
+            break;
           case 'number':
+            field = new NumberInputDefaults({ '@id': key, label: key, name: key, model: schema[key] });
+            break;
           case 'boolean':
-            field.model = schema[key];
+            field = new SwitchDefaults({ '@id': key, label: key, name: key, model: schema[key] });
             break;
         }
         fieldsSchema.push(field);
@@ -101,7 +104,7 @@ export class SchemaGeneratorService {
               schema[key] = parseInt(formValues[key], 10);
               break;
             case 'boolean':
-              schema[key] = (formValues[key] === 'true') ? true : false;
+              schema[key] = (formValues[key] === 'true' || formValues[key] === true) ? true : false;
               break;
           }
         }
