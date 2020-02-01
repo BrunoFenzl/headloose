@@ -1,22 +1,8 @@
 <main class="app">
-  <div class="container-fluid container-xl">
-    <div class="row">
-      <aside class="col-3">
-        <nav>
-          <ul>
-            <li>
-              <a routerLink="/pages" routerLinkActive="active">Pages</a>
-            </li>
-            <li>
-              <a routerLink="/media-library" routerLinkActive="active">Media Library</a>
-            </li>
-            <li>
-              <a routerLink="/settings" routerLinkActive="active">Settings</a>
-            </li>
-          </ul>
-        </nav>
-      </aside>
-      <div class="col">
+  <div class="container-fluid h-100">
+    <div class="row h-100">
+      <app-navigation></app-navigation>
+      <div class="app__content">
         <router-outlet></router-outlet>
       </div>
     </div>

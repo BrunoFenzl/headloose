@@ -1,0 +1,26 @@
+@import "src/scss";
+
+:host {
+  position: relative;
+  min-height: 2rem;
+  border: 1px solid $gray-300;
+  padding: 1rem;
+
+  &:hover > app-component-options {
+    display: block;
+  }
+}
+
+.column__comp-wrapper {
+  position: relative;
+  border: 1px solid $gray-300;
+
+  &:hover > app-component-options {
+    display: block;
+  }
+}
+
+.column__add {
+  position: relative;
+  z-index: 200;
+}

@@ -1,0 +1,10 @@
+<app-component-options [targetId]="id"></app-component-options>
+<div *ngFor="let child of children$ | async">
+  <div class="column__comp-wrapper">
+    <app-component-options [targetId]="child['@id']"></app-component-options>
+    <ng-container [dynamicComponent]="child"></ng-container>
+  </div>
+</div>
+<div class="column__add">
+  <button (click)="addComponent()">Add Component</button>
+</div>

@@ -1,0 +1,17 @@
+@import "src/scss";
+
+:host {
+  @include make-row();
+  position: relative;
+
+  min-height: 2rem;
+  border-radius: 2px;
+  border: 1px solid $gray-200;
+  padding: 1rem;
+
+  &:hover {
+    app-component-options {
+      display: block;
+    }
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "pages": [
+    {
+      "id": 0,
+      "title": "Page 0",
+      "content": []
+    },
+    {
+      "id": 1,
+      "title": "Page 1",
+      "content": "/pages/1.json"
+    }
+  ]
+}

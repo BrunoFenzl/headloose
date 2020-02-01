@@ -24,7 +24,7 @@ import { DynamicComponentRegistryService } from '../dynamic-component/dynamic-co
 import {
   DynamicComponentSchema,
   DynamicFormValue,
-  DynamicFormComponentSchema
+  DynamicPageSchema
 } from '../dynamic-components.interfaces';
 import { formControlStatus } from '../form-control-status.constants';
 
@@ -36,11 +36,11 @@ export class DynamicComponentDirective implements OnInit, OnDestroy, DoCheck {
    * Component schema
    */
   @Input('dynamicComponent')
-  public get schema(): DynamicFormComponentSchema | null {
+  public get schema(): DynamicPageSchema | null {
     return this.internalSchema;
   }
 
-  public set schema(schema: DynamicFormComponentSchema | null) {
+  public set schema(schema: DynamicPageSchema | null) {
     // update schema
     // Note: We only update the schema if it is not null so that we keep the schema itself (and iformation such as @id)
     this.internalSchema = schema || this.internalSchema;
@@ -105,7 +105,7 @@ export class DynamicComponentDirective implements OnInit, OnDestroy, DoCheck {
   /**
    * Internal component schema (controlled by getter & setter)
    */
-  private internalSchema: DynamicFormComponentSchema | null;
+  private internalSchema: DynamicPageSchema | null;
 
   /**
    * Component reference

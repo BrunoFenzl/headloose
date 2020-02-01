@@ -1,0 +1,10 @@
+<form class="" [formGroup]="form">
+  <div *ngIf="content$ | async">
+    Currently editing {{ content$["@type"] | async }}
+    <strong>{{ content$["@id"] }}</strong>
+  </div>
+  <ng-container
+    *ngFor="let compSchema of formSchema"
+    [dynamicComponent]="compSchema"
+  ></ng-container>
+</form>

@@ -5,20 +5,21 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
 
 import { StoreRouterConnectingModule, RouterStateSerializer } from '@ngrx/router-store';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { environment } from '../environments/environment';
 import { PageNotFoundModule } from './page-not-found/page-not-found.module';
-import { metaReducers } from './reducers';
-import { EffectsModule } from '@ngrx/effects';
 
 import { reducers, CustomSerializer } from './store';
+import { NavigationComponent } from './navigation/navigation.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    NavigationComponent,
   ],
   imports: [
     // Angular
@@ -40,6 +41,8 @@ import { reducers, CustomSerializer } from './store';
       useClass: CustomSerializer
     }
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [
+  ]
 })
 export class AppModule { }

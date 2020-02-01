@@ -15,7 +15,7 @@ export class DynamicComponentRegistryService {
   constructor(
     @Optional() @Inject(DYNAMIC_COMPONENT_FACTORIES) dynamicComponentFactories: any | null, // no type!
   ) {
-    this.dynamicComponentFactories = <Array<DynamicComponentFactory<any>>> (dynamicComponentFactories || []);
+    this.dynamicComponentFactories = (dynamicComponentFactories as Array<DynamicComponentFactory<any>> || []);
   }
 
   public createComponent(schema: DynamicComponentSchema, injector: Injector): ComponentRef<any> | null {
@@ -41,7 +41,7 @@ export class DynamicComponentRegistryService {
     const componentRef: ComponentRef<any> = factory.create(schema, injector);
 
     // cleanup on destroy
-    componentRef.onDestroy( (): void => {
+    componentRef.onDestroy((): void => {
       componentRef.changeDetectorRef.detach();
     });
 
