@@ -1,8 +1,10 @@
+import { DynamicPageSchema } from 'src/dynamic-renderer/dynamic-components.interfaces';
+
 export interface PageModel {
-  id: string;
+  id?: string;
   title: string;
   path: string;
-  content: any[];
+  contentUrl: string;
 }
 
 export interface PagesModel {

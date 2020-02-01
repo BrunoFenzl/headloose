@@ -1,7 +1,8 @@
 import { Action } from '@ngrx/store';
 import { PageModel } from '../models/pages.model';
+import { DynamicPageSchema } from 'src/dynamic-renderer/dynamic-components.interfaces';
 
-export enum PageActionTypes {
+export enum ContentActionTypes {
   // page collection
   LOAD_PAGES = '[PAGE] Load Pages',
   LOAD_PAGES_SUCCESS = '[PAGE] Load Pages Success',
@@ -20,66 +21,66 @@ export enum PageActionTypes {
 
 // Next three Actions are for the list of pages
 export class LoadPagesAction implements Action {
-  readonly type = PageActionTypes.LOAD_PAGES;
+  readonly type = ContentActionTypes.LOAD_PAGES;
 }
 
 export class LoadPagesSuccessAction implements Action {
-  readonly type = PageActionTypes.LOAD_PAGES_SUCCESS;
+  readonly type = ContentActionTypes.LOAD_PAGES_SUCCESS;
   constructor(public payload: Array<PageModel>) { }
 }
 
 export class LoadPagesFailureAction implements Action {
-  readonly type = PageActionTypes.LOAD_PAGES_FAILURE;
+  readonly type = ContentActionTypes.LOAD_PAGES_FAILURE;
   constructor(public payload: Error) { }
 }
 
 // Next Actions are for single pages
 export class LoadPageAction implements Action {
-  readonly type = PageActionTypes.LOAD_PAGE;
+  readonly type = ContentActionTypes.LOAD_PAGE;
   constructor(public payload: string) { }
 }
 
 export class LoadPageSuccessAction implements Action {
-  readonly type = PageActionTypes.LOAD_PAGE_SUCCESS;
-  constructor(public payload: PageModel) { }
+  readonly type = ContentActionTypes.LOAD_PAGE_SUCCESS;
+  constructor(public payload: DynamicPageSchema) { }
 }
 
 export class LoadPageFailureAction implements Action {
-  readonly type = PageActionTypes.LOAD_PAGE_FAILURE;
+  readonly type = ContentActionTypes.LOAD_PAGE_FAILURE;
   constructor(public payload: Error) { }
 }
 
 export class AddPageAction implements Action {
-  readonly type = PageActionTypes.ADD_PAGE;
+  readonly type = ContentActionTypes.ADD_PAGE;
   constructor(public payload: PageModel) { }
 }
 
 export class AddPageSuccessAction implements Action {
-  readonly type = PageActionTypes.ADD_PAGE_SUCCESS;
+  readonly type = ContentActionTypes.ADD_PAGE_SUCCESS;
   constructor(public payload: PageModel) { }
 }
 
 export class AddPageFailureAction implements Action {
-  readonly type = PageActionTypes.ADD_PAGE_FAILURE;
+  readonly type = ContentActionTypes.ADD_PAGE_FAILURE;
   constructor(public payload: Error) { }
 }
 
 export class DeletePageAction implements Action {
-  readonly type = PageActionTypes.DELETE_PAGE;
+  readonly type = ContentActionTypes.DELETE_PAGE;
   constructor(public payload: string) { }
 }
 
 export class DeletePageSuccessAction implements Action {
-  readonly type = PageActionTypes.DELETE_PAGE_SUCCESS;
+  readonly type = ContentActionTypes.DELETE_PAGE_SUCCESS;
   constructor(public payload: string) { }
 }
 
 export class DeletePageFailureAction implements Action {
-  readonly type = PageActionTypes.DELETE_PAGE_FAILURE;
+  readonly type = ContentActionTypes.DELETE_PAGE_FAILURE;
   constructor(public payload: Error) { }
 }
 
-export type PageAction =
+export type ContentAction =
   // page collection actions
   LoadPagesAction |
   LoadPagesSuccessAction |

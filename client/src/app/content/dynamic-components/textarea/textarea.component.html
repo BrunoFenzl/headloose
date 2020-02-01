@@ -1,0 +1,13 @@
+<div class="form-group">
+  <label for="exampleFormControlTextarea1">Example textarea</label>
+  <textarea
+    [name]=""
+    [id]="id"
+    [disabled]="disabled || ''"
+    [required]="required || ''"
+    [readonly]="readonly || ''"
+    [value]="model"
+    class="form-control"
+    (change)="valueChange($event)"
+  ></textarea>
+</div>

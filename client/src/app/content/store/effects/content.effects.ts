@@ -1,19 +1,32 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
-import { PagesService } from '../pages.service';
-import { LoadPagesAction, PageActionTypes, LoadPagesSuccessAction, LoadPagesFailureAction, AddPageFailureAction, AddPageAction, AddPageSuccessAction, DeletePageAction, DeletePageSuccessAction, DeletePageFailureAction, LoadPageAction, LoadPageSuccessAction, LoadPageFailureAction } from '../actions/pages.actions';
+import { ContentService } from '../services/content.service';
+import {
+  LoadPagesAction,
+  ContentActionTypes,
+  LoadPagesSuccessAction,
+  LoadPagesFailureAction,
+  AddPageFailureAction,
+  AddPageAction,
+  AddPageSuccessAction,
+  DeletePageAction,
+  DeletePageSuccessAction,
+  DeletePageFailureAction,
+  LoadPageSuccessAction,
+  LoadPageAction
+} from '../actions/content.actions';
 import { mergeMap, map, catchError } from 'rxjs/operators';
 import { of, Observable } from 'rxjs';
 import { Action } from '@ngrx/store';
 
 @Injectable()
-export class PagesEffects {
+export class ContentEffects {
 
   @Effect()
   loadPages$: Observable<Action> = this.actions$
     .pipe(
       // ofType(actionType) Filters stream allowing only the given Action Type to pass
-      ofType<LoadPagesAction>(PageActionTypes.LOAD_PAGES),
+      ofType<LoadPagesAction>(ContentActionTypes.LOAD_PAGES),
       mergeMap(
         // Makes the request and pipes the resulting Observable
         () => this.pagesService.getPages()
@@ -24,9 +37,23 @@ export class PagesEffects {
       )
     );
 
-  @Effect() addPage$ = this.actions$
+  @Effect()
+  loadPage$ = this.actions$
     .pipe(
-      ofType<AddPageAction>(PageActionTypes.ADD_PAGE),
+      ofType<LoadPageAction>(ContentActionTypes.LOAD_PAGE),
+      mergeMap(
+        (data) => this.pagesService.getPage(data.payload) // data.payload is a new Page instance
+          .pipe(
+            map((result) => new LoadPageSuccessAction(result)),
+            catchError(error => of(new AddPageFailureAction(error))),
+          )
+      )
+    );
+
+  @Effect()
+  addPage$ = this.actions$
+    .pipe(
+      ofType<AddPageAction>(ContentActionTypes.ADD_PAGE),
       mergeMap(
         (data) => this.pagesService.addPage(data.payload) // data.payload is a new Page instance
           .pipe(
@@ -36,9 +63,10 @@ export class PagesEffects {
       )
     );
 
-  @Effect() deletePage$ = this.actions$
+  @Effect()
+  deletePage$ = this.actions$
     .pipe(
-      ofType<DeletePageAction>(PageActionTypes.DELETE_PAGE),
+      ofType<DeletePageAction>(ContentActionTypes.DELETE_PAGE),
       mergeMap(
         (data) => this.pagesService.deletePage(data.payload) // data.payload is the id of the page to delete
           .pipe(
@@ -50,6 +78,6 @@ export class PagesEffects {
 
   constructor(
     private actions$: Actions,
-    private pagesService: PagesService,
+    private pagesService: ContentService,
   ) { }
 }

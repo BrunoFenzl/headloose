@@ -1,0 +1,14 @@
+<label for="{{ id }}">Example select</label>
+<select
+  class="form-control"
+  [name]="name"
+  [id]="id"
+  [disabled]="disabled || ''"
+  [required]="required || ''"
+  [value]="model"
+  (change)="valueChange($event)"
+>
+  <option *ngFor="let option of options" value="{{ option.value }}">
+    {{ option.label }}
+  </option>
+</select>

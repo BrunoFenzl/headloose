@@ -3,7 +3,7 @@ import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { ContentState } from './content/store/models/content.model';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { LoadPagesAction } from './content/store/actions/pages.actions';
+import { LoadPagesAction } from './content/store/actions/content.actions';
 import { PageModel } from './content/store/models/pages.model';
 
 @Component({

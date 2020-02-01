@@ -1,0 +1,12 @@
+<input
+  class="input input--text"
+  type="text"
+  [name]=""
+  [id]="id"
+  [disabled]="disabled || ''"
+  [required]="required || ''"
+  [readonly]="readonly || ''"
+  [value]="model"
+  (change)="valueChange($event)"
+/>
+<label class="input__label" for="{{ id }}">{{ label }}</label>

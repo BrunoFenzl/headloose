@@ -1,0 +1,15 @@
+@import "src/scss";
+
+:host,
+.app {
+  height: inherit;
+}
+
+.app__content {
+  flex-basis: 0;
+  flex-grow: 1;
+  max-width: 100%;
+}
+
+@include media-breakpoint-up(md) {
+}

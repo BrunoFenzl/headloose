@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { ContentState } from 'src/app/content/store/models/content.model';
 import { Observable } from 'rxjs';
 import { PageModel } from '../store/models/pages.model';
-import { LoadPagesAction, AddPageAction, DeletePageAction } from '../store';
+import { LoadPagesAction, AddPageAction, DeletePageAction, getPagesArray } from '../store';
 
 
 @Component({
@@ -19,10 +19,7 @@ export class OverviewComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.state$ = this.store.select(store => {
-      const e = store.pages.entities;
-      return Object.keys(e).map(id => e[id]);
-    });
+    this.state$ = this.store.select(getPagesArray);
     this.store.dispatch(new LoadPagesAction());
   }
 
@@ -30,7 +27,7 @@ export class OverviewComponent implements OnInit {
     this.store.dispatch(new AddPageAction({
       title: 'New Page',
       path: '',
-      content: [],
+      contentUrl: {},
     } as PageModel));
   }
 

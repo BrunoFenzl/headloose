@@ -1,48 +1,54 @@
+// Vendos
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { OverlayModule } from '@angular/cdk/overlay';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+
+// State
+import { contentReducer, ContentEffects, PageEffects, ContentService } from './store';
+
+import { ContentRoutingModule } from './content-routing.module';
+
+// Components
+import { ModalService, ModalComponent } from '../modal';
 import { OverviewComponent } from './overview/overview.component';
 import { EditorComponent } from './editor/editor.component';
-import { DynamicRendererModule } from '../../dynamic-renderer/dynamic-renderer.module';
-import { DYNAMIC_COMPONENT_FACTORIES } from '../../dynamic-renderer/injection-token';
-import { StoreModule } from '@ngrx/store';
-import { reducer } from './store';
-import { EffectsModule } from '@ngrx/effects';
-import { PagesEffects } from './store/effects/pages.effects';
-import { PagesService } from './store/pages.service';
-import { ContentRoutingModule } from './content-routing.module';
+import { DynamicComponentsModule } from './dynamic-components/dynamic-components.module';
+import { OptionsRendererComponent } from './options-renderer/options-renderer.component';
+import { ComponentsListComponent } from './components-list/components-list.component';
+
 
 @NgModule({
   declarations: [
     OverviewComponent,
-    EditorComponent
+    EditorComponent,
+    OptionsRendererComponent,
+    ModalComponent,
+    ComponentsListComponent,
   ],
   exports: [
     OverviewComponent,
     EditorComponent,
+    ModalComponent,
   ],
   imports: [
     ReactiveFormsModule,
     CommonModule,
-    DynamicRendererModule,
-    StoreModule.forFeature('pages', reducer),
-    EffectsModule.forFeature([PagesEffects]),
+    StoreModule.forFeature('content', contentReducer),
+    EffectsModule.forFeature([ContentEffects]),
     ContentRoutingModule,
+    DynamicComponentsModule,
+    OverlayModule,
   ],
-  entryComponents: [],
+  entryComponents: [
+    ModalComponent,
+    OptionsRendererComponent,
+  ],
   providers: [
-    PagesService,
-
-    // {
-    //   multi: true,
-    //   provide: DYNAMIC_COMPONENT_FACTORIES,
-    //   useValue: headlineDynamicFactory,
-    // },
-    // {
-    //   multi: true,
-    //   provide: DYNAMIC_COMPONENT_FACTORIES,
-    //   useValue: buttonDynamicFactory,
-    // }
+    ModalService,
+    ContentService,
   ],
 })
 export class ContentModule { }
