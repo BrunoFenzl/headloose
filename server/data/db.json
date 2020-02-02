@@ -9,6 +9,12 @@
       "id": 1,
       "title": "Page 1",
       "content": "/pages/1.json"
+    },
+    {
+      "title": "New Page",
+      "path": "",
+      "contentUrl": {},
+      "id": 2
     }
   ]
 }

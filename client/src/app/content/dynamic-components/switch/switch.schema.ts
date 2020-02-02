@@ -5,6 +5,7 @@ export interface SwitchSchema extends DynamicComponentSchema {
   '@type': 'Switch' | string;
   parent: string | null;
   model: boolean;
+  label?: string;
   readonly?: boolean;
   disabled?: boolean;
   required?: boolean;
@@ -17,6 +18,7 @@ export interface SwitchSchema extends DynamicComponentSchema {
 export class SwitchDefaults implements SwitchSchema {
   '@id' = uuid();
   '@type' = 'Switch';
+  label = 'Label';
   parent = null;
   model = false;
   readonly = false;

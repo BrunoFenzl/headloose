@@ -22,7 +22,7 @@ export class UpdateComponentAction implements Action {
 
 export class ChooseComponentAction implements Action {
   readonly type = PageActionTypes.CHOOSE_COMPONENT;
-  constructor(public payload: string | null) { }
+  constructor(public payload: DynamicComponentSchema) { }
 }
 
 export class AddComponentAction implements Action {
