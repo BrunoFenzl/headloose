@@ -1,1 +1,9 @@
-<p>components-list works!</p>
+<ul class="component-list">
+  <li
+    *ngFor="let key of keys"
+    class="component-list__item"
+    (click)="selectComponent(key)"
+  >
+    {{ key }}
+  </li>
+</ul>
