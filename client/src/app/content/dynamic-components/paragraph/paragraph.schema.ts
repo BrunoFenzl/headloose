@@ -12,7 +12,7 @@ export interface ParagraphSchema extends DynamicComponentSchema {
 export class ParagraphDefaults implements ParagraphSchema {
   '@id' = uuid();
   '@type' = 'Paragraph';
-  content: 'I\'m a brand new paragrah!';
+  content = 'I\'m a brand new paragrah!';
   parent = null;
   children = [];
   classes = [];

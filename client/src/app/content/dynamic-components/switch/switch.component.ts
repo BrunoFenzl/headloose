@@ -20,6 +20,9 @@ export class SwitchComponent extends FormComponentBase<boolean> {
   name: string;
 
   @Input()
+  label: string;
+
+  @Input()
   required: boolean;
 
   @Input()

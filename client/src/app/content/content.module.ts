@@ -45,6 +45,7 @@ import { ComponentsListComponent } from './components-list/components-list.compo
   entryComponents: [
     ModalComponent,
     OptionsRendererComponent,
+    ComponentsListComponent,
   ],
   providers: [
     ModalService,

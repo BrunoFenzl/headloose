@@ -6,16 +6,24 @@ input[type="checkbox"] {
 
 label {
   cursor: pointer;
-  text-indent: -9999px;
-  width: 3rem;
-  height: 1.5rem;
-  background: grey;
-  display: block;
-  border-radius: 1.5rem;
+  display: flex;
+  align-items: center;
   position: relative;
 }
 
-label:after {
+label::before {
+  content: "";
+  position: relative;
+  display: inline-block;
+  width: 3rem;
+  height: 1.5rem;
+  margin-right: 0.3rem;
+  background: grey;
+  border-radius: 1.5rem;
+  cursor: pointer;
+}
+
+label::after {
   content: "";
   position: absolute;
   top: 2px;
@@ -27,12 +35,12 @@ label:after {
   transition: 0.3s;
 }
 
-input:checked + label {
+input:checked + label::before {
   background: #bada55;
 }
 
 input:checked + label:after {
-  left: calc(100% - 2px);
+  left: calc(3rem - 2px);
   transform: translateX(-100%);
 }
 
