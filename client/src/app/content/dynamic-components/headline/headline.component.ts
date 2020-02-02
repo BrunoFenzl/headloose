@@ -18,6 +18,7 @@ export class HeadlineComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    console.log('headline', this.content, this.id, this.model);
   }
 
 }

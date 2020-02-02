@@ -18,9 +18,9 @@ export interface Option {
 export class HeadlineDefaults implements HeadlineSchema {
   '@id' = uuid();
   '@type' = 'Headline';
-  content: 'I\'m a brand new Headline!';
-  model: 'h1';
-  modelOptions: [
+  content = 'I\'m a brand new Headline!';
+  model = 'h1';
+  modelOptions = [
     { label: 'H1', value: 'h1' },
     { label: 'H2', value: 'h2' },
     { label: 'H3', value: 'h3' },
