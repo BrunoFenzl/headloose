@@ -12,7 +12,7 @@ import { LoadPagesAction, AddPageAction, DeletePageAction, getPagesArray } from 
   styleUrls: ['./overview.component.scss']
 })
 export class OverviewComponent implements OnInit {
-  private state$: Observable<Array<PageModel>>;
+  public state$: Observable<Array<PageModel>>;
 
   constructor(
     private store: Store<ContentState>,
