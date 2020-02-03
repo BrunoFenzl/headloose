@@ -31,7 +31,6 @@ export function pageReducer(
       active.children.push(action.payload['@id']);
       // Ensure the active component's id is set in the newly created component
       action.payload.parent = active['@id'];
-      console.log('action.payload', action.payload);
       return {
         ...state,
         components: { ...state.components, [action.payload['@id']]: action.payload }
@@ -50,16 +49,18 @@ export function pageReducer(
       // Now, we have to get references to it's parent...
       const onesParent = components[theOne.parent];
       // ...and children
-      const onesChildren = theOne.children;
-      // set the parent of the component being deleted to the parent property of it's children
-      onesChildren.forEach(c => components[c].parent = onesParent['@id']);
-      // now remove change theOne's id for it's children id's inside the onesParent
-      onesParent.children
-        .splice(
-          onesParent.children.indexOf(theOne['@id']),
-          1,
-          ...onesChildren
-        );
+      if (theOne.children) {
+        const onesChildren = theOne.children;
+        // set the parent of the component being deleted to the parent property of it's children
+        onesChildren.forEach(c => components[c].parent = onesParent['@id']);
+        // now remove change theOne's id for it's children id's inside the onesParent
+        onesParent.children
+          .splice(
+            onesParent.children.indexOf(theOne['@id']),
+            1,
+            ...onesChildren
+          );
+      }
 
       return {
         ...state,

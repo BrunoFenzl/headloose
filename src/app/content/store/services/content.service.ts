@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { PageModel } from '../models/pages.model';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { DynamicPageSchema } from 'src/dynamic-renderer/dynamic-components.interfaces';
+import { page1, pages } from '../models/test-content';
 
 @Injectable()
 export class ContentService {
@@ -12,11 +13,13 @@ export class ContentService {
   constructor(private http: HttpClient) { }
 
   getPages(): Observable<PageModel[]> {
-    return this.http.get<PageModel[]>(this.PAGES_URL);
+    // return this.http.get<PageModel[]>(this.PAGES_URL);
+    return of(pages);
   }
 
   getPage(id: string): Observable<DynamicPageSchema> {
-    return this.http.get<DynamicPageSchema>(`${this.PAGE}/${id}.json`);
+    // return this.http.get<DynamicPageSchema>(`${this.PAGE}/${id}.json`);
+    return of(page1);
   }
 
   addPage(page: PageModel): Observable<PageModel> {
@@ -24,6 +27,7 @@ export class ContentService {
   }
 
   deletePage(id: string): Observable<string> {
-    return this.http.delete<string>(`${this.PAGES_URL}/${id}`);
+    // return this.http.delete<string>(`${this.PAGES_URL}/${id}`);
+    return of(id);
   }
 }
