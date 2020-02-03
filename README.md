@@ -11,6 +11,8 @@ This is my playground where I can develop and test new ideas. This is NOWHERE re
 - Dynamic route loading
 - Module lazy loading
 
+A preview of the current state can be seen [here](https://brunofenzl.github.io/headloose/)
+
 ## Building and developing
 
 This project was scaffolded with angular-cli, so all `ng` commands apply. To run a local development server just type `npm start` as usual.
