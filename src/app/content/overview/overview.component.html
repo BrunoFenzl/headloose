@@ -1,12 +1,15 @@
 <div *ngIf="state$ | async">
   <ul *ngFor="let page of state$ | async">
     <li>
-      <div>reorder</div>
-      <div routerLink="{{ page.id }}">
+      <!-- <div>reorder</div> -->
+      <h5>
         {{ page.title }}
-      </div>
-      <div (click)="deletePage(page.id)">Delete</div>
+      </h5>
+      <button class="btn btn-primary" routerLink="{{ page.id }}">Edit</button>
+      <button class="btn btn-danger" (click)="deletePage(page.id)">
+        Delete
+      </button>
     </li>
   </ul>
-  <button (click)="addPage()">Add page</button>
+  <!-- <button (click)="addPage()">Add page</button> -->
 </div>
