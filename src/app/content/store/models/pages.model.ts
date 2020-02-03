@@ -3,8 +3,8 @@ import { DynamicPageSchema } from 'src/dynamic-renderer/dynamic-components.inter
 export interface PageModel {
   id?: string;
   title: string;
-  path: string;
-  contentUrl: string;
+  path?: string;
+  contentUrl?: string;
 }
 
 export interface PagesModel {
