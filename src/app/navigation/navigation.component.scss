@@ -46,11 +46,13 @@
 
 @include media-breakpoint-up(md) {
   :host {
-    flex: 0 0 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex: 0 0 200px;
   }
 
   .navigation {
-    position: fixed;
-    width: 300px;
+    width: 200px;
   }
 }

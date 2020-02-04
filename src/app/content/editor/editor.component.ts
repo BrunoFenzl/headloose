@@ -4,6 +4,10 @@ import { FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { ContentState, getSelectedPageContentParsed, LoadPageAction } from '../store';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
+import { AppState, getRouterState, RouterStateUrl } from 'src/app/store';
+import { RouterReducerState } from '@ngrx/router-store';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-editor',
@@ -14,16 +18,20 @@ export class EditorComponent implements OnInit {
   public page$: Observable<DynamicComponentSchema[]>;
   public children$: Observable<DynamicComponentSchema[]>;
   public form: FormGroup;
-  public pageContent: DynamicPageSchema;
+  public pageId$: Observable<RouterReducerState<RouterStateUrl>>;
 
   constructor(
-    private store: Store<ContentState>
+    private store: Store<AppState>,
   ) {
     this.form = new FormGroup({});
   }
 
   ngOnInit() {
-    this.store.dispatch(new LoadPageAction('1'));
+    this.store.select(getRouterState).subscribe(
+      (r => {
+        this.store.dispatch(new LoadPageAction(r.state.params.id));
+      })
+    );
     this.page$ = this.store.select(getSelectedPageContentParsed);
   }
 
