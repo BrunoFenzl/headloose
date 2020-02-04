@@ -5,8 +5,10 @@
       <h5>
         {{ page.title }}
       </h5>
-      <button class="btn btn-primary" routerLink="{{ page.id }}">Edit</button>
-      <button class="btn btn-danger" (click)="deletePage(page.id)">
+      <button class="btn btn-primary" routerLink="{{ page.slug }}">
+        Edit
+      </button>
+      <button class="btn btn-danger" (click)="deletePage(page['@id'])">
         Delete
       </button>
     </li>

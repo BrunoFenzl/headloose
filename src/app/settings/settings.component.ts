@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { JsonExporterService } from '../services/json-exporter.service';
 
 @Component({
   selector: 'app-settings',
@@ -7,9 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SettingsComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private exportService: JsonExporterService
+  ) { }
 
   ngOnInit() {
+  }
+
+  exportContent(): void {
+    this.exportService.export();
+  }
+
+  importContent(): void {
+    this.exportService.export();
   }
 
 }
