@@ -1,16 +1,12 @@
 import { ContentAction, ContentActionTypes } from '../actions/content.actions';
-import { PageModel, ContentState } from '../models';
+import { ContentState } from '../models';
+import { pages } from '../models/test-content';
 import { PageAction, PageActionTypes } from '../actions';
 import { pageReducer } from './page.reducer';
 
 const initialState: ContentState = {
-  pages: {},
-  activePage: {
-    '@id': '',
-    '@type': 'Page',
-    children: [],
-    components: {},
-  },
+  pages,
+  activePage: null,
   loading: false,
   error: undefined,
 };
@@ -26,19 +22,8 @@ export function contentReducer(
         loading: true,
       };
     case ContentActionTypes.LOAD_PAGES_SUCCESS:
-      const e = action.payload.reduce(
-        (pages: { [id: number]: PageModel }, page: PageModel) => {
-          return {
-            ...pages,
-            [page.id]: page
-          };
-        },
-        { ...state.pages }
-      );
-
       return {
         ...state,
-        pages: { ...e },
         loading: false,
       };
     case ContentActionTypes.LOAD_PAGES_FAILURE:
@@ -76,11 +61,11 @@ export function contentReducer(
         the rest of the object BUT the one we destructure first. This way we can use entities cleaned off
         the item to delete.
       */
-      const { [parseInt(action.payload, 10)]: removed, ...pages } = state.pages;
+      const { [action.payload]: removed, ...rest } = state.pages;
 
       return {
         ...state,
-        pages, // remove page with the id given in the payload
+        pages: rest,
         loading: false
       };
     case ContentActionTypes.DELETE_PAGE_FAILURE:
@@ -90,17 +75,20 @@ export function contentReducer(
         loading: false,
       };
     case ContentActionTypes.LOAD_PAGE:
+      console.log('LOAD_PAGE:', state, action.payload);
       return {
         ...state,
         loading: true,
       };
     case ContentActionTypes.LOAD_PAGE_SUCCESS:
+      console.log('LOAD_PAGE_SUCCESS', action);
       return {
         ...state,
         activePage: action.payload,
         loading: false,
       };
     case ContentActionTypes.LOAD_PAGE_FAILURE:
+      console.log('LOAD_PAGE_FAILURE', action);
       return {
         ...state,
         error: action.payload,
