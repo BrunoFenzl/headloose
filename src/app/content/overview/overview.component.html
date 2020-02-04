@@ -1,7 +1,6 @@
 <div *ngIf="state$ | async">
   <ul *ngFor="let page of state$ | async">
     <li>
-      {{ page.slug | json }}
       <!-- <div>reorder</div> -->
       <h5>
         {{ page.title }}
