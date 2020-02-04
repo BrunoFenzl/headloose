@@ -23,7 +23,10 @@ export const getActiveComponent = createSelector(
  */
 export const getSelectedPageContentParsed = createSelector(
   getActivePageState,
-  (state: DynamicPageSchema): DynamicComponentSchema[] => state.children.map(id => state.components[id])
+  (state: DynamicPageSchema): DynamicComponentSchema[] => {
+    console.log('getSelectedPageContentParsed', state);
+    return state.children.map(id => state.components[id]);
+  }
 );
 
 /**

@@ -41,12 +41,14 @@ export class ContentEffects {
   loadPage$ = this.actions$
     .pipe(
       ofType<LoadPageAction>(ContentActionTypes.LOAD_PAGE),
-      mergeMap(
-        (data) => this.pagesService.getPage(data.payload) // data.payload is a new Page instance
-          .pipe(
-            map((result) => new LoadPageSuccessAction(result)),
-            catchError(error => of(new AddPageFailureAction(error))),
-          )
+      mergeMap((data) => this.pagesService.getPage(data.payload) // data.payload is a new Page instance
+        .pipe(
+          map((result) => {
+            console.log('LoadPageSuccessAction', result);
+            return new LoadPageSuccessAction(result);
+          }),
+          catchError(error => of(new AddPageFailureAction(error))),
+        )
       )
     );
 
