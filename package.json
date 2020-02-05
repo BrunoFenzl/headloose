@@ -1,13 +1,19 @@
 {
-  "name": "kopflos",
+  "name": "headloose",
+  "author": "Bruno Fenzl <bruno@brunofenzl.com>",
   "version": "0.0.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/BrunoFenzl/headloose.git"
+  },
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build --prod --output-path docs --base-href /headloose/",
+    "build": "ng build --prod",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "deploy": "ng deploy --base-href /headloose/"
   },
   "private": true,
   "dependencies": {
