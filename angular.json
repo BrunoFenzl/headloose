@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "kopflos": {
+    "headloose": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -72,18 +72,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "kopflos:build"
+            "browserTarget": "headloose:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "kopflos:build:production"
+              "browserTarget": "headloose:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "kopflos:build"
+            "browserTarget": "headloose:build"
           }
         },
         "test": {
@@ -120,11 +120,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "kopflos:serve"
+            "devServerTarget": "headloose:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "kopflos:serve:production"
+              "devServerTarget": "headloose:serve:production"
             }
           }
         },
@@ -135,5 +135,5 @@
       }
     }
   },
-  "defaultProject": "kopflos"
+  "defaultProject": "headloose"
 }
