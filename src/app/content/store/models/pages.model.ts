@@ -1,14 +1,16 @@
 import { DynamicPageSchema } from 'src/dynamic-renderer/dynamic-components.interfaces';
+import { v4 as uuid } from 'uuid';
 
-export interface PageModel {
-  id?: string;
-  title: string;
-  path?: string;
-  contentUrl?: string;
-}
+export class PageDefaults implements DynamicPageSchema {
+  '@id' = uuid();
+  '@type' = 'Page';
+  title = '';
+  slug = '';
+  children = [];
+  activeComponent = null;
+  components = {};
 
-export interface PagesModel {
-  entities: { [id: number]: PageModel };
-  loading: boolean;
-  error: Error;
+  constructor(options) {
+    Object.assign(this, options);
+  }
 }

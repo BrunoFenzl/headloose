@@ -16,6 +16,9 @@ export interface DynamicFormValues {
 }
 
 export interface DynamicPageSchema extends DynamicComponentSchema {
+  '@type': 'Page' | string;
+  title: string;
+  slug: string;
   children: Array<string>;
   components: { [id: string]: DynamicComponentSchema };
   activeComponent?: string | null;

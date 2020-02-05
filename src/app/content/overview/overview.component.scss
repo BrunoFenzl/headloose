@@ -1,0 +1,9 @@
+@import "src/scss";
+
+:host {
+  @include make-container();
+
+  display: flex;
+  justify-content: center;
+  padding: 2rem;
+}

@@ -4,6 +4,8 @@ import { PageActionTypes, PageAction } from '../actions';
 const initialState: DynamicPageSchema = {
   '@id': '',
   '@type': 'Page',
+  title: '',
+  slug: '',
   children: [],
   components: {},
   activeComponent: null,
