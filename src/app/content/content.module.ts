@@ -37,6 +37,8 @@ import { ComponentsListComponent } from './components-list/components-list.compo
     ReactiveFormsModule,
     CommonModule,
     StoreModule.forFeature('content', contentReducer),
+    // Disabling effects since we are not talking to
+    // any external data store right now.
     EffectsModule.forFeature([ContentEffects]),
     ContentRoutingModule,
     DynamicComponentsModule,

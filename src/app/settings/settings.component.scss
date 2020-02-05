@@ -1,0 +1,7 @@
+@import "src/scss";
+
+:host {
+  @include make-container();
+  display: block;
+  padding: 2rem;
+}

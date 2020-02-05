@@ -1,10 +1,9 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-// import { StateManagerService } from './state-manager.service';
+import { Component, OnInit } from '@angular/core';
 import { ContentState } from './content/store/models/content.model';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { LoadPagesAction } from './content/store/actions/content.actions';
-import { PageModel } from './content/store/models/pages.model';
+import { DynamicPageSchema } from 'src/dynamic-renderer/dynamic-components.interfaces';
 
 @Component({
   selector: 'app-root',
@@ -12,14 +11,12 @@ import { PageModel } from './content/store/models/pages.model';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  pages$: Observable<Array<PageModel>>;
+  pages$: Observable<Array<DynamicPageSchema>>;
 
   constructor(
     private store: Store<ContentState>
   ) { }
 
   ngOnInit() {
-    // this.pages$ = this.store.select(store => store.pages.data);
-    // this.store.dispatch(new LoadPagesAction());
   }
 }

@@ -1,5 +1,4 @@
 import { Action } from '@ngrx/store';
-import { PageModel } from '../models/pages.model';
 import { DynamicPageSchema } from 'src/dynamic-renderer/dynamic-components.interfaces';
 
 export enum ContentActionTypes {
@@ -26,7 +25,7 @@ export class LoadPagesAction implements Action {
 
 export class LoadPagesSuccessAction implements Action {
   readonly type = ContentActionTypes.LOAD_PAGES_SUCCESS;
-  constructor(public payload: Array<PageModel>) { }
+  constructor(public payload: { [id: string]: DynamicPageSchema }) { }
 }
 
 export class LoadPagesFailureAction implements Action {
@@ -52,12 +51,12 @@ export class LoadPageFailureAction implements Action {
 
 export class AddPageAction implements Action {
   readonly type = ContentActionTypes.ADD_PAGE;
-  constructor(public payload: PageModel) { }
+  constructor(public payload: DynamicPageSchema) { }
 }
 
 export class AddPageSuccessAction implements Action {
   readonly type = ContentActionTypes.ADD_PAGE_SUCCESS;
-  constructor(public payload: PageModel) { }
+  constructor(public payload: DynamicPageSchema) { }
 }
 
 export class AddPageFailureAction implements Action {

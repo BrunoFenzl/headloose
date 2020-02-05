@@ -1,17 +1,10 @@
 import { DynamicPageSchema } from 'src/dynamic-renderer/dynamic-components.interfaces';
-import { PageModel } from './pages.model';
-
-export const pages: Array<PageModel> = [
-  {
-    id: '1',
-    title: 'Page 1',
-    path: '/pages/1.json'
-  },
-];
 
 export const page1: DynamicPageSchema = {
   '@id': 'page-1',
   '@type': 'Page',
+  title: 'Page 1',
+  slug: 'page-1',
   children: ['row-1', 'row-2'],
   activeComponent: null,
   components: {
@@ -150,3 +143,6 @@ export const page1: DynamicPageSchema = {
   }
 };
 
+export const pages: { [id: string]: DynamicPageSchema } = {
+  'page-1': page1
+};
