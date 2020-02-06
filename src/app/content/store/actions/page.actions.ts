@@ -27,7 +27,7 @@ export class ChooseComponentAction implements Action {
 
 export class AddComponentAction implements Action {
   readonly type = PageActionTypes.ADD_COMPONENT;
-  constructor(public payload: DynamicComponentSchema) { }
+  constructor(public payload: { component: DynamicComponentSchema, parentId: string }) { }
 }
 
 export class DeleteComponentAction implements Action {

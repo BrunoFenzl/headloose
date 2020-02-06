@@ -1,0 +1,17 @@
+:host {
+  z-index: 1000;
+  position: relative;
+  align-self: center;
+}
+
+.add-page {
+  align-self: center;
+
+  i {
+    font-size: 2rem;
+  }
+
+  span {
+    display: block;
+  }
+}

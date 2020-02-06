@@ -13,14 +13,18 @@
 }
 
 .page {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
   background-color: white;
   padding: 1rem;
   border-radius: 3px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 }
 
+.editor__form {
+  width: 100%;
+}
+
 @include media-breakpoint-up(md) {
-  .page {
-    max-width: 80%;
-  }
 }

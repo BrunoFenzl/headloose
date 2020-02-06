@@ -24,3 +24,19 @@
   position: relative;
   z-index: 200;
 }
+
+.add-page {
+  margin: 0 auto;
+  display: block;
+  position: relative;
+  z-index: 1000;
+  align-self: center;
+
+  i {
+    font-size: 2rem;
+  }
+
+  span {
+    display: block;
+  }
+}
