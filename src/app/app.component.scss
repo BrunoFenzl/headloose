@@ -11,5 +11,13 @@
   max-width: 100%;
 }
 
+.app__content-header {
+  height: 5rem;
+}
+
+.app__content-inner {
+  padding: 0 10%;
+}
+
 @include media-breakpoint-up(md) {
 }

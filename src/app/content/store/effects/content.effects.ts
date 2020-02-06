@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
-import { ContentService } from '../services/content.service';
+import { NetworkService } from '../../../services/network.service';
 import {
   LoadPagesAction,
   ContentActionTypes,
@@ -13,7 +13,9 @@ import {
   DeletePageSuccessAction,
   DeletePageFailureAction,
   LoadPageSuccessAction,
-  LoadPageAction
+  LoadPageAction,
+  UpdatePageSuccessAction,
+  UpdatePageFailureAction
 } from '../actions/content.actions';
 import { mergeMap, map, catchError } from 'rxjs/operators';
 import { of, Observable } from 'rxjs';
@@ -29,7 +31,7 @@ export class ContentEffects {
       ofType<LoadPagesAction>(ContentActionTypes.LOAD_PAGES),
       mergeMap(
         // Makes the request and pipes the resulting Observable
-        () => this.pagesService.getPages()
+        () => this.networkService.getPages()
           .pipe(
             map((data) => new LoadPagesSuccessAction(data)),
             catchError(error => of(new LoadPagesFailureAction(error))),
@@ -41,7 +43,7 @@ export class ContentEffects {
   loadPage$ = this.actions$
     .pipe(
       ofType<LoadPageAction>(ContentActionTypes.LOAD_PAGE),
-      mergeMap((data) => this.pagesService.getPage(data.payload) // data.payload is a new Page instance
+      mergeMap((data) => this.networkService.getPage(data.payload) // data.payload is a new Page instance
         .pipe(
           map((result) => {
             console.log('LoadPageSuccessAction', result);
@@ -57,10 +59,23 @@ export class ContentEffects {
     .pipe(
       ofType<AddPageAction>(ContentActionTypes.ADD_PAGE),
       mergeMap(
-        (data) => this.pagesService.addPage(data.payload) // data.payload is a new Page instance
+        (data) => this.networkService.addPage(data.payload) // data.payload is a new Page instance
           .pipe(
             map(() => new AddPageSuccessAction(data.payload)),
             catchError(error => of(new AddPageFailureAction(error))),
+          )
+      )
+    );
+
+  @Effect()
+  updatePage$ = this.actions$
+    .pipe(
+      ofType<AddPageAction>(ContentActionTypes.UPDATE_PAGE),
+      mergeMap(
+        (data) => this.networkService.updatePage(data.payload) // data.payload is a new Page instance
+          .pipe(
+            map(() => new UpdatePageSuccessAction(data.payload)),
+            catchError(error => of(new UpdatePageFailureAction(error))),
           )
       )
     );
@@ -70,7 +85,7 @@ export class ContentEffects {
     .pipe(
       ofType<DeletePageAction>(ContentActionTypes.DELETE_PAGE),
       mergeMap(
-        (data) => this.pagesService.deletePage(data.payload) // data.payload is the id of the page to delete
+        (data) => this.networkService.deletePage(data.payload) // data.payload is the id of the page to delete
           .pipe(
             map(() => new DeletePageSuccessAction(data.payload)),
             catchError(error => of(new DeletePageFailureAction(error)))
@@ -80,6 +95,6 @@ export class ContentEffects {
 
   constructor(
     private actions$: Actions,
-    private pagesService: ContentService,
+    private networkService: NetworkService,
   ) { }
 }

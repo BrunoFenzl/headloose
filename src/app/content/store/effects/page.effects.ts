@@ -3,7 +3,7 @@ import { Effect, ofType, Actions } from '@ngrx/effects';
 import { Observable } from 'rxjs';
 import { mergeMap } from 'rxjs/operators';
 import { ContentActionTypes, ChooseComponentAction, PageActionTypes } from '../actions';
-import { ContentService } from '../services/content.service';
+import { NetworkService } from '../../../services/network.service';
 import { Action } from '@ngrx/store';
 import { ModalService } from 'src/app/modal/modal.service';
 
