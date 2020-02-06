@@ -21,6 +21,7 @@ import { ComponentsListComponent } from './components-list/components-list.compo
 import { PageService } from '../services/page.service';
 import { NetworkService } from '../services/network.service';
 import { PageListItemComponent } from './page-list-item/page-list-item.component';
+import { AddComponentComponent } from './add-component/add-component.component';
 
 
 @NgModule({
@@ -31,11 +32,13 @@ import { PageListItemComponent } from './page-list-item/page-list-item.component
     ModalComponent,
     ComponentsListComponent,
     PageListItemComponent,
+    AddComponentComponent,
   ],
   exports: [
     OverviewComponent,
     EditorComponent,
     ModalComponent,
+    AddComponentComponent,
   ],
   imports: [
     ReactiveFormsModule,

@@ -9,10 +9,5 @@
       ></app-page-list-item>
     </li>
   </ul>
-  <button class="add-page btn btn-link" (click)="addPage()">
-    <i class="material-icons">
-      add_circle_outline
-    </i>
-    <span>Add page</span>
-  </button>
+  <app-add-component [label]="'Add Page'" (add)="addPage()"></app-add-component>
 </ng-container>

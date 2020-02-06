@@ -4,6 +4,8 @@ import { DynamicComponentSchema } from 'src/dynamic-renderer/dynamic-components.
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { ContentState, getComponentChildren } from '../../store';
+import { PageService } from 'src/app/services/page.service';
+import { ColumnDefaults } from '../column';
 
 @Component({
   selector: 'app-row',
@@ -17,11 +19,15 @@ export class RowComponent implements OnInit {
   public id: string;
 
   constructor(
-    public store: Store<ContentState>,
-    public readonly formGroupDirective: FormGroupDirective
+    private store: Store<ContentState>,
+    private pageService: PageService,
   ) { }
 
   ngOnInit() {
     this.children$ = this.store.select(getComponentChildren, { id: this.id });
+  }
+
+  addColumn(): void {
+    this.pageService.addComponent(new ColumnDefaults(), this.id);
   }
 }

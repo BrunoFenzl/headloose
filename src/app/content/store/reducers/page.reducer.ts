@@ -1,4 +1,4 @@
-import { DynamicPageSchema } from 'src/dynamic-renderer/dynamic-components.interfaces';
+import { DynamicPageSchema, DynamicComponentSchema } from 'src/dynamic-renderer/dynamic-components.interfaces';
 import { PageActionTypes, PageAction } from '../actions';
 
 const initialState: DynamicPageSchema = {
@@ -31,16 +31,30 @@ export function pageReducer(
       const active = state.components[state.activeComponent];
       // Add the newly created component id to it's children list
       active.children.push(action.payload['@id']);
-      // Ensure the active component's id is set in the newly created component
+      // Ensure the active component's id is set in the newly created component parent
       action.payload.parent = active['@id'];
       return {
         ...state,
-        components: { ...state.components, [action.payload['@id']]: action.payload }
+        components: { ...state.components, [action.payload['@id']]: action.payload },
       };
     case PageActionTypes.ADD_COMPONENT:
+      const newState = { ...state };
+      let futureParent: DynamicComponentSchema;
+
+      if (action.payload.parentId) {
+        futureParent = newState.components[action.payload.parentId];
+      } else {
+        futureParent = newState; // the current page
+      }
+
+      console.log('futureParent', futureParent);
+
+      newState.components[action.payload.component['@id']] = action.payload.component;
+
+      action.payload.component.parent = futureParent['@id'];
+      futureParent.children.push(action.payload.component['@id']);
       return {
-        ...state,
-        components: { ...state.components, [action.payload['@id']]: action.payload }
+        ...newState,
       };
     case PageActionTypes.DELETE_COMPONENT:
       // First we have to find the object being deleted, here named 'theOne'.
@@ -51,18 +65,16 @@ export function pageReducer(
       // Now, we have to get references to it's parent...
       const onesParent = components[theOne.parent];
       // ...and children
-      if (theOne.children) {
-        const onesChildren = theOne.children;
-        // set the parent of the component being deleted to the parent property of it's children
-        onesChildren.forEach(c => components[c].parent = onesParent['@id']);
-        // now remove change theOne's id for it's children id's inside the onesParent
-        onesParent.children
-          .splice(
-            onesParent.children.indexOf(theOne['@id']),
-            1,
-            ...onesChildren
-          );
-      }
+      const onesChildren = theOne.children || [];
+      // set the parent of the component being deleted to the parent property of it's children
+      onesChildren.forEach(c => components[c].parent = onesParent['@id']);
+      // now remove change theOne's id for it's children id's inside the onesParent
+      onesParent.children
+        .splice(
+          onesParent.children.indexOf(theOne['@id']),
+          1,
+          ...onesChildren
+        );
 
       return {
         ...state,

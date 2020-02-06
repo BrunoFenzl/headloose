@@ -15,6 +15,7 @@ export const TextareaComponentDynamicFactory: DynamicComponentFactory<TextareaCo
     // These properties from the schema should be populated as attributes in this component's instance
     const attributes: Array<keyof TextareaSchema> = [
       'name',
+      'label',
       'model',
       'maxlength',
       'minlength',

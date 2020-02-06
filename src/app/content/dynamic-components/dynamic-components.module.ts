@@ -17,6 +17,7 @@ import { HeadlineComponent, HeadlineComponentDynamicFactory } from './headline';
 import { ParagraphComponent, ParagraphComponentDynamicFactory } from './paragraph';
 import { NumberInputComponent, NumberInputComponentDynamicFactory } from './number-input';
 import { SwitchComponent, SwitchComponentDynamicFactory } from './switch';
+import { AddComponentComponent } from '../add-component/add-component.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { SwitchComponent, SwitchComponentDynamicFactory } from './switch';
     NumberInputComponent,
     TextareaComponent,
     SwitchComponent,
+    AddComponentComponent,
   ],
   providers: [
     SchemaGeneratorService,
