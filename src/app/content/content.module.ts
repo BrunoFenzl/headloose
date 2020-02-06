@@ -7,7 +7,7 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 
 // State
-import { contentReducer, ContentEffects, PageEffects, ContentService } from './store';
+import { contentReducer, ContentEffects, PageEffects } from './store';
 
 import { ContentRoutingModule } from './content-routing.module';
 
@@ -18,6 +18,9 @@ import { EditorComponent } from './editor/editor.component';
 import { DynamicComponentsModule } from './dynamic-components/dynamic-components.module';
 import { OptionsRendererComponent } from './options-renderer/options-renderer.component';
 import { ComponentsListComponent } from './components-list/components-list.component';
+import { PageService } from '../services/page.service';
+import { NetworkService } from '../services/network.service';
+import { PageListItemComponent } from './page-list-item/page-list-item.component';
 
 
 @NgModule({
@@ -27,6 +30,7 @@ import { ComponentsListComponent } from './components-list/components-list.compo
     OptionsRendererComponent,
     ModalComponent,
     ComponentsListComponent,
+    PageListItemComponent,
   ],
   exports: [
     OverviewComponent,
@@ -51,7 +55,8 @@ import { ComponentsListComponent } from './components-list/components-list.compo
   ],
   providers: [
     ModalService,
-    ContentService,
+    NetworkService,
+    PageService
   ],
 })
 export class ContentModule { }

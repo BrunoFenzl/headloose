@@ -3,7 +3,10 @@
     <div class="row h-100">
       <app-navigation></app-navigation>
       <div class="app__content">
-        <router-outlet></router-outlet>
+        <div class="app__content-header"></div>
+        <div class="app__content-inner">
+          <router-outlet></router-outlet>
+        </div>
       </div>
     </div>
   </div>

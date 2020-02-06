@@ -40,7 +40,7 @@ export function contentReducer(
     case ContentActionTypes.ADD_PAGE_SUCCESS:
       return {
         ...state,
-        pages: { ...state.pages, [action.payload.id]: action.payload },
+        pages: { ...state.pages, [action.payload['@id']]: action.payload },
         loading: false
       };
     case ContentActionTypes.ADD_PAGE_FAILURE:
@@ -74,21 +74,38 @@ export function contentReducer(
         error: action.payload,
         loading: false,
       };
+    case ContentActionTypes.UPDATE_PAGE:
+      console.log('update page', action.payload);
+      return {
+        ...state,
+        loading: true,
+      };
+    case ContentActionTypes.UPDATE_PAGE_SUCCESS:
+      console.log('update page success', action.payload);
+      return {
+        ...state,
+        pages: { ...state.pages, [action.payload['@id']]: action.payload },
+        activePage: action.payload,
+        loading: false,
+      };
+    case ContentActionTypes.UPDATE_PAGE_FAILURE:
+      return {
+        ...state,
+        error: action.payload,
+        loading: false,
+      };
     case ContentActionTypes.LOAD_PAGE:
-      console.log('LOAD_PAGE:', state, action.payload);
       return {
         ...state,
         loading: true,
       };
     case ContentActionTypes.LOAD_PAGE_SUCCESS:
-      console.log('LOAD_PAGE_SUCCESS', action);
       return {
         ...state,
         activePage: action.payload,
         loading: false,
       };
     case ContentActionTypes.LOAD_PAGE_FAILURE:
-      console.log('LOAD_PAGE_FAILURE', action);
       return {
         ...state,
         error: action.payload,
