@@ -1,7 +1,7 @@
 import { DynamicComponentFactory } from 'src/dynamic-renderer/dynamic-components.interfaces';
 import { SwitchComponent } from './switch.component';
 import { SwitchSchema } from './switch.schema';
-import { Injector, ComponentRef, ComponentFactoryResolver, Renderer, Renderer2 } from '@angular/core';
+import { Injector, ComponentRef, ComponentFactoryResolver, Renderer2 } from '@angular/core';
 
 export const SwitchComponentDynamicFactory: DynamicComponentFactory<SwitchComponent> = {
   create: (schema: SwitchSchema, injector: Injector): ComponentRef<SwitchComponent> => {

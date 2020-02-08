@@ -1,7 +1,7 @@
 import { DynamicComponentFactory } from 'src/dynamic-renderer/dynamic-components.interfaces';
 import { TextareaComponent } from './textarea.component';
 import { TextareaSchema } from './textarea.schema';
-import { Injector, ComponentRef, ComponentFactoryResolver, Renderer, Renderer2 } from '@angular/core';
+import { Injector, ComponentRef, ComponentFactoryResolver, Renderer2 } from '@angular/core';
 
 export const TextareaComponentDynamicFactory: DynamicComponentFactory<TextareaComponent> = {
   create: (schema: TextareaSchema, injector: Injector): ComponentRef<TextareaComponent> => {

@@ -6,15 +6,15 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 const routes: Routes = [
   {
     path: 'pages',
-    loadChildren: './content/content.module#ContentModule',
+    loadChildren: () => import('./content/content.module').then(m => m.ContentModule),
   },
   {
     path: 'settings',
-    loadChildren: './settings/settings.module#SettingsModule',
+    loadChildren: () => import('./settings/settings.module').then(m => m.SettingsModule),
   },
   {
     path: 'media-library',
-    loadChildren: './media-library/media-library.module#MediaLibraryModule',
+    loadChildren: () => import('./media-library/media-library.module').then(m => m.MediaLibraryModule),
   },
   {
     path: '',

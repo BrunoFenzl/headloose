@@ -1,8 +1,9 @@
-import { Input, HostBinding, HostListener } from '@angular/core';
+import { Input, HostBinding, HostListener, Directive } from '@angular/core';
 
 /**
  * Base class for all dynamic form components
  */
+@Directive()
 export class ComponentBase {
   /**
    * Disable flag
