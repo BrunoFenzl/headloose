@@ -37,7 +37,6 @@ export class SchemaGeneratorService {
         const valueType = typeof schema[key];
         // const field: DynamicComponentSchema = new (this.inputTypesMap[valueType])({ '@id': key, name: key });
         let field: DynamicComponentSchema;
-
         switch (valueType) {
           case 'object':
             field = new TextareaDefaults({ '@id': key, label: key, name: key, model: schema[key] });

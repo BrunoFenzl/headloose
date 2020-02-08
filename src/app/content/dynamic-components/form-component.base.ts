@@ -1,7 +1,8 @@
 import { ControlValueAccessor } from '@angular/forms';
-import { Input, Output, EventEmitter, ChangeDetectorRef, ViewRef } from '@angular/core';
+import { Input, Output, EventEmitter, ChangeDetectorRef, ViewRef, Directive } from '@angular/core';
 import { ComponentBase } from './component.base';
 
+@Directive()
 export class FormComponentBase<T> extends ComponentBase implements ControlValueAccessor {
 
   @Input()

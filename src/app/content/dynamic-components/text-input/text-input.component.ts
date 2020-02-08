@@ -22,6 +22,12 @@ export class TextInputComponent extends FormComponentBase<string> implements OnI
   label: string;
 
   @Input()
+  name: string;
+
+  @Input()
+  model: string;
+
+  @Input()
   required: boolean;
 
   @Input()
@@ -31,13 +37,13 @@ export class TextInputComponent extends FormComponentBase<string> implements OnI
   readonly: boolean;
 
   @Input()
-  max: number;
+  maxlength: number;
 
   @Input()
-  min: number;
+  minlength: number;
 
   @Input()
-  step: number;
+  size: number;
 
   @Input()
   placeholder: string;

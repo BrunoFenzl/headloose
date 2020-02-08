@@ -1,0 +1,11 @@
+@import "src/scss";
+
+:host {
+  position: relative;
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.input--select {
+  height: 3.375rem;
+}

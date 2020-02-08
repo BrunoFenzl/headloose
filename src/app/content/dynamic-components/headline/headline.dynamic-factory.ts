@@ -1,7 +1,7 @@
 import { DynamicComponentFactory } from 'src/dynamic-renderer/dynamic-components.interfaces';
 import { HeadlineComponent } from './headline.component';
 import { HeadlineSchema } from './headline.schema';
-import { Injector, ComponentRef, ComponentFactoryResolver, Renderer, Renderer2 } from '@angular/core';
+import { Injector, ComponentRef, ComponentFactoryResolver, Renderer2 } from '@angular/core';
 
 export const HeadlineComponentDynamicFactory: DynamicComponentFactory<HeadlineComponent> = {
   create: (schema: HeadlineSchema, injector: Injector): ComponentRef<HeadlineComponent> => {

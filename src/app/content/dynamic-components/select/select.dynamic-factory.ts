@@ -1,7 +1,7 @@
 import { DynamicComponentFactory } from 'src/dynamic-renderer/dynamic-components.interfaces';
 import { SelectComponent } from './select.component';
 import { SelectSchema } from './select.schema';
-import { Injector, ComponentRef, ComponentFactoryResolver, Renderer, Renderer2 } from '@angular/core';
+import { Injector, ComponentRef, ComponentFactoryResolver, Renderer2 } from '@angular/core';
 
 export const SelectComponentDynamicFactory: DynamicComponentFactory<SelectComponent> = {
   create: (schema: SelectSchema, injector: Injector): ComponentRef<SelectComponent> => {

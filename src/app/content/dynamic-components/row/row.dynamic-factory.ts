@@ -1,7 +1,7 @@
 import { DynamicComponentFactory } from 'src/dynamic-renderer/dynamic-components.interfaces';
 import { RowComponent } from './row.component';
 import { RowSchema } from './row.schema';
-import { Injector, ComponentRef, ComponentFactoryResolver, Renderer, Renderer2 } from '@angular/core';
+import { Injector, ComponentRef, ComponentFactoryResolver, Renderer2 } from '@angular/core';
 
 export const RowComponentDynamicFactory: DynamicComponentFactory<RowComponent> = {
   create: (schema: RowSchema, injector: Injector): ComponentRef<RowComponent> => {

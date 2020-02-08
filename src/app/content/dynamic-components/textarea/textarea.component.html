@@ -1,13 +1,11 @@
-<div class="form-group">
-  <label for="{{ id }}">{{ label }}</label>
-  <textarea
-    [name]="name"
-    [id]="id"
-    [disabled]="disabled || ''"
-    [required]="required || ''"
-    [readonly]="readonly || ''"
-    [value]="model"
-    class="form-control"
-    (change)="valueChange($event)"
-  ></textarea>
-</div>
+<textarea
+  [name]="name"
+  [id]="id"
+  [disabled]="disabled || ''"
+  [required]="required || ''"
+  [readonly]="readonly || ''"
+  [value]="model"
+  class="input"
+  (change)="valueChange($event)"
+></textarea>
+<label class="input__label" for="{{ id }}">{{ label }}</label>
