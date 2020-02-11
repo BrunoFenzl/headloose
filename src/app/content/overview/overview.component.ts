@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { PageDefaults } from '../store/models/pages.model';
 import { LoadPagesAction, AddPageAction, DeletePageAction, getPagesArray } from '../store';
 import { DynamicPageSchema } from 'src/dynamic-renderer/dynamic-components.interfaces';
+import { PageService } from 'src/app/services/page.service';
 
 
 @Component({
@@ -17,18 +18,24 @@ export class OverviewComponent implements OnInit {
 
   constructor(
     private store: Store<ContentState>,
-  ) { }
+    private pageService: PageService
+  ) {
+  }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.state$ = this.store.select(getPagesArray);
     this.store.dispatch(new LoadPagesAction());
   }
 
   addPage(): void {
-    this.store.dispatch(new AddPageAction(new PageDefaults({})));
+    this.pageService.addPage(new PageDefaults({}));
+  }
+
+  updatePage(page: DynamicPageSchema): void {
+    this.pageService.updatePage(page);
   }
 
   deletePage(pageId: string): void {
-    this.store.dispatch(new DeletePageAction(pageId));
+    this.pageService.deletePage(pageId);
   }
 }

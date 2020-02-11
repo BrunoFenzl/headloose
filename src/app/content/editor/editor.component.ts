@@ -8,6 +8,8 @@ import { Router } from '@angular/router';
 import { AppState, getRouterState, RouterStateUrl } from 'src/app/store';
 import { RouterReducerState } from '@ngrx/router-store';
 import { map } from 'rxjs/operators';
+import { PageService } from 'src/app/services/page.service';
+import { RowDefaults } from '../dynamic-components/row';
 
 @Component({
   selector: 'app-editor',
@@ -22,6 +24,7 @@ export class EditorComponent implements OnInit {
 
   constructor(
     private store: Store<AppState>,
+    private pageService: PageService,
   ) {
     this.form = new FormGroup({});
   }
@@ -33,6 +36,10 @@ export class EditorComponent implements OnInit {
       })
     );
     this.page$ = this.store.select(getSelectedPageContentParsed);
+  }
+
+  addRow(): void {
+    this.pageService.addComponent(new RowDefaults());
   }
 
 }

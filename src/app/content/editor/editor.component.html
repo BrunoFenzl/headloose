@@ -1,6 +1,6 @@
 <div class="editor">
   <div class="page">
-    <form [formGroup]="form">
+    <form class="editor__form" [formGroup]="form">
       <div class="container">
         <ng-container
           *ngFor="let componentSchema of page$ | async"
@@ -9,5 +9,7 @@
         </ng-container>
       </div>
     </form>
+
+    <app-add-component [label]="'Add Row'" (add)="addRow()"></app-add-component>
   </div>
 </div>

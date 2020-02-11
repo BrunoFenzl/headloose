@@ -1,17 +1,13 @@
-<div *ngIf="state$ | async">
-  <ul *ngFor="let page of state$ | async">
+<ng-container *ngIf="state$ | async">
+  <ul class="page-list" *ngFor="let page of state$ | async">
     <li>
       <!-- <div>reorder</div> -->
-      <h5>
-        {{ page.title }}
-      </h5>
-      <button class="btn btn-primary" routerLink="{{ page.slug }}">
-        Edit
-      </button>
-      <button class="btn btn-danger" (click)="deletePage(page['@id'])">
-        Delete
-      </button>
+      <app-page-list-item
+        [page]="page"
+        (deletePage)="deletePage($event)"
+        (updatePage)="updatePage($event)"
+      ></app-page-list-item>
     </li>
   </ul>
-  <!-- <button (click)="addPage()">Add page</button> -->
-</div>
+  <app-add-component [label]="'Add Page'" (add)="addPage()"></app-add-component>
+</ng-container>

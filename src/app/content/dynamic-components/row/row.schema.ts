@@ -15,7 +15,7 @@ export class RowDefaults implements RowSchema {
   children = [];
   classes = [];
 
-  constructor(options) {
+  constructor(options = {}) {
     Object.assign(this, options);
   }
 }

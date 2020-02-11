@@ -15,7 +15,7 @@ export class ColumnDefaults implements ColumnSchema {
   children = [];
   classes = [];
 
-  constructor(options) {
+  constructor(options = {}) {
     Object.assign(this, options);
   }
 }
