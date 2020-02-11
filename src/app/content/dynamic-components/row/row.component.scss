@@ -8,10 +8,38 @@
   border-radius: 2px;
   border: 1px solid $gray-200;
   padding: 1rem;
+  margin-bottom: 1rem;
 
   &:hover {
     app-component-options {
       display: block;
     }
+  }
+}
+
+.new-col {
+  border: 1px solid $primary;
+  border-radius: 5px;
+}
+
+.add-page {
+  margin: 0 auto;
+  display: block;
+  position: relative;
+  z-index: 1000;
+  align-self: center;
+
+  i {
+    font-size: 2rem;
+  }
+
+  span {
+    display: block;
+  }
+}
+
+@include media-breakpoint-up(sm) {
+  .new-col {
+    min-height: 10rem;
   }
 }

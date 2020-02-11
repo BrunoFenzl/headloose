@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ContentState, getComponentChildren, ChooseComponentAction, SelectComponentAction } from '../../store';
+import { ContentState, getComponentChildren, SelectComponentAction } from '../../store';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { DynamicComponentSchema } from 'src/dynamic-renderer/dynamic-components.interfaces';

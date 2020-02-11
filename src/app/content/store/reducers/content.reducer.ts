@@ -112,7 +112,6 @@ export function contentReducer(
         loading: false,
       };
     case PageActionTypes.SELECT_COMPONENT:
-    case PageActionTypes.CHOOSE_COMPONENT:
     case PageActionTypes.UPDATE_COMPONENT:
     case PageActionTypes.ADD_COMPONENT:
     case PageActionTypes.DELETE_COMPONENT:
