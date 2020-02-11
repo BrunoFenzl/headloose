@@ -20,6 +20,9 @@ export class TextareaComponent extends FormComponentBase<string> implements OnIn
   name: string;
 
   @Input()
+  label: string;
+
+  @Input()
   required: boolean;
 
   @Input()
@@ -39,6 +42,9 @@ export class TextareaComponent extends FormComponentBase<string> implements OnIn
 
   @Input()
   placeholder: string;
+
+  @Input()
+  model: string;
 
   public id: string;
 

@@ -8,12 +8,12 @@
   },
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build --prod",
+    "start": "ng serve --aot=true",
+    "build": "ng build --base-href /headloose/",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "deploy": "ng deploy --base-href /headloose/"
+    "deploy": "ng deploy  --base-href /headloose/"
   },
   "private": true,
   "dependencies": {

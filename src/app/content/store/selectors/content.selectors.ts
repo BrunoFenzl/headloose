@@ -44,3 +44,10 @@ export const getSelectedPageContent = createSelector(
     return state.content;
   }
 );
+
+export const getPagebyId = createSelector(
+  getContentPages,
+  (state: { [id: string]: DynamicPageSchema }, props: { id: string }): DynamicPageSchema => {
+    return state[props.id];
+  }
+);

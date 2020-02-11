@@ -40,7 +40,7 @@ export class SchemaGeneratorService {
 
         switch (valueType) {
           case 'object':
-            field = new TextareaDefaults({ '@id': key, name: key });
+            field = new TextareaDefaults({ '@id': key, label: key, name: key, model: schema[key] });
             if (key === 'options') {
               // convert options array into a string with the format 'label:value'
               field.model = this.stringifyOptions(schema.options);
