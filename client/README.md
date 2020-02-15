@@ -1,14 +1,12 @@
-# Headloose
+# Headloose Client
 
-Headloose is a static HTML / JSON generator with the GUI written in Angular.
+This client already sports a few nice features:
 
-This is my playground where I can develop and test new ideas. This is NOWHERE ready for primetime but it already sports a few nice features:
-
-- JSON content schema for manipulating and generating content
+- JSON content schema for generating and manipulating content
 - Dynamic component factories based on content schema
 - Async state management with @ngrx/effects
 - State is bound to the router with @ngrx/router
-- Dynamic route loading
+- Dynamic route lazy-loading
 - Module lazy loading
 
 A preview of the current state can be seen [here](https://brunofenzl.github.io/headloose/)
@@ -21,9 +19,10 @@ This project was scaffolded with angular-cli, so all `ng` commands apply. To run
 
 The roadmap is very loose and depends heavily on how much time I have to spare.
 
+- ~~Dockerize~~
 - Finish basic component set
 - Add JSON importer
-- Add JSON exporter
+- ~~Add JSON exporter~~
 - Add HTML generator
 - Export as .zip file
 - Create component factories factory to speed up custom component creation
