@@ -3,6 +3,7 @@ import KoaRouter from 'koa-router';
 import { ApolloServer } from 'apollo-server-koa';
 import schema from './schema';
 import { errorHandler as formatError } from './errors';
+import mongoose from 'mongoose';
 
 async function main() {
   const app = App();
@@ -11,6 +12,14 @@ async function main() {
   app.listen(port);
 
   console.log(`listening on port ${port}`);
+
+  mongoose.connect(process.env.MONGO_URL);
+  const db = mongoose.connection;
+
+  db.on('error', console.error.bind(console, 'connection error:'));
+  db.once('open', () => {
+    console.log('Database connected.');
+  });
 }
 
 export function App(): Koa {
