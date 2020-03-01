@@ -1,9 +1,7 @@
-const queries = `
+export const queries = `
   type Query {
-    getTree(id: String!): ComponentQueryResponse
-    getComponent(id: String!): ComponentQueryResponse
-    getComponents(ids: [String]!): ComponentQueryResponse
+    tree(id: String!): QueryResponse
+    component(id: String!): QueryResponse
+    components(ids: [String]!): QueryResponse
   }
 `;
-
-export default [queries];

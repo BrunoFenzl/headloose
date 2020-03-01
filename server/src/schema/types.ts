@@ -1,30 +1,69 @@
 const componentInput = `
   input ComponentInput {
-    type: String!
-    children: [String]!
+    _id: String!
+    _type: String
+    children: [String]
     parent: String
-    createdAt: String!
-    modifiedAt: String!
-    name: String!
+    name: String
+    attributes: AttributesInput
+  }
+`;
+
+const attributesInput = `
+  input AttributesInput {
+    meta: JSON
+    classnames: [String]
+
+    title: String
+    slug: String
+    order: Int
+
+    model: String
+    label: String
+    maxlength: Int
+    minlength: Int
+    min: Int
+    max: Int
+    step: Int
+    size: Int
+    placeholder: String
+    disabled: Boolean
+    readonly: Boolean
+    required: Boolean
+    options: [OptionsInput]
+
+    no_gutters: Boolean
+
+    breakpoint_xs: String
+    breakpoint_sm: String
+    breakpoint_md: String
+    breakpoint_lg: String
+  }
+`;
+
+const optionsInput = `
+  input OptionsInput {
+    value: String!
+    label: String!
   }
 `;
 
 const component = `
   type Component {
-    id: ID!
-    type: String!
+    _id: ID!
+    _type: String!
     children: [String]!
     parent: String
-    createdAt: String!
-    modifiedAt: String!
+    createdAt: DateTime!
+    modifiedAt: DateTime!
     name: String!
     attributes: Attributes
   }
 `;
 
-const ComponentQueryResponse = `
-  type ComponentQueryResponse {
-    success: Boolean!
+const QueryResponse = `
+  type QueryResponse {
+    code: Int!
     message: String!
     data: [Component!]!
   }
@@ -32,15 +71,15 @@ const ComponentQueryResponse = `
 
 const Attributes = `
   interface Attributes {
-    """Meta will hold non essential stringified fields that vary between components"""
-    meta: String
+    """Meta will hold non essential fields as JSON that vary between components"""
+    meta: JSON
     classnames: [String]!
   }
 `;
 
 const pageAttributes = `
   type PageAttributes implements Attributes {
-    meta: String
+    meta: JSON
     classnames: [String]!
     title: String!
     slug: String!
@@ -49,8 +88,8 @@ const pageAttributes = `
 `;
 
 const formControlAttributes = `
-  type FormInputAttributes implements Attributes {
-    meta: String
+  type FormControlAttributes implements Attributes {
+    meta: JSON
     classnames: [String]!
     model: String
     label: String
@@ -70,7 +109,7 @@ const formControlAttributes = `
 
 const rowAttributes = `
   type RowAttributes implements Attributes {
-    meta: String
+    meta: JSON
     classnames: [String]!
     no_gutters: Boolean
   }
@@ -78,7 +117,7 @@ const rowAttributes = `
 
 const columnAttributes = `
   type ColumnAttributes implements Attributes {
-    meta: String
+    meta: JSON
     classnames: [String]!
     breakpoint_xs: String
     breakpoint_sm: String
@@ -89,7 +128,7 @@ const columnAttributes = `
 
 const genericComponentAttributes = `
   type GenericComponentAttributes implements Attributes {
-    meta: String
+    meta: JSON
     classnames: [String]!
   }
 `;
@@ -101,12 +140,15 @@ const option = `
   }
 `;
 
-export default [
+export const types = [
+  'scalar DateTime',
   'scalar JSON',
   'scalar JSONObject',
   componentInput,
+  attributesInput,
+  optionsInput,
   component,
-  ComponentQueryResponse,
+  QueryResponse,
   Attributes,
   pageAttributes,
   formControlAttributes,
@@ -114,4 +156,4 @@ export default [
   columnAttributes,
   genericComponentAttributes,
   option,
-]
+];
