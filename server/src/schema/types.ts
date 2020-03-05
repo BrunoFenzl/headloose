@@ -1,6 +1,6 @@
 const componentInput = `
   input ComponentInput {
-    _id: String!
+    _id: String
     _type: String
     children: [String]
     parent: String
