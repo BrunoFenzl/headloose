@@ -1,14 +1,23 @@
-import { ComponentModel } from '../db';
+import { ComponentModel, Component } from '../types/component';
+import { QueryResponse } from '../types/queryResponse';
+
+export const sdl = `
+  type Query {
+    tree(id: String!): QueryResponse
+    component(id: String!): QueryResponse
+    components(ids: [String]!): QueryResponse
+  }
+`;
 
 export const Query = {
   tree: async (parent, { id }, ctx, info) => {
     const docs = [];
-    async function getDoc(_id) {
+    async function getDoc(_id): Promise<Component> {
       const res = await ComponentModel.findById(_id);
       return res;
     }
 
-    async function processData(_id) {
+    async function processData(_id): Promise<Component> {
       const doc = await getDoc(_id);
 
       if (doc.children) {
@@ -23,44 +32,16 @@ export const Query = {
 
     docs.push(await processData(id));
 
-    return {
-      code: 200,
-      message: 'all good',
-      data: docs,
-    }
+    return new QueryResponse(200, 'All good!', docs);
   },
   component: async (parent, { id }, ctx, info) => {
     const doc = await ComponentModel.findById(id);
 
-    return {
-      code: 200,
-      message: 'all good',
-      data: [doc],
-    }
+    return new QueryResponse(200, 'All good!', [doc]);
   },
   components: async (parent, { ids }, ctx, info) => {
     const docs = await ComponentModel.find().where('_id').in(ids).exec();
 
-    return {
-      code: 200,
-      message: 'all good',
-      data: docs,
-    }
+    return new QueryResponse(200, 'All good!', docs);
   },
-}
-
-export const Attributes = {
-  __resolveType: (parent) => {
-    console.log('resolver parent', parent);
-    switch (parent.type) {
-      case 'page':
-        return 'PageAttributes';
-      case 'column':
-        return 'ColumnAttributes';
-      case 'Row':
-        return 'RowAttributes';
-      default:
-        return 'FormControlAttributes';
-    }
-  }
 }

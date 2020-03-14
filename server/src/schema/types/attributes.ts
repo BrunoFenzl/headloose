@@ -1,15 +1,7 @@
-const componentInput = `
-  input ComponentInput {
-    _id: String
-    _type: String
-    children: [String]
-    parent: String
-    name: String
-    attributes: AttributesInput
-  }
-`;
+import { prop } from '@typegoose/typegoose';
+import { Option } from './option';
 
-const attributesInput = `
+const attributesInputSDL = `
   input AttributesInput {
     meta: JSON
     classnames: [String]
@@ -41,35 +33,7 @@ const attributesInput = `
   }
 `;
 
-const optionsInput = `
-  input OptionsInput {
-    value: String!
-    label: String!
-  }
-`;
-
-const component = `
-  type Component {
-    _id: ID!
-    _type: String!
-    children: [String]!
-    parent: String
-    createdAt: DateTime!
-    modifiedAt: DateTime!
-    name: String!
-    attributes: Attributes
-  }
-`;
-
-const QueryResponse = `
-  type QueryResponse {
-    code: Int!
-    message: String!
-    data: [Component!]!
-  }
-`;
-
-const Attributes = `
+const attributesSDL = `
   interface Attributes {
     """Meta will hold non essential fields as JSON that vary between components"""
     meta: JSON
@@ -77,7 +41,7 @@ const Attributes = `
   }
 `;
 
-const pageAttributes = `
+const pageAttributesSDL = `
   type PageAttributes implements Attributes {
     meta: JSON
     classnames: [String]!
@@ -87,7 +51,7 @@ const pageAttributes = `
   }
 `;
 
-const formControlAttributes = `
+const formControlAttributesSDL = `
   type FormControlAttributes implements Attributes {
     meta: JSON
     classnames: [String]!
@@ -107,7 +71,7 @@ const formControlAttributes = `
   }
 `;
 
-const rowAttributes = `
+const rowAttributesSDL = `
   type RowAttributes implements Attributes {
     meta: JSON
     classnames: [String]!
@@ -115,7 +79,7 @@ const rowAttributes = `
   }
 `;
 
-const columnAttributes = `
+const columnAttributesSDL = `
   type ColumnAttributes implements Attributes {
     meta: JSON
     classnames: [String]!
@@ -126,34 +90,69 @@ const columnAttributes = `
   }
 `;
 
-const genericComponentAttributes = `
+const genericComponentAttributesSDL = `
   type GenericComponentAttributes implements Attributes {
     meta: JSON
     classnames: [String]!
   }
 `;
 
-const option = `
-  type Option {
-    value: String!
-    label: String!
-  }
-`;
-
-export const types = [
-  'scalar DateTime',
-  'scalar JSON',
-  'scalar JSONObject',
-  componentInput,
-  attributesInput,
-  optionsInput,
-  component,
-  QueryResponse,
-  Attributes,
-  pageAttributes,
-  formControlAttributes,
-  rowAttributes,
-  columnAttributes,
-  genericComponentAttributes,
-  option,
+export const sdl = [
+  attributesInputSDL,
+  attributesSDL,
+  pageAttributesSDL,
+  formControlAttributesSDL,
+  rowAttributesSDL,
+  columnAttributesSDL,
+  genericComponentAttributesSDL
 ];
+
+export class Attributes {
+  @prop()
+  public meta: string;
+  @prop()
+  public classnames: Array<string>;
+  @prop()
+  public model: string;
+  @prop()
+  public label: string;
+  @prop()
+  public maxlength: number;
+  @prop()
+  public minlength: number;
+  @prop()
+  public min: number;
+  @prop()
+  public max: number;
+  @prop()
+  public step: number;
+  @prop()
+  public size: number;
+  @prop()
+  public placeholder: string;
+  @prop()
+  public disabled: boolean;
+  @prop()
+  public readonly: boolean;
+  @prop()
+  public required: boolean;
+  @prop()
+  public options: Array<Option>;
+};
+
+
+export const AttributesResolver = {
+  __resolveType: (parent) => {
+    console.log('resolver parent', parent);
+    switch (parent.type) {
+      case 'page':
+        return 'PageAttributes';
+      case 'column':
+        return 'ColumnAttributes';
+      case 'Row':
+        return 'RowAttributes';
+      default:
+        return 'FormControlAttributes';
+    }
+  }
+}
