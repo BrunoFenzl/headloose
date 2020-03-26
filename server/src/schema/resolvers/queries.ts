@@ -12,11 +12,13 @@ export const sdl = `
 export const Query = {
   tree: async (parent, { id }, ctx, info) => {
     const docs = [];
+    // async wrapper around mongoose find method
     async function getDoc(_id): Promise<Component> {
       const res = await ComponentModel.findById(_id);
       return res;
     }
 
+    // Recursive function to search all children ids starting at a given component
     async function processData(_id): Promise<Component> {
       const doc = await getDoc(_id);
 
