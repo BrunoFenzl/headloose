@@ -15,6 +15,11 @@ import { PageNotFoundModule } from './page-not-found/page-not-found.module';
 
 import { reducers, CustomSerializer } from './store';
 import { NavigationComponent } from './navigation/navigation.component';
+import { GraphQLModule } from './graphql.module';
+import { ApolloModule, APOLLO_OPTIONS } from 'apollo-angular';
+import { HttpLinkModule, HttpLink } from 'apollo-angular-link-http';
+import { InMemoryCache } from 'apollo-cache-inmemory';
+
 
 @NgModule({
   declarations: [
@@ -34,11 +39,27 @@ import { NavigationComponent } from './navigation/navigation.component';
     EffectsModule.forRoot([]),
     StoreRouterConnectingModule.forRoot(),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
+    // graphql
+    GraphQLModule,
+    ApolloModule,
+    HttpLinkModule,
   ],
   providers: [
     {
       provide: RouterStateSerializer,
       useClass: CustomSerializer
+    },
+    {
+      provide: APOLLO_OPTIONS,
+      useFactory: (httpLink: HttpLink) => {
+        return {
+          cache: new InMemoryCache(),
+          link: httpLink.create({
+            uri: 'http://localhost:9000/graphql'
+          })
+        }
+      },
+      deps: [HttpLink]
     }
   ],
   bootstrap: [AppComponent],
