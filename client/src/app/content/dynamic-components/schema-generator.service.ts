@@ -42,24 +42,30 @@ export class SchemaGeneratorService {
             field = new TextareaDefaults({ '@id': key, label: key, name: key, model: schema[key] });
             if (key === 'options') {
               // convert options array into a string with the format 'label:value'
-              field.model = this.stringifyOptions(schema.options);
+              field.attributes.model = this.stringifyOptions(schema.attributes.options);
             } else if (key === 'classes') {
               // convert classes array into a string with the form 'classname1 classname2 classname3'
-              field.model = this.stringifyClassnames(schema.classes);
+              field.attributes.model = this.stringifyClassnames(schema.attributes.classnames);
             }
             break;
           case 'string':
-            if (key === 'model' && schema.modelOptions !== undefined) {
-              field = new SelectDefaults({ '@id': key, label: key, name: key, model: schema.model, options: schema.modelOptions });
+            if (key === 'model' && schema.attributes.modelOptions !== undefined) {
+              field = new SelectDefaults({
+                _id: key,
+                label: key,
+                name: key,
+                model: schema.attributes.model,
+                options: schema.attributes.modelOptions
+              });
             } else {
-              field = new TextInputDefaults({ '@id': key, label: key, name: key, model: schema[key] });
+              field = new TextInputDefaults({ _id: key, label: key, name: key, model: schema[key] });
             }
             break;
           case 'number':
-            field = new NumberInputDefaults({ '@id': key, label: key, name: key, model: schema[key] });
+            field = new NumberInputDefaults({ _id: key, label: key, name: key, model: schema[key] });
             break;
           case 'boolean':
-            field = new SwitchDefaults({ '@id': key, label: key, name: key, model: schema[key] });
+            field = new SwitchDefaults({ _id: key, label: key, name: key, model: schema[key] });
             break;
         }
         fieldsSchema.push(field);

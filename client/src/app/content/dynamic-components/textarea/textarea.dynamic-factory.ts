@@ -1,10 +1,13 @@
-import { DynamicComponentFactory } from 'src/dynamic-renderer/dynamic-components.interfaces';
+import {
+  DynamicComponentFactory,
+  DynamicComponentAttributes,
+  DynamicComponentSchema
+} from 'src/dynamic-renderer/dynamic-components.interfaces';
 import { TextareaComponent } from './textarea.component';
-import { TextareaSchema } from './textarea.schema';
 import { Injector, ComponentRef, ComponentFactoryResolver, Renderer2 } from '@angular/core';
 
 export const TextareaComponentDynamicFactory: DynamicComponentFactory<TextareaComponent> = {
-  create: (schema: TextareaSchema, injector: Injector): ComponentRef<TextareaComponent> => {
+  create: (schema: DynamicComponentSchema, injector: Injector): ComponentRef<TextareaComponent> => {
     const renderer: Renderer2 = injector.get(Renderer2);
 
     const componentRef: ComponentRef<TextareaComponent> = injector
@@ -13,8 +16,7 @@ export const TextareaComponentDynamicFactory: DynamicComponentFactory<TextareaCo
       .create(injector);
 
     // These properties from the schema should be populated as attributes in this component's instance
-    const attributes: Array<keyof TextareaSchema> = [
-      'name',
+    const attributes: Array<keyof DynamicComponentAttributes> = [
       'label',
       'model',
       'maxlength',
@@ -34,9 +36,9 @@ export const TextareaComponentDynamicFactory: DynamicComponentFactory<TextareaCo
         componentRef.instance[option] = schema[option];
       });
 
-    componentRef.instance.id = schema['@id'];
+    componentRef.instance.id = schema._id;
 
-    (schema.classes || [])
+    (schema.attributes.classnames || [])
       .forEach(
         (className: string): void => {
           renderer.addClass(componentRef.location.nativeElement, className);

@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, ChangeDetectorRef, forwardRef } from '@angular/core';
-import { SelectOption } from './select.schema';
+import { SelectOption } from '../../../../dynamic-renderer/dynamic-components.interfaces';
 import { FormComponentBase } from '../form-component.base';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 

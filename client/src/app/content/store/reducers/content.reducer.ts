@@ -40,7 +40,7 @@ export function contentReducer(
     case ContentActionTypes.ADD_PAGE_SUCCESS:
       return {
         ...state,
-        pages: { ...state.pages, [action.payload['@id']]: action.payload },
+        pages: { ...state.pages, [action.payload._id]: action.payload },
         loading: false
       };
     case ContentActionTypes.ADD_PAGE_FAILURE:
@@ -84,7 +84,7 @@ export function contentReducer(
       console.log('update page success', action.payload);
       return {
         ...state,
-        pages: { ...state.pages, [action.payload['@id']]: action.payload },
+        pages: { ...state.pages, [action.payload._id]: action.payload },
         activePage: action.payload,
         loading: false,
       };

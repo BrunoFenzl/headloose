@@ -34,7 +34,7 @@ export const getSelectedPageContentParsed = createSelector(
  */
 export const getComponentChildren = createSelector(
   getActivePageState,
-  (state: DynamicComponentSchema, props: { id: string }): DynamicComponentSchema[] => {
+  (state: DynamicPageSchema, props: { id: string }): DynamicComponentSchema[] => {
     return state.components[props.id].children.map(id => state.components[id]);
   }
 );

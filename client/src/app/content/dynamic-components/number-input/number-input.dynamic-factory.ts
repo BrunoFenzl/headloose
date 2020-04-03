@@ -1,10 +1,13 @@
-import { DynamicComponentFactory } from 'src/dynamic-renderer/dynamic-components.interfaces';
+import {
+  DynamicComponentFactory,
+  DynamicComponentAttributes,
+  DynamicComponentSchema
+} from 'src/dynamic-renderer/dynamic-components.interfaces';
 import { NumberInputComponent } from './number-input.component';
-import { NumberInputSchema } from './number-input.schema';
 import { Injector, ComponentRef, ComponentFactoryResolver, Renderer2 } from '@angular/core';
 
 export const NumberInputComponentDynamicFactory: DynamicComponentFactory<NumberInputComponent> = {
-  create: (schema: NumberInputSchema, injector: Injector): ComponentRef<NumberInputComponent> => {
+  create: (schema: DynamicComponentSchema, injector: Injector): ComponentRef<NumberInputComponent> => {
     const renderer: Renderer2 = injector.get(Renderer2);
 
     const componentRef: ComponentRef<NumberInputComponent> = injector
@@ -13,9 +16,8 @@ export const NumberInputComponentDynamicFactory: DynamicComponentFactory<NumberI
       .create(injector);
 
     // These properties from the schema should be populated as attributes in this component's instance
-    const attributes: Array<keyof NumberInputSchema> = [
+    const attributes: Array<keyof DynamicComponentAttributes> = [
       'label',
-      'name',
       'model',
       'max',
       'min',
@@ -34,9 +36,9 @@ export const NumberInputComponentDynamicFactory: DynamicComponentFactory<NumberI
         componentRef.instance[option] = schema[option];
       });
 
-    componentRef.instance.id = schema['@id'];
+    componentRef.instance.id = schema._id;
 
-    (schema.classes || [])
+    (schema.attributes.classnames || [])
       .forEach(
         (className: string): void => {
           renderer.addClass(componentRef.location.nativeElement, className);

@@ -1,36 +1,22 @@
-import { DynamicComponentSchema } from '../../../../dynamic-renderer/dynamic-components.interfaces';
-import { v4 as uuid } from 'uuid';
-
-export interface TextareaSchema extends DynamicComponentSchema {
-  '@type': 'Textarea' | string;
-  parent: string | null;
-  label: string;
-  model?: string;
-  maxlength?: number;
-  minlength?: number;
-  size?: number;
-  placeholder?: string;
-  disabled?: boolean;
-  readonly?: boolean;
-  required?: boolean;
-  classes?: Array<string>;
-}
+import { DynamicComponentSchema, DynamicComponentAttributes } from '../../../../dynamic-renderer/dynamic-components.interfaces';
 
 /**
  * Default implementation with sensitive defaults
  */
-export class TextareaDefaults implements TextareaSchema {
-  '@id' = uuid();
-  '@type' = 'Textarea';
-  label = 'Label';
-  model = 'Type some text…';
+export class TextareaDefaults implements DynamicComponentSchema {
+  _type = 'Textarea';
   parent = null;
-  maxlength = 240;
-  minlength = 0;
-  size = 5;
-  placeholder = 'Platzhalter';
-  required = false;
-  classes = ['textarea'];
+  name = 'New textarea';
+  attributes = {
+    label: 'Label',
+    model: 'Type some text…',
+    maxlength: 240,
+    minlength: 0,
+    size: 5,
+    placeholder: 'This is a placeholder',
+    required: false,
+    classnames: ['textarea'],
+  }
 
   constructor(options = {}) {
     Object.assign(this, options);

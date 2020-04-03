@@ -198,7 +198,7 @@ export class DynamicComponentDirective implements OnInit, OnDestroy, DoCheck {
       this.component
     );
     this.hasValidationRules =
-      this.schema.validation && this.schema.validation.length > 0;
+      this.schema.attributes.validation && this.schema.attributes.validation.length > 0;
 
     // If the component is a form component, connect the component to the overall form and setup validation rules
     if (this.isFormComponent) {
@@ -215,7 +215,7 @@ export class DynamicComponentDirective implements OnInit, OnDestroy, DoCheck {
 
     // Remove form control && from control name directives
     if (this.isFormComponent) {
-      this.formGroupDirective.control.removeControl(this.schema['@id']);
+      this.formGroupDirective.control.removeControl(this.schema._id);
       this.formControlName.ngOnDestroy(); // Emulate the lifecycle eding for the programmatically instatiated directive
     }
 
@@ -278,21 +278,21 @@ export class DynamicComponentDirective implements OnInit, OnDestroy, DoCheck {
     if (!this.formControl) {
       this.formControl = new FormControl();
       this.formControl.setValue(
-        this.schema.hasOwnProperty('initialModel')
-          ? this.schema.initialModel
+        this.schema.attributes.hasOwnProperty('initialModel')
+          ? this.schema.attributes.initialModel
           : this.component.instance.model
       );
     }
 
     // Apply disabled state (if it changed)
     if (
-      this.schema.hasOwnProperty('disabled') &&
-      this.schema.disabled &&
+      this.schema.attributes.hasOwnProperty('disabled') &&
+      this.schema.attributes.disabled &&
       this.formControl.enabled
     ) {
       this.formControl.disable();
     } else if (
-      (!this.schema.hasOwnProperty('disabled') || !this.schema.disabled) &&
+      (!this.schema.attributes.hasOwnProperty('disabled') || !this.schema.attributes.disabled) &&
       this.formControl.disabled
     ) {
       this.formControl.enable();
@@ -300,7 +300,7 @@ export class DynamicComponentDirective implements OnInit, OnDestroy, DoCheck {
 
     // Connect form control to parent form
     this.formGroupDirective.control.addControl(
-      this.schema['@id'],
+      this.schema._id,
       this.formControl
     );
 
@@ -313,14 +313,14 @@ export class DynamicComponentDirective implements OnInit, OnDestroy, DoCheck {
       [this.component.instance],
       'always'
     );
-    this.formControlName.name = this.schema['@id'];
+    this.formControlName.name = this.schema._id;
     this.formControlName.ngOnChanges({}); // Lifecycle hook must be called once on init
 
     // Add 'fake' formControlName attribute (so that other things, like the scroll service , continue to work properly)
     this.renderer.setAttribute(
       this.component.location.nativeElement,
       'formControlName',
-      this.schema['@id']
+      this.schema._id
     );
 
     // Setup form control status corresponding to the form control name instance

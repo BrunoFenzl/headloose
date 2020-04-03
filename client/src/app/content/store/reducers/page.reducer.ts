@@ -2,13 +2,17 @@ import { DynamicPageSchema, DynamicComponentSchema } from 'src/dynamic-renderer/
 import { PageActionTypes, PageAction } from '../actions';
 
 const initialState: DynamicPageSchema = {
-  '@id': '',
-  '@type': 'Page',
-  title: '',
-  slug: '',
+  _id: '',
+  _type: 'Page',
+  name: 'page',
+  parent: null,
   children: [],
   components: {},
   activeComponent: null,
+  attributes: {
+    title: '',
+    slug: '',
+  }
 };
 
 export function pageReducer(
@@ -44,11 +48,11 @@ export function pageReducer(
       }
 
       // Create new entry in the 'components' object
-      newState.components[action.payload.component['@id']] = action.payload.component;
+      newState.components[action.payload.component._id] = action.payload.component;
       // Save reference to the parent in this component
-      action.payload.component.parent = futureParent['@id'];
+      action.payload.component.parent = futureParent._id;
       // And add this component to it's parent's children array
-      futureParent.children.push(action.payload.component['@id']);
+      futureParent.children.push(action.payload.component._id);
       return {
         ...newState,
       };
@@ -63,11 +67,11 @@ export function pageReducer(
       // ...and children
       const onesChildren = theOne.children || [];
       // set the parent of the component being deleted to the parent property of it's children
-      onesChildren.forEach(c => components[c].parent = onesParent['@id']);
+      onesChildren.forEach(c => components[c].parent = onesParent._id);
       // now remove change theOne's id for it's children id's inside the onesParent
       onesParent.children
         .splice(
-          onesParent.children.indexOf(theOne['@id']),
+          onesParent.children.indexOf(theOne._id),
           1,
           ...onesChildren
         );

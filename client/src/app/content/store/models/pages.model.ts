@@ -1,14 +1,18 @@
 import { DynamicPageSchema } from 'src/dynamic-renderer/dynamic-components.interfaces';
-import { v4 as uuid } from 'uuid';
 
 export class PageDefaults implements DynamicPageSchema {
-  '@id' = uuid();
-  '@type' = 'Page';
-  title = 'New Page';
-  slug = 'new-page';
+  _type = 'Page';
+  name = 'new page';
+  parent = null;
   children = [];
   activeComponent = null;
   components = {};
+  attributes = {
+    title: 'New Page',
+    slug: 'new-page',
+    order: 0,
+    classnames: ['page'],
+  };
 
   constructor(options) {
     Object.assign(this, options);

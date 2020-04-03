@@ -37,7 +37,7 @@ export class PageListItemComponent implements OnInit {
   }
 
   requestDelete(): void {
-    this.deletePage.emit(this.page['@id']);
+    this.deletePage.emit(this.page._id);
   }
 
   requestUpdate(): void {
@@ -46,7 +46,7 @@ export class PageListItemComponent implements OnInit {
   }
 
   titleInputChange(evt): void {
-    this.page.title = evt.target.value;
-    this.page.slug = slugify(evt.target.value);
+    this.page.attributes.title = evt.target.value;
+    this.page.attributes.slug = slugify(evt.target.value);
   }
 }

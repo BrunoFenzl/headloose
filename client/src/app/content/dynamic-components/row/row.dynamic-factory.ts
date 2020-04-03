@@ -1,10 +1,9 @@
-import { DynamicComponentFactory } from 'src/dynamic-renderer/dynamic-components.interfaces';
+import { DynamicComponentFactory, DynamicComponentSchema } from 'src/dynamic-renderer/dynamic-components.interfaces';
 import { RowComponent } from './row.component';
-import { RowSchema } from './row.schema';
 import { Injector, ComponentRef, ComponentFactoryResolver, Renderer2 } from '@angular/core';
 
 export const RowComponentDynamicFactory: DynamicComponentFactory<RowComponent> = {
-  create: (schema: RowSchema, injector: Injector): ComponentRef<RowComponent> => {
+  create: (schema: DynamicComponentSchema, injector: Injector): ComponentRef<RowComponent> => {
     const renderer: Renderer2 = injector.get(Renderer2);
 
     const componentRef: ComponentRef<RowComponent> = injector
@@ -13,7 +12,7 @@ export const RowComponentDynamicFactory: DynamicComponentFactory<RowComponent> =
       .create(injector);
 
     // These properties from the schema should be populated as attributes in this component's instance
-    const attributes: Array<keyof RowSchema> = [
+    const attributes: Array<keyof DynamicComponentSchema> = [
       'children',
     ];
 
@@ -25,9 +24,9 @@ export const RowComponentDynamicFactory: DynamicComponentFactory<RowComponent> =
         componentRef.instance[option] = schema[option];
       });
 
-    componentRef.instance.id = schema['@id'];
+    componentRef.instance.id = schema._id;
 
-    (schema.classes || [])
+    (schema.attributes.classnames || [])
       .forEach(
         (className: string): void => {
           renderer.addClass(componentRef.location.nativeElement, className);

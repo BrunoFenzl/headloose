@@ -1,10 +1,13 @@
-import { DynamicComponentFactory } from 'src/dynamic-renderer/dynamic-components.interfaces';
+import {
+  DynamicComponentFactory,
+  DynamicComponentAttributes,
+  DynamicComponentSchema
+} from 'src/dynamic-renderer/dynamic-components.interfaces';
 import { SelectComponent } from './select.component';
-import { SelectSchema } from './select.schema';
 import { Injector, ComponentRef, ComponentFactoryResolver, Renderer2 } from '@angular/core';
 
 export const SelectComponentDynamicFactory: DynamicComponentFactory<SelectComponent> = {
-  create: (schema: SelectSchema, injector: Injector): ComponentRef<SelectComponent> => {
+  create: (schema: DynamicComponentSchema, injector: Injector): ComponentRef<SelectComponent> => {
     const renderer: Renderer2 = injector.get(Renderer2);
 
     const componentRef: ComponentRef<SelectComponent> = injector
@@ -13,8 +16,7 @@ export const SelectComponentDynamicFactory: DynamicComponentFactory<SelectCompon
       .create(injector);
 
     // These properties from the schema should be populated as attributes in this component's instance
-    const attributes: Array<keyof SelectSchema> = [
-      'name',
+    const attributes: Array<keyof DynamicComponentAttributes> = [
       'options',
       'model',
       'size',
@@ -30,9 +32,9 @@ export const SelectComponentDynamicFactory: DynamicComponentFactory<SelectCompon
         componentRef.instance[option] = schema[option];
       });
 
-    componentRef.instance.id = schema['@id'];
+    componentRef.instance.id = schema._id;
 
-    (schema.classes || [])
+    (schema.attributes.classnames || [])
       .forEach(
         (className: string): void => {
           renderer.addClass(componentRef.location.nativeElement, className);

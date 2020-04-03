@@ -1,37 +1,21 @@
 import { DynamicComponentSchema } from '../../../../dynamic-renderer/dynamic-components.interfaces';
-import { v4 as uuid } from 'uuid';
-
-export interface TextInputSchema extends DynamicComponentSchema {
-  '@type': 'TextInput' | string;
-  label: string;
-  name: string;
-  model: string;
-  parent: string;
-  maxlength?: number;
-  minlength?: number;
-  size?: number;
-  placeholder?: string;
-  readonly?: boolean;
-  disabled?: boolean;
-  required?: boolean;
-  classes?: Array<string>;
-}
 
 /**
  * Default implementation with sensitive defaults
  */
-export class TextInputDefaults implements TextInputSchema {
-  '@id' = uuid();
-  '@type' = 'TextInput';
-  label = 'My text input label';
+export class TextInputDefaults implements DynamicComponentSchema {
+  _type = 'TextInput';
   name = '';
-  model = '';
-  parent = '';
-  placeholder = '';
-  readonly = false;
-  disabled = false;
-  required = false;
-  classes = ['foo'];
+  parent = null;
+  attributes = {
+    label: 'My text input label',
+    model: 'value',
+    placeholder: 'A Placeholder',
+    readonly: false,
+    disabled: false,
+    required: false,
+    classnames: ['textinput'],
+  }
 
   constructor(options) {
     Object.assign(this, options);

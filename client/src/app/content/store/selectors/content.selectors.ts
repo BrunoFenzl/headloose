@@ -30,7 +30,7 @@ export const getSelectedPage = createSelector(
     return router.state &&
       Object.keys(pages)
         .map(key => pages[key])
-        .find((page) => page.slug === router.state.params.id);
+        .find((page) => page.attributes.slug === router.state.params.id);
   }
 );
 
@@ -41,7 +41,7 @@ export const getSelectedPageContent = createSelector(
   getSelectedPage,
   (state: DynamicPageSchema) => {
     console.log('getSelectedPageContent', state);
-    return state.content;
+    return state.attributes.content;
   }
 );
 

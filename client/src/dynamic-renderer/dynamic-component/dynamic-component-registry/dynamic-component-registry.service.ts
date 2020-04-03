@@ -22,12 +22,12 @@ export class DynamicComponentRegistryService {
     // find component factory, based on a given '@type'
     const factory: DynamicComponentFactory<any> | null = this.dynamicComponentFactories
       .find((dynamicComponentFactory: DynamicComponentFactory<any>): boolean => {
-        return dynamicComponentFactory.for === schema['@type'];
+        return dynamicComponentFactory.for === schema._type;
       }) || null;
 
     if (!factory) {
       const dynamicErrorService: DynamicErrorService = injector.get(DynamicErrorService, null);
-      const error: Error = new Error(`No factory found for the component of type "${schema['@type']}"!`);
+      const error: Error = new Error(`No factory found for the component of type "${schema._type}"!`);
 
       if (dynamicErrorService) {
         dynamicErrorService.handleError(error);

@@ -1,10 +1,13 @@
-import { DynamicComponentFactory } from 'src/dynamic-renderer/dynamic-components.interfaces';
+import {
+  DynamicComponentFactory,
+  DynamicComponentAttributes,
+  DynamicComponentSchema
+} from 'src/dynamic-renderer/dynamic-components.interfaces';
 import { ParagraphComponent } from './paragraph.component';
-import { ParagraphSchema } from './paragraph.schema';
 import { Injector, ComponentRef, ComponentFactoryResolver, Renderer2 } from '@angular/core';
 
 export const ParagraphComponentDynamicFactory: DynamicComponentFactory<ParagraphComponent> = {
-  create: (schema: ParagraphSchema, injector: Injector): ComponentRef<ParagraphComponent> => {
+  create: (schema: DynamicComponentSchema, injector: Injector): ComponentRef<ParagraphComponent> => {
     const renderer: Renderer2 = injector.get(Renderer2);
 
     const componentRef: ComponentRef<ParagraphComponent> = injector
@@ -13,8 +16,7 @@ export const ParagraphComponentDynamicFactory: DynamicComponentFactory<Paragraph
       .create(injector);
 
     // These properties from the schema should be populated as attributes in this component's instance
-    const attributes: Array<keyof ParagraphSchema> = [
-      'children',
+    const attributes: Array<keyof DynamicComponentAttributes> = [
       'content',
     ];
 
@@ -26,9 +28,9 @@ export const ParagraphComponentDynamicFactory: DynamicComponentFactory<Paragraph
         componentRef.instance[option] = schema[option];
       });
 
-    componentRef.instance.id = schema['@id'];
+    componentRef.instance.id = schema._id;
 
-    (schema.classes || [])
+    (schema.attributes.classnames || [])
       .forEach(
         (className: string): void => {
           renderer.addClass(componentRef.location.nativeElement, className);

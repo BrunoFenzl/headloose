@@ -1,10 +1,13 @@
-import { DynamicComponentFactory } from 'src/dynamic-renderer/dynamic-components.interfaces';
+import {
+  DynamicComponentFactory,
+  DynamicComponentAttributes,
+  DynamicComponentSchema
+} from 'src/dynamic-renderer/dynamic-components.interfaces';
 import { SwitchComponent } from './switch.component';
-import { SwitchSchema } from './switch.schema';
 import { Injector, ComponentRef, ComponentFactoryResolver, Renderer2 } from '@angular/core';
 
 export const SwitchComponentDynamicFactory: DynamicComponentFactory<SwitchComponent> = {
-  create: (schema: SwitchSchema, injector: Injector): ComponentRef<SwitchComponent> => {
+  create: (schema: DynamicComponentSchema, injector: Injector): ComponentRef<SwitchComponent> => {
     const renderer: Renderer2 = injector.get(Renderer2);
 
     const componentRef: ComponentRef<SwitchComponent> = injector
@@ -13,8 +16,7 @@ export const SwitchComponentDynamicFactory: DynamicComponentFactory<SwitchCompon
       .create(injector);
 
     // These properties from the schema should be populated as attributes in this component's instance
-    const attributes: Array<keyof SwitchSchema> = [
-      'name',
+    const attributes: Array<keyof DynamicComponentAttributes> = [
       'label',
       'model',
       'readonly',
@@ -30,9 +32,9 @@ export const SwitchComponentDynamicFactory: DynamicComponentFactory<SwitchCompon
         componentRef.instance[option] = schema[option];
       });
 
-    componentRef.instance.id = schema['@id'];
+    componentRef.instance.id = schema._id;
 
-    (schema.classes || [])
+    (schema.attributes.classnames || [])
       .forEach(
         (className: string): void => {
           renderer.addClass(componentRef.location.nativeElement, className);
