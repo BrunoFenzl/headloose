@@ -1,7 +1,7 @@
 import { DynamicComponentFactory } from 'src/dynamic-renderer/dynamic-components.interfaces';
 import { ParagraphComponent } from './paragraph.component';
 import { ParagraphSchema } from './paragraph.schema';
-import { Injector, ComponentRef, ComponentFactoryResolver, Renderer, Renderer2 } from '@angular/core';
+import { Injector, ComponentRef, ComponentFactoryResolver, Renderer2 } from '@angular/core';
 
 export const ParagraphComponentDynamicFactory: DynamicComponentFactory<ParagraphComponent> = {
   create: (schema: ParagraphSchema, injector: Injector): ComponentRef<ParagraphComponent> => {

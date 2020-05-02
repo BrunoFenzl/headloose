@@ -1,7 +1,7 @@
 import { DynamicComponentFactory } from 'src/dynamic-renderer/dynamic-components.interfaces';
 import { NumberInputComponent } from './number-input.component';
 import { NumberInputSchema } from './number-input.schema';
-import { Injector, ComponentRef, ComponentFactoryResolver, Renderer, Renderer2 } from '@angular/core';
+import { Injector, ComponentRef, ComponentFactoryResolver, Renderer2 } from '@angular/core';
 
 export const NumberInputComponentDynamicFactory: DynamicComponentFactory<NumberInputComponent> = {
   create: (schema: NumberInputSchema, injector: Injector): ComponentRef<NumberInputComponent> => {

@@ -1,7 +1,7 @@
 import { DynamicComponentFactory } from 'src/dynamic-renderer/dynamic-components.interfaces';
 import { TextInputComponent } from './text-input.component';
 import { TextInputSchema } from './text-input.schema';
-import { Injector, ComponentRef, ComponentFactoryResolver, Renderer, Renderer2 } from '@angular/core';
+import { Injector, ComponentRef, ComponentFactoryResolver, Renderer2 } from '@angular/core';
 
 export const TextInputComponentDynamicFactory: DynamicComponentFactory<TextInputComponent> = {
   create: (schema: TextInputSchema, injector: Injector): ComponentRef<TextInputComponent> => {
