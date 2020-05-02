@@ -14,11 +14,12 @@ export const NumberInputComponentDynamicFactory: DynamicComponentFactory<NumberI
 
     // These properties from the schema should be populated as attributes in this component's instance
     const attributes: Array<keyof NumberInputSchema> = [
+      'label',
       'name',
       'model',
-      'maxlength',
-      'minlength',
-      'size',
+      'max',
+      'min',
+      'step',
       'placeholder',
       'readonly',
       'disabled',

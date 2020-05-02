@@ -1,6 +1,5 @@
-<label for="{{ id }}">Example select</label>
 <select
-  class="form-control"
+  class="input input--select"
   [name]="name"
   [id]="id"
   [disabled]="disabled || ''"
@@ -12,3 +11,4 @@
     {{ option.label }}
   </option>
 </select>
+<label class="input__label" for="{{ id }}">Example select</label>

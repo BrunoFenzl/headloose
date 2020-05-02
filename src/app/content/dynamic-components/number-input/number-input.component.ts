@@ -16,10 +16,16 @@ import { NG_VALUE_ACCESSOR } from '@angular/forms';
     }
   ]
 })
-export class NumberInputComponent extends FormComponentBase<string> implements OnInit {
+export class NumberInputComponent extends FormComponentBase<number> implements OnInit {
+
+  @Input()
+  label: string;
 
   @Input()
   name: string;
+
+  @Input()
+  model: number;
 
   @Input()
   required: boolean;
@@ -31,13 +37,13 @@ export class NumberInputComponent extends FormComponentBase<string> implements O
   readonly: boolean;
 
   @Input()
-  maxlength: number;
+  max: number;
 
   @Input()
-  minlength: number;
+  min: number;
 
   @Input()
-  size: number;
+  step: number;
 
   @Input()
   placeholder: string;
