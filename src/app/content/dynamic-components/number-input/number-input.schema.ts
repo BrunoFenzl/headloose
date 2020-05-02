@@ -3,10 +3,13 @@ import { v4 as uuid } from 'uuid';
 
 export interface NumberInputSchema extends DynamicComponentSchema {
   '@type': 'NumberInput' | string;
+  label: string;
+  name: string;
+  model: number;
   parent: string | null;
-  maxlength?: number | null;
-  minlength?: number | null;
-  size?: number | null;
+  max?: number | null;
+  min?: number | null;
+  step?: number | null;
   placeholder?: string;
   readonly?: boolean;
   disabled?: boolean;
@@ -20,15 +23,18 @@ export interface NumberInputSchema extends DynamicComponentSchema {
 export class NumberInputDefaults implements NumberInputSchema {
   '@id' = uuid();
   '@type' = 'NumberInput';
+  label = 'My number input label';
+  name = '';
+  model = 0;
   parent = null;
-  maxlength = null;
-  minlength = null;
-  size = null;
+  max = 100;
+  min = 0;
+  step = 10;
   readonly = false;
   placeholder = '';
   disabled = false;
   required = false;
-  classes = ['form-group'];
+  classes = ['foo'];
 
   constructor(options) {
     Object.assign(this, options);
