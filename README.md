@@ -1,33 +1,11 @@
 # Headloose
 
-Headloose is a static HTML / JSON generator with the GUI written in Angular.
+Headloose is kind of a JavaScript CMS with an own file format for exchanging content and aiming at generating static HTML / JSON. Know what I mean?
 
-This is my playground where I can develop and test new ideas. This is NOWHERE ready for primetime but it already sports a few nice features:
+The GUI is written in Angular (currently 9.x) and the backend is an express/mongo duo. Everything is dockerized.
 
-- JSON content schema for manipulating and generating content
-- Dynamic component factories based on content schema
-- Async state management with @ngrx/effects
-- State is bound to the router with @ngrx/router
-- Dynamic route loading
-- Module lazy loading
+This is my playground where I can develop and test ideas, experiment with new stuff and play around. This is NOWHERE ready for primetime and who knows if it will ever be.
 
 A preview of the current state can be seen [here](https://brunofenzl.github.io/headloose/)
 
-## Building and developing
-
-This project was scaffolded with angular-cli, so all `ng` commands apply. To run a local development server just type `npm start` as usual.
-
-## Roadmap
-
-The roadmap is very loose and depends heavily on how much time I have to spare.
-
-- Finish basic component set
-- Add JSON importer
-- Add JSON exporter
-- Add HTML generator
-- Export as .zip file
-- Create component factories factory to speed up custom component creation
-- Add component drag and drop in editor
-- Add media management
-- Add basic settings configuration for exported content
-- Build with electron
+If you already have docker installed, clone this repo and run `docker-compose up`.

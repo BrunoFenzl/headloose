@@ -1,0 +1,45 @@
+version: '3.7'
+services:
+  client:
+    image: node:12-alpine
+    build: ./client
+    restart: always
+    ports:
+      - '4200:4200'
+    working_dir: /client/src
+    volumes:
+      - ./client:/client/src
+    entrypoint: ['npm', 'start']
+    depends_on:
+      - mongodb
+    networks:
+      - headloose_network
+  server:
+    image: server-api
+    build: ./server
+    restart: always
+    ports:
+      - '9000:9000'
+    volumes:
+      - ./server:/server
+    entrypoint: ['npm', 'start']
+    environment:
+      - SECRET_KEY_BASE=secret
+      - MONGO_URL=mongodb://mongodb:27017/dev
+    depends_on:
+      - mongodb
+    networks:
+      - headloose_network
+  mongodb:
+    image: mongo
+    restart: always
+    volumes:
+      - ./data-node:/data/db
+    ports:
+      - 27017:27017
+    command: mongod --noauth
+    networks:
+      - headloose_network
+networks:
+  headloose_network:
+    driver: bridge
